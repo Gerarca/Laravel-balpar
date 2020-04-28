@@ -43,7 +43,7 @@
 
             </div>
             <div class="card-footer ">
-              <button type="submit" class="btn btn-warning btn-round btn-block mb-3">Ingresar</button>
+              <button type="submit" class="btn btn-info btn-round btn-block mb-3">Ingresar</button>
             </div>
           </div>
         </form>

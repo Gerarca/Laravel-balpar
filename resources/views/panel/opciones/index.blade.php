@@ -31,7 +31,7 @@
                     @php $i++; @endphp
                     <div class="tab-pane  @if($i === 1) active show @endif" id="tab-content-{{ $i }}" role="tabpanel" aria-expanded="true">
                       @foreach($group->options as $key => $option)
-                        @if($option->type == 'text')
+                        @if($option->type == 'text' && $option->name <> 'carrusel_1' && $option->name <> 'carrusel_2')
                           <div class="form-group has-label">
                             <label for="option_{{$option->name}}">
                               {!! $option->title !!}
@@ -74,7 +74,7 @@
                             </div>
                         @endif
 
-                        @if($option->type == 'color')
+                        {{-- @if($option->type == 'color')
                           <div class="form-group has-label">
                             <label for="option_{{$option->name}}">
                               {!! $option->title !!}
@@ -82,7 +82,7 @@
                             <input class="form-control" id="option_{{$option->name}}" name="{{$option->name}}" type="color"  value="{{ $option->value }}" style="padding: 0px;" />
                           </div>
 
-                        @endif
+                        @endif --}}
                         @if($option->type == 'imagen')
                           <div class="form-group has-label">
                             <label for="option_{{$option->name}}">

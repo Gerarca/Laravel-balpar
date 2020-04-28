@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="{{ url('assets_template/img/apple-icon.png') }}">
-  <link rel="icon" type="image/png" href="{{ url('assets_template/img/favicon.png') }}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ url('assets_front/images/favicon.png') }}">
+  <link rel="icon" type="image/png" href="{{ url('assets_front/images/favicon.png') }}">
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -32,7 +32,7 @@
             <span class="navbar-toggler-bar bar3"></span>
           </button>
         </div>
-        <a class="navbar-brand" href="javascript:void(0)">Panel de administración Porta </a>
+        <a class="navbar-brand" href="javascript:void(0)">Panel de administración Balpar SA </a>
       </div>
       {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-bar navbar-kebab"></span>
