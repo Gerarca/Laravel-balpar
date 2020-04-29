@@ -15,48 +15,36 @@
                 <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                     <tr>
-                      <th>Titulo</th>
-                      <th>Tipo de banner</th>
-                      <th>Enlace</th>
-                      <th>Imagen</th>
-                      <th>Fecha de creación</th>
                       <th>Orden</th>
+                      <th>Imagen</th>
                       <th>Visible</th>
-
+                      <th>Fecha de creación</th>
                       <th class="disabled-sorting text-right">Acciones</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>Titulo</th>
-                      <th>Tipo de banner</th>
-                      <th>Enlace</th>
-                      <th>Imagen</th>
-                      <th>Fecha de creación</th>
                       <th>Orden</th>
+                      <th>Imagen</th>
                       <th>Visible</th>
+                      <th>Fecha de creación</th>
                       <th class="disabled-sorting text-right">Acciones</th>
                     </tr>
                   </tfoot>
                   <tbody>
                       @foreach($banners as $banner)
                         <tr>
-                          <td>{{ $banner->titulo }}</td>
-                          <td>{{ ($banner->tipo_banner==1)?'Principal':'Secundario' }}</td>
-                          <td>{!! $banner->enlace ? '<a href="'.$banner->enlace.'" target="_blank" class="btn btn-primary btn-round btn-icon"><i class="fa fa-chrome"></i></a>' : ''  !!}</td>
-                          <td><img src="{{ url('uploads/'.$banner->imagen) }}" alt="{{ $banner->titulo }}" width="100"></td>
+                          <td class="text-center">{{ $banner->orden }}</td>
+                          <td class="text-center"><img src="{{ url('uploads/'.$banner->imagen) }}" alt="Image banner" width="100"></td>
+                          <td class="text-center">{{ $banner->visible == 1 ? 'Sí' : 'No' }}</td>
                           <td>{{ $banner->created_at }}</td>
-                          <td>{{ $banner->orden }}</td>
-                          <td>{{ $banner->visible==1?'Si':'No' }}</td>
                           <td class="text-right">
                             <a href="{{ route('banner.edit', $banner->id) }}" class="btn btn-warning btn-link btn-icon btn-sm edit "><i class="fa fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger btn-link btn-icon btn-sm remove btn-delete" data-id="{{ $banner->id }}" data-toggle="modal"  data-target="#modal-default" data-route="{{ route('banner.destroy', $banner->id) }}" data-title="{{ $banner->name }}"><i class="fa fa-times"></i></a>
+                            <a href="#" class="btn btn-danger btn-link btn-icon btn-sm remove btn-delete" data-id="{{ $banner->id }}" data-toggle="modal"  data-target="#modal-default" data-route="{{ route('banner.destroy', $banner->id) }}" data-title="Eliminar Banner"><i class="fa fa-times"></i></a>
 
                           </td>
                         </tr>
                       @endforeach
-
-
                   </tbody>
                 </table>
               </div>

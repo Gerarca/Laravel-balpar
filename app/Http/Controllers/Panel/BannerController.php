@@ -19,14 +19,6 @@ use App\Banner;
 
 class BannerController extends Controller
 {
-
-    public function __construct(User $users, Role $roles, Banner $banners)
-    {
-      $this->middleware('auth');
-      $this->users = $users;
-      $this->roles = $roles;
-      $this->banners = $banners;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -34,9 +26,7 @@ class BannerController extends Controller
      */
     public function index()
     {
-      $banners = $this->banners->orderBy('orden', 'desc')->get();
-
-      return view('panel.banner.index', compact('banners'));
+        return view('panel.banner.index', ['banners' => Banner::orderBy('orden')->get()]);
     }
 
     /**
@@ -46,8 +36,8 @@ class BannerController extends Controller
      */
     public function create(Banner $banner)
     {
-        $orden_maximo = $this->banners->get()->count()+1;
-        return view('panel.banner.form', compact('banner', 'orden_maximo'));
+        $orden_maximo = Banner::all()->count() + 1;
+        return view('panel.banner.form', compact('orden_maximo', 'banner'));
     }
 
     /**
@@ -58,34 +48,28 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-      request()->validate([
-        'titulo'=> 'required|max:255',
-        'imagen'=> 'required|image'
-      ]);
+        request()->validate([
+            'imagen' => 'required|image'
+        ]);
 
-      $exploid_vencimiento=explode('/', $request['vencimiento']);
-      $request['vencimiento']=$exploid_vencimiento[2].'-'.$exploid_vencimiento[1].'-'.$exploid_vencimiento[0];
-      $request['vencimiento']=date('Y-m-d H:i:s',strtotime($request['vencimiento']));
-      $request['visible']=$request['visible']?'1':'0';
-      $banner = $this->banners->create($request->only('titulo', 'enlace', 'orden', 'tipo_vencimiento', 'vencimiento', 'visible', 'tipo_banner') + ['user_id'=> \Auth::user()->id]);
-      if($request->hasFile('imagen')) {
-          $imageName = str_slug($request->titulo).'-'.time() . '.' .$request->file('imagen')->getClientOriginalExtension();
-          $request->file('imagen')->move(base_path() . '/public/uploads/', $imageName);
-          if ($request['tipo_banner']==1) {
-            $res[0]=1920;
-            $res[1]=580;
-          }else {
-            $res[0]=600;
-            $res[1]=800;
-          }
-          Image::make(base_path() . '/public/uploads/' . $imageName)->fit($res[0], $res[1], function ($constraint) {
-              $constraint->upsize();
-              $constraint->aspectRatio();
-          })->encode('jpg', 60)->save();
+        $orden_actual = Banner::where('orden', '>=', $request['orden']);
 
-          $banner->fill(['imagen' => $imageName])->save();
-      }
-      Session::flash('mensaje', 'El banner '.$banner->titulo.' ha sido creado correctamente');
+        if($orden_actual->exists()){
+            $orden_actual->increment('orden');
+        }
+
+        $request['visible'] = $request['visible'] ? '1' : '0';
+
+        $imageName = 'banner-'. time() . '.' .$request->file('imagen')->getClientOriginalExtension();
+        $request->file('imagen')->move(base_path() . '/public/uploads/', $imageName);
+        Image::make(base_path() . '/public/uploads/' . $imageName)->fit(1920, 700, function ($constraint) {
+            $constraint->upsize();
+            $constraint->aspectRatio();
+        })->encode('jpg', 60)->save();
+
+        $banner = Banner::create($request->only('visible', 'orden') + ['imagen' => $imageName]);
+
+        Session::flash('mensaje', 'El banner ha sido creado correctamente');
         return redirect(route('banner.index'))->with('status', 'El banner ha sido creado');
     }
 
@@ -106,11 +90,10 @@ class BannerController extends Controller
      * @param  \App\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Banner $banner)
     {
-        $banner = $this->banners->findOrFail($id);
-        $orden_maximo = $this->banners->get()->count()+1;
-        return view('panel.banner.form', compact('banner', 'orden_maximo'));
+        $orden_maximo = Banner::all()->count();
+        return view('panel.banner.form', compact('orden_maximo', 'banner'));
     }
 
     /**
@@ -120,39 +103,35 @@ class BannerController extends Controller
      * @param  \App\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Banner $banner)
     {
-      request()->validate([
-        'titulo'=> 'required|max:255'
-      ]);
-      $exploid_vencimiento=explode('/', $request['vencimiento']);
-      $request['vencimiento']=$exploid_vencimiento[2].'-'.$exploid_vencimiento[1].'-'.$exploid_vencimiento[0];
-      $request['vencimiento']=date('Y-m-d H:i:s',strtotime($request['vencimiento']));
-      $request['visible']=$request['visible']?'1':'0';
-      $banner = $this->banners->findOrFail($id);
-      $banner->fill($request->only('titulo', 'enlace', 'orden', 'tipo_vencimiento', 'vencimiento', 'visible', 'tipo_banner'))->save();
+        request()->validate([
+            'imagen' => 'image'
+        ]);
 
-      if($request->hasFile('imagen')) {
-          $imageName = str_slug($request->titulo).'-'.time() . '.' .$request->file('imagen')->getClientOriginalExtension();
-          $request->file('imagen')->move(base_path() . '/public/uploads/', $imageName);
-          if ($request['tipo_banner']==1) {
-            $res[0]=1920;
-            $res[1]=580;
-          }else {
-            $res[0]=600;
-            $res[1]=800;
-          }
-          Image::make(base_path() . '/public/uploads/' . $imageName)->fit($res[0], $res[1], function ($constraint) {
-              $constraint->upsize();
-              $constraint->aspectRatio();
-          })->encode('jpg', 60)->save();
+        if(request()->orden != $banner->orden){
 
-          $banner->fill(['imagen' => $imageName])->save();
-      }
+            $orden_viejo = Banner::where('orden', $request["orden"]);
+            $orden_viejo->update(['orden' => $banner->orden]);
+            $banner->orden = request('orden');
+            $banner->save();
+        }
 
-      Session::flash('mensaje', 'El banner  '.$banner->titulo.' ha sido actualizado correctamente');
+        $request['visible'] = $request['visible'] ? '1' : '0';
+        $banner->fill($request->only('visible', 'orden'))->save();
 
-      return redirect(route('banner.edit', $banner->id))->with('status', 'El banner ha sido actualizado');
+        if($request->hasFile('imagen')) {
+            $imageName = 'banner_edit-'. time() . '.' .$request->file('imagen')->getClientOriginalExtension();
+            $request->file('imagen')->move(base_path() . '/public/uploads/', $imageName);
+            Image::make(base_path() . '/public/uploads/' . $imageName)->fit(1920, 700, function ($constraint) {
+                $constraint->upsize();
+                $constraint->aspectRatio();
+            })->encode('jpg', 70)->save();
+            $banner->fill(['imagen' => $imageName])->save();
+        }
+
+        Session::flash('mensaje', 'El banner ha sido actualizado correctamente');
+        return redirect(route('banner.edit', $banner->id))->with('status', 'El banner ha sido actualizado');
     }
 
     /**
@@ -161,12 +140,16 @@ class BannerController extends Controller
      * @param  \App\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id)
+    public function destroy(Banner $banner)
     {
-      $banner = $this->banners->findOrFail($id);
+        $orden_actual = Banner::where('orden', '>=', $banner['orden']);
 
-      $banner->delete();
-      Session::flash('mensaje', 'El Banner '. $banner->titulo.' ha sido eliminado');
-      return redirect(route('banner.index'));
+        if($orden_actual->exists()){
+            $orden_actual->decrement('orden');
+        }
+
+        $banner->delete();
+        Session::flash('mensaje', 'El Banner ha sido eliminado');
+        return redirect(route('banner.index'));
     }
 }

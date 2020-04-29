@@ -3,12 +3,11 @@
 
   <section class="banner-section">
     <div class="slider-carousel owl-carousel">
-      <div class="item">
-        <img src="{{url('assets_front/images/banner.jpg')}}">
-      </div>
-      <div class="item">
-        <img src="{{url('assets_front/images/banner2.jpg')}}">
-      </div>
+        @foreach($banners as $banner)
+            <div class="item">
+                <img src="{{ url('uploads/'. $banner->imagen) }}">
+            </div>
+        @endforeach
     </div>
   </section>
 
