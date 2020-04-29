@@ -15,6 +15,8 @@
                 <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                     <tr>
+                      <th>#</th>
+                      <th>Foto</th>
                       <th>Nombre</th>
                       <th>Email</th>
                       <th>Rol</th>
@@ -24,6 +26,8 @@
                   </thead>
                   <tfoot>
                     <tr>
+                      <th>#</th>
+                      <th>Foto</th>
                       <th>Nombre</th>
                       <th>Email</th>
                       <th>Rol</th>
@@ -34,6 +38,8 @@
                   <tbody>
                       @foreach($users as $user)
                         <tr>
+                          <td class="text-center">{{ $loop->iteration }}</td>
+                          <td class="text-center"><img src="{{ url('uploads/'.$user->image) }}" alt="{{ $user->name }}" width="100"></td>
                           <td>{{ $user->name }}</td>
                           <td>{{ $user->email }}</td>
                           @if($user->roles->first())

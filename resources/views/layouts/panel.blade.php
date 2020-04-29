@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="{{ url('assets_template/img/apple-icon.png')}}">
-  <link rel="icon" type="image/png" href="{{ url('assets_template/img/favicon.png')}}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ url('assets_front/images/favicon.png')}}">
+  <link rel="icon" type="image/png" href="{{ url('assets_front/images/favicon.png')}}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>{{ config('app.name', 'Panel Porta') }}</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -22,18 +22,18 @@
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="brown" data-active-color="danger">
+    <div class="sidebar" data-color="white" data-active-color="info">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
       <div class="logo">
         <a href="{{route('panel.index')}}" class="simple-text logo-mini">
           <div class="logo-image-small">
-            <img src="{{ url('assets_cliente/img/logo.jpg') }}">
+            <img src="{{ url('assets_front/images/logo.png') }}">
           </div>
         </a>
         <a href="{{route('panel.index')}}" class="simple-text logo-normal">
-          Pink Garden
+          Balpar S.A
           <!-- <div class="logo-image-big">
             <img src="{{ url('assets_template/img/logo-big.png') }}">
           </div> -->
