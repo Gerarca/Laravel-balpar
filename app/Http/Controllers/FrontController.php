@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Banner;
+use App\DatosDinamico;
 
 class FrontController extends Controller
 {
     public function index(){
         $banners = Banner::where('visible', '=', 1)->orderBy('orden')->get();
-		return view('front.index', compact('banners'));
+        $dato_dinamico = DatosDinamico::first();
+		return view('front.index', compact('banners', 'dato_dinamico'));
 	}
     public function contacto(){
 		return view('front.contacto');

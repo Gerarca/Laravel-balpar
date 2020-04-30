@@ -369,5 +369,26 @@
     </div>
   </li> --}}
 
+  <li class="{{ (Request::is('panel/datos_dinamicos') || Request::is('panel/datos_dinamicos/*') )?'active':''}}">
+        <a data-toggle="collapse" href="#menu_extra" class="{{ (Request::is('panel/datos_dinamicos') || Request::is('panel/datos_dinamicos/*') )?'collapsed':''}}">
+            <i class="fa fa-commenting-o"></i>
+            <p>
+                Extra
+                <b class="caret"></b>
+            </p>
+        </a>
+        <div class="{{ (Request::is('panel/datos_dinamicos') || Request::is('panel/datos_dinamicos/*') )?'collapse show':'collapse'}} " id="menu_extra">
+            <ul class="nav">
+
+                <li class="{{ (Request::is('panel/datos_dinamicos') || Request::is('panel/datos_dinamicos/*/edit'))?'active':''}} ">
+                    <a href="{{ route('datos_dinamicos.index') }}">
+                        <span class="sidebar-mini-icon">DD</span>
+                        <span class="sidebar-normal"> Datos Dinamicos </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </li>
+
 
 </ul>

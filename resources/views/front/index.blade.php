@@ -120,7 +120,7 @@
         <div class="flex-col-c-m flex-row row p-l-15 p-r-15 w-100">
           <div class="col-md-4 flex-col-c-m mb-4">
             <span class="m-text9">
-              +<span class="counter "data-from="0" data-to="25" data-speed="5000" data-refresh-interval="50"></span>
+              +<span class="counter "data-from="0" data-to="{{ $dato_dinamico->years }}" data-speed="5000" data-refresh-interval="50"></span>
             </span>
             <span class="s-text4 p-t-15 counter-label">
               Años de Trayectoria
@@ -128,7 +128,7 @@
           </div>
           <div class="col-md-4 flex-col-c-m mb-4">
             <span class="m-text9">
-              +<span class="counter "data-from="0" data-to="1000" data-speed="5000" data-refresh-interval="50"></span>
+              +<span class="counter "data-from="0" data-to="{{ $dato_dinamico->clientes }}" data-speed="5000" data-refresh-interval="50"></span>
             </span>
             <span class="s-text4 p-t-15 counter-label">
               Clientes Satisfechos
@@ -136,7 +136,7 @@
           </div>
           <div class="col-md-4 flex-col-c-m mb-4">
             <span class="m-text9">
-              +<span class="counter "data-from="0" data-to="800" data-speed="5000" data-refresh-interval="50"></span>
+              +<span class="counter "data-from="0" data-to="{{ $dato_dinamico->trabajos }}" data-speed="5000" data-refresh-interval="50"></span>
             </span>
             <span class="s-text4 p-t-15 counter-label">
               Fuentes de Trabajo
