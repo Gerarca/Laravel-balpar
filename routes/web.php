@@ -73,7 +73,7 @@ Route::group(['middleware' => 'role:usuario', 'middleware' => 'role:administrado
 	Route::resource('panel/ciudad', 'Panel\CiudadController', ['except' => ['show']]);
 	Route::resource('panel/solicitudtarjeta', 'Panel\SolicitudTarjetaController', ['except' => ['show']]);
 	Route::resource('panel/newsletter', 'Panel\NewsletterController', ['except' => ['show']]);
-	Route::resource('panel/categoria', 'Panel\CategoriaController', ['except' => ['show']]);
+	Route::resource('panel/categorias', 'Panel\CategoriaController', ['except' => ['show']]);
 	Route::resource('panel/marca', 'Panel\MarcaController', ['except' => ['show']]);
 	Route::resource('panel/sucursal', 'Panel\SucursalController', ['except' => ['show']]);
 	Route::resource('panel/color', 'Panel\ColorController', ['except' => ['show']]);

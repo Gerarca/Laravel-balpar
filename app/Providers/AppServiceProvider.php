@@ -23,9 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // view()->composer(
-        //     ['layouts.front'],
-        //     'App\Http\ViewComposers\InjectCategory'
-        // );
+        view()->composer(
+            ['layouts.front'],
+            'App\Http\ViewComposers\InjectCategory'
+        );
     }
 }
