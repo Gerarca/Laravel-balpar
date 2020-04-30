@@ -20,6 +20,7 @@ Route::get('/producto', 'FrontController@producto')->name('front.producto');
 Route::get('/presupuesto', 'FrontController@presupuesto')->name('front.presupuesto');
 Route::get('/nosotros', 'FrontController@nosotros')->name('front.nosotros');
 Route::get('/servicio_tecnico', 'FrontController@servicio_tecnico')->name('front.servicio_tecnico');
+Route::post('/dejar_testimonio', 'FrontController@cargar_testimonio')->name('cargar.testimonio');
 
 Route::post('/ajax/addProducto', 'Ajax\CarritoController@addProducto')->name('ajax.addProducto');
 Route::get('/ajax/getProductos', 'Ajax\CarritoController@getProductos')->name('ajax.getProductos');
@@ -79,6 +80,7 @@ Route::group(['middleware' => 'role:usuario', 'middleware' => 'role:administrado
 	Route::resource('panel/tamano', 'Panel\TamanoController', ['except' => ['show']]);
 	Route::resource('panel/etiqueta', 'Panel\EtiquetaController', ['except' => ['show']]);
 	Route::resource('panel/datos_dinamicos', 'Panel\DatosDinamicoController', ['except' => ['show', 'create', 'store', 'destroy']]);
+	Route::resource('panel/testimonios', 'Panel\TestimonioController', ['except' => ['show']]);
 
 	Route::get('panel/producto/{cod_articulo}/cuotas', 'Panel\CuotasController@index')->name('panel.cuotas.index');
 	Route::post('panel/producto/{cod_articulo}/cuotas', 'Panel\CuotasController@store')->name('panel.cuotas.store');

@@ -101,6 +101,29 @@
     </div>
   </section>
 
+    {{-- Testimonios --}}
+    <section class="newproduct p-b-80 p-t-80">
+        <div class="container">
+            <div class="sec-title">
+                <h3 class="m-text5 t-center text-color mb-4">
+                    Testimonios
+                </h3>
+            </div>
+            <div class="testimonios-carousel owl-carousel">
+                @foreach($testimonios as $testimonio)
+                    <div class="item-testimonio">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $testimonio->nombre }}</h5>
+                                <p class="card-text">{{ $testimonio->testimonio }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
   <section>
     <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14427.314806682854!2d-57.5541044!3d-25.3099587!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa2e47a29fc2f49e3!2sBalpar%20S.A.!5e0!3m2!1ses-419!2spy!4v1583264226416!5m2!1ses-419!2spy" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
   </section>
@@ -118,5 +141,28 @@
       $("#cv-input").hide();
     }
   });
+
+  $('.testimonios-carousel').owlCarousel({
+    margin:30,
+    loop:true,
+    autoplay:true,
+    autoplayTimeout:3000,
+    nav:true,
+    navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
+    dots:false,
+    responsiveClass:true,
+    responsive:{
+      0:{
+        items:2,
+      },
+      600:{
+        items:3,
+      },
+      1000:{
+        items:5,
+      }
+    }
+  })
+
   </script>
 @endsection

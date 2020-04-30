@@ -242,6 +242,29 @@
       </div>
     </section>
 
+    {{-- Testimonios --}}
+    <section class="newproduct p-b-80 p-t-80">
+        <div class="container">
+            <div class="sec-title">
+                <h3 class="m-text5 t-center text-color mb-4">
+                    Testimonios
+                </h3>
+            </div>
+            <div class="marcas-carousel owl-carousel">
+                @foreach($testimonios as $testimonio)
+                    <div class="item-marca">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $testimonio->nombre }}</h5>
+                                <p class="card-text">{{ $testimonio->testimonio }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
     {{-- Marcas --}}
     <section class="newproduct p-b-80 p-t-80">
       <div class="container">

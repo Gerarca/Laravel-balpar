@@ -198,14 +198,15 @@
             Testimonios
           </h4>
           <div class="testimonio-box">
-            <form class="" action="" method="post">
+            <form class="" action="{{ route('cargar.testimonio') }}" method="POST">
+              @csrf
               <h5 class="mb-2">Dejá tu testimonio</h5>
               <div class="bo4 of-hidden size15 m-b-20">
-                <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="nombre_testimonio" placeholder="Nombre">
+                <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="nombre" required placeholder="Nombre">
               </div>
-              <textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" name="testimonio" placeholder="Testimonio"></textarea>
+              <textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" name="testimonio" required placeholder="Testimonio"></textarea>
               <div class="">
-                <button class="btn btn-primary flex-c-m sizefull s-text1 trans-0-4 w-100">
+                <button type="submit" class="btn btn-primary flex-c-m sizefull s-text1 trans-0-4 w-100">
                   Enviar Testimonio
                 </button>
               </div>
@@ -236,15 +237,35 @@
 
   <script src="{{url('assets_front/vendor/slick/slick.min.js')}}"></script>
   <script src="{{url('assets_front/js/slick-custom.js')}}"></script>
-  <script src="{{url('assets_front/vendor/sweetalert/sweetalert.min.js')}}"></script>
+  {{-- <script src="{{url('assets_front/vendor/sweetalert/sweetalert.min.js')}}"></script> --}}
   <script src="{{url('assets_front/js/main.js')}}"></script>
   <script src="{{url('assets_front/js/owl.carousel.min.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
   <script type="text/javascript">
-  $(".has-menu").click(function(){
-    $(this).find(".sub_menu").toggleClass("show");
-    $(this).toggleClass("open");
-  });
+  
+      $(".has-menu").click(function(){
+        $(this).find(".sub_menu").toggleClass("show");
+        $(this).toggleClass("open");
+      });
+
+        $(document).ready(function(){
+
+            @if($errors->any())
+				@foreach ($errors->all() as $error)
+
+					Swal.fire("ERROR","{{$error}}","error");
+
+				@endforeach
+			@endif
+			@if(session('status'))
+
+				Swal.fire("EXITO","{{ session('status') }}","success");
+
+			@endif
+
+        });
+
   </script>
   @yield('especifico')
 </body>
