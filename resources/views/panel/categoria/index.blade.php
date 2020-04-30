@@ -6,7 +6,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title">Categorias</h4>
+                <h4 class="card-title">Categorías</h4>
               </div>
               <div class="card-body">
                 <div class="toolbar">
@@ -15,45 +15,32 @@
                 <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                     <tr>
-                      <th>Titulo</th>
-                      <th>Padre</th>
-                      <th>Imagen</th>
+                      <th>#</th>
+                      <th>Categoría</th>
                       <th>Fecha de creación</th>
-                      <th>Prioridad</th>
-
                       <th class="disabled-sorting text-right">Acciones</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>Titulo</th>
-                      <th>Padre</th>
-                      <th>Imagen</th>
+                      <th>#</th>
+                      <th>Categoría</th>
                       <th>Fecha de creación</th>
-                      <th>Prioridad</th>
                       <th class="disabled-sorting text-right">Acciones</th>
                     </tr>
                   </tfoot>
                   <tbody>
                       @foreach($categorias as $categoria)
                         <tr>
-                          <td>{{ $categoria->titulo }}</td>
-                          <td>{{ count($categoria->getPadre($categoria->cod_padre))?$categoria->getPadre($categoria->cod_padre)[0]->titulo:'-' }}</td>
-                          <td>
-                            @if (strlen($categoria->imagen)>=1)
-                              <img src="{{ url('uploads/'.$categoria->imagen) }}" alt="{{ $categoria->titulo }}" width="100"></td>
-                            @endif
+                          <td class="text-center">{{ $loop->iteration }}</td>
+                          <td>{{ $categoria->categoria }}</td>
                           <td>{{ $categoria->created_at }}</td>
-                          <td>{{ $categoria->orden }}</td>
                           <td class="text-right">
-                              <a href="{{ route('categoria.edit', $categoria->id) }}" class="btn btn-warning btn-link btn-icon btn-sm edit "><i class="fa fa-edit"></i></a>
-                              <a href="#" class="btn btn-danger btn-link btn-icon btn-sm remove btn-delete" data-id="{{ $categoria->id }}" data-toggle="modal"  data-target="#modal-default" data-route="{{ route('categoria.destroy', $categoria->id) }}" data-title="{{ $categoria->name }}"><i class="fa fa-times"></i></a>
-
+                              <a href="{{ route('categorias.edit', $categoria->id) }}" class="btn btn-warning btn-link btn-icon btn-sm edit "><i class="fa fa-edit"></i></a>
+                              <a href="#" class="btn btn-danger btn-link btn-icon btn-sm remove btn-delete" data-id="{{ $categoria->id }}" data-toggle="modal"  data-target="#modal-default" data-route="{{ route('categorias.destroy', $categoria->id) }}" data-title="{{ $categoria->categoria }}"><i class="fa fa-times"></i></a>
                           </td>
                         </tr>
                       @endforeach
-
-
                   </tbody>
                 </table>
               </div>

@@ -15,12 +15,6 @@ use App\Categoria;
 
 class CategoriaController extends Controller
 {
-
-  public function __construct( Categoria $categorias)
-  {
-    $this->middleware('auth');
-    $this->categorias = $categorias;
-  }
     /**
      * Display a listing of the resource.
      *
@@ -28,9 +22,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-      $categorias = $this->categorias->orderBy('orden', 'desc')->get();
-
-      return view('panel.categoria.index', compact('categorias'));
+        return view('panel.categoria.index', ['categorias' => Categoria::orderBy('id', 'desc')->get()]);
     }
 
     /**
@@ -38,13 +30,10 @@ class CategoriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function create(Categoria $categoria)
-     {
-         // $orden_maximo = $this->categorias->get()->count()+1;
-         $orden_maximo=10;
-         $categorias=$this->categorias->getPadresConHijos();
-         return view('panel.categoria.form', compact('categoria', 'orden_maximo', 'categorias'));
-     }
+    public function create(Categoria $categoria)
+    {
+        return view('panel.categoria.form', compact('categoria'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -54,24 +43,13 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-      request()->validate([
-        'titulo'=> 'required|max:255',
-        'imagen'=> 'image'
-      ]);
-      $categoria = $this->categorias->create($request->only('titulo', 'cod_padre', 'orden') + ['user_id'=> \Auth::user()->id]);
-      if($request->hasFile('imagen')) {
-          $imageName = str_slug($request->titulo).'-'.time() . '.' .$request->file('imagen')->getClientOriginalExtension();
-          $request->file('imagen')->move(base_path() . '/public/uploads/', $imageName);
-          Image::make(base_path() . '/public/uploads/' . $imageName)->fit(800, 500, function ($constraint) {
-              $constraint->upsize();
-              $constraint->aspectRatio();
-          })->encode('jpg', 60)->save();
+        request()->validate([
+            'categoria'=> 'required|max:255'
+        ]);
+        $categoria = Categoria::create($request->only('categoria'));
 
-          $categoria->fill(['imagen' => $imageName])->save();
-      }
-
-        Session::flash('mensaje', 'La categoria '.$categoria->titulo.' ha sido creada correctamente');
-        return redirect(route('categoria.index'))->with('status', 'La categoria ha sido creado');
+        Session::flash('mensaje', 'La categoria '.$categoria->categoria.' ha sido creada correctamente');
+        return redirect(route('categorias.index'));
 
     }
 
@@ -92,13 +70,9 @@ class CategoriaController extends Controller
      * @param  \App\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categoria $categoria, $id)
+    public function edit(Categoria $categoria)
     {
-      $categoria = $this->categorias->findOrFail($id);
-      $categorias=$this->categorias->getPadresConHijos();
-      // $orden_maximo = $this->categorias->get()->count()+1;
-       $orden_maximo=10;
-      return view('panel.categoria.form', compact('categoria', 'orden_maximo', 'categorias'));
+        return view('panel.categoria.form', compact('categoria'));
     }
 
     /**
@@ -108,26 +82,16 @@ class CategoriaController extends Controller
      * @param  \App\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categoria $categoria, $id)
+    public function update(Request $request, Categoria $categoria)
     {
-      request()->validate([
-        'titulo'=> 'required|max:255'
-      ]);
-      $categoria = $this->categorias->findOrFail($id);
-      $categoria->fill($request->only('titulo', 'cod_padre', 'orden'))->save();
-      if($request->hasFile('imagen')) {
-          $imageName = str_slug($request->titulo).'-'.time() . '.' .$request->file('imagen')->getClientOriginalExtension();
-          $request->file('imagen')->move(base_path() . '/public/uploads/', $imageName);
-          Image::make(base_path() . '/public/uploads/' . $imageName)->fit(800, 500, function ($constraint) {
-              $constraint->upsize();
-              $constraint->aspectRatio();
-          })->encode('jpg', 60)->save();
+        request()->validate([
+            'categoria'=> 'required|max:255'
+        ]);
 
-          $categoria->fill(['imagen' => $imageName])->save();
-      }
-      Session::flash('mensaje', 'La categoria  '.$categoria->titulo.' ha sido actualizada correctamente');
+        $categoria->fill($request->only('categoria'))->save();
 
-      return redirect(route('categoria.edit', $categoria->id))->with('status', 'La categoria ha sido actualizado');
+        Session::flash('mensaje', 'La categoría  '.$categoria->categoria.' ha sido actualizada correctamente.');
+        return redirect(route('categorias.edit', $categoria->id));
     }
 
     /**
@@ -136,15 +100,10 @@ class CategoriaController extends Controller
      * @param  \App\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categoria $categoria, $id)
+    public function destroy(Categoria $categoria)
     {
-      $categoria = $this->categorias->findOrFail($id);
-      $cod_padre=$categoria->cod_padre;
-      $categoria->where('cod_padre',$categoria->id)
-      ->update(['cod_padre' => $cod_padre]);
-
-      $categoria->delete();
-      Session::flash('mensaje', 'La Categoria '. $categoria->titulo.' ha sido eliminada');
-      return redirect(route('categoria.index'));
+        $categoria->delete();
+        Session::flash('mensaje', 'La Categoria '. $categoria->categoria.' ha sido eliminada.');
+        return redirect(route('categorias.index'));
     }
 }

@@ -59,9 +59,9 @@
               <li class="has-menu">
                 <a href="javascript:void(0)">Productos</a>
                 <ul class="sub_menu">
-                  <li><a href="{{route('front.catalogo')}}">Ejemplo 1</a></li>
-                  <li><a href="{{route('front.catalogo')}}">Ejemplo 2</a></li>
-                  <li><a href="{{route('front.catalogo')}}">Ejemplo 3</a></li>
+                    @foreach($categories as $category)
+                        <li><a href="{{route('front.catalogo')}}">{{ $category->categoria }}</a></li>
+                    @endforeach
                 </ul>
               </li>
               <li class="has-menu">
@@ -243,7 +243,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
   <script type="text/javascript">
-  
+
       $(".has-menu").click(function(){
         $(this).find(".sub_menu").toggleClass("show");
         $(this).toggleClass("open");
