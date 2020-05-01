@@ -32,10 +32,9 @@
               Marca
             </h4>
             <ul>
-              <li class="p-t-4"><a href="#" class="s-text13">Sipel</a></li>
-              <li class="p-t-4"><a href="#" class="s-text13">Mundial</a></li>
-              <li class="p-t-4"><a href="#" class="s-text13">Dixter</a></li>
-              <li class="p-t-4"><a href="#" class="s-text13">Sirman</a></li>
+                @foreach($marcas as $marca)
+                    <li class="p-t-4"><a href="#" class="s-text13">{{ $marca->nombre }}</a></li>
+                @endforeach
             </ul>
 
             <hr>

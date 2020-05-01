@@ -165,24 +165,24 @@
       </ul>
     </div>
   </li>
-  <li class="{{ (Request::is('panel/marca/*') || Request::is('panel/marca'))?'active':''}}">
-    <a data-toggle="collapse" href="#menu_marca" class="{{ (Request::is('panel/marca/*') || Request::is('panel/marca'))?'collapsed':''}}">
+  <li class="{{ (Request::is('panel/marcas/*') || Request::is('panel/marcas'))?'active':''}}">
+    <a data-toggle="collapse" href="#menu_marca" class="{{ (Request::is('panel/marcas/*') || Request::is('panel/marcas'))?'collapsed':''}}">
       <i class="nc-icon nc-tag-content"></i>
       <p>
         Marcas
         <b class="caret"></b>
       </p>
     </a>
-    <div class="{{ (Request::is('panel/marca/*') || Request::is('panel/marca'))?'collapse show':'collapse'}} " id="menu_marca">
+    <div class="{{ (Request::is('panel/marcas/*') || Request::is('panel/marcas'))?'collapse show':'collapse'}} " id="menu_marca">
       <ul class="nav">
-        <li class="{{ (Request::is('panel/marca') || Request::is('panel/marca/*/edit'))?'active':''}} ">
-          <a href="{{ route('marca.index') }}">
+        <li class="{{ (Request::is('panel/marcas') || Request::is('panel/marcas/*/edit'))?'active':''}} ">
+          <a href="{{ route('marcas.index') }}">
             <span class="sidebar-mini-icon">LM</span>
             <span class="sidebar-normal"> Lista de Marcas </span>
           </a>
         </li>
-        <li class="{{ (Request::is('panel/marca/create'))?'active':''}} ">
-          <a href="{{ route('marca.create') }}">
+        <li class="{{ (Request::is('panel/marcas/create'))?'active':''}} ">
+          <a href="{{ route('marcas.create') }}">
             <span class="sidebar-mini-icon">AM</span>
             <span class="sidebar-normal"> Añadir Marca </span>
           </a>

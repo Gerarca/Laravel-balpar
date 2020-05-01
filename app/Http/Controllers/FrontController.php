@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Banner;
 use App\DatosDinamico;
 use App\Testimonio;
+use App\Marca;
 
 class FrontController extends Controller
 {
@@ -13,14 +14,16 @@ class FrontController extends Controller
         $banners = Banner::where('visible', '=', 1)->orderBy('orden')->get();
         $dato_dinamico = DatosDinamico::first();
         $testimonios = Testimonio::where('visible', '=', 1)->orderBy('id', 'desc')->get();
-		return view('front.index', compact('banners', 'dato_dinamico', 'testimonios'));
+        $marcas = Marca::all();
+		return view('front.index', compact('banners', 'dato_dinamico', 'testimonios', 'marcas'));
 	}
     public function contacto(){
         $testimonios = Testimonio::where('visible', '=', 1)->orderBy('id', 'desc')->get();
 		return view('front.contacto', compact('testimonios'));
 	}
     public function catalogo(){
-		return view('front.catalogo');
+        $marcas = Marca::orderBy('nombre')->get();
+		return view('front.catalogo', compact('marcas'));
 	}
     public function producto(){
 		return view('front.producto');
