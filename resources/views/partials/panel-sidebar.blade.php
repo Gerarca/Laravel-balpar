@@ -102,8 +102,8 @@
     </div>
   </li>
 
-  <li class="{{ (Request::is('panel/categorias/*') || Request::is('panel/categorias') || Request::is('panel/etiqueta/*') || Request::is('panel/etiqueta') || Request::is('panel/usos/*') || Request::is('panel/usos') || Request::is('panel/tamano/*') || Request::is('panel/tamano'))?'active':''}}">
-    <a data-toggle="collapse" href="#menu_categoria" class="{{ (Request::is('panel/categorias/*') || Request::is('panel/categorias') || Request::is('panel/etiqueta/*') || Request::is('panel/etiqueta') || Request::is('panel/usos/*') || Request::is('panel/usos') || Request::is('panel/tamano/*') || Request::is('panel/tamano'))?'collapsed':''}}">
+  <li class="{{ (Request::is('panel/categorias/*') || Request::is('panel/categorias') || Request::is('panel/etiqueta/*') || Request::is('panel/etiqueta') || Request::is('panel/usos/*') || Request::is('panel/usos') || Request::is('panel/rubros/*') || Request::is('panel/rubros'))?'active':''}}">
+    <a data-toggle="collapse" href="#menu_categoria" class="{{ (Request::is('panel/categorias/*') || Request::is('panel/categorias') || Request::is('panel/etiqueta/*') || Request::is('panel/etiqueta') || Request::is('panel/usos/*') || Request::is('panel/usos') || Request::is('panel/rubros/*') || Request::is('panel/rubros'))?'collapsed':''}}">
       <i class="fa fa-tags"></i>
       <p>
         Categorias
@@ -111,7 +111,7 @@
       </p>
     </a>
 
-    <div class="{{ (Request::is('panel/categorias/*') || Request::is('panel/categorias') || Request::is('panel/etiqueta/*') || Request::is('panel/etiqueta') || Request::is('panel/usos/*') || Request::is('panel/usos') || Request::is('panel/tamano/*') || Request::is('panel/tamano'))?'collapse show':'collapse'}} " id="menu_categoria">
+    <div class="{{ (Request::is('panel/categorias/*') || Request::is('panel/categorias') || Request::is('panel/etiqueta/*') || Request::is('panel/etiqueta') || Request::is('panel/usos/*') || Request::is('panel/usos') || Request::is('panel/rubros/*') || Request::is('panel/rubros'))?'collapse show':'collapse'}} " id="menu_categoria">
       <ul class="nav">
         <li class="{{ (Request::is('panel/categorias') || Request::is('panel/categorias/*/edit'))?'active':''}} ">
           <a href="{{ route('categorias.index') }}">
@@ -125,31 +125,18 @@
             <span class="sidebar-normal"> Añadir Categoria </span>
           </a>
         </li>
-        {{-- <li class="{{ (Request::is('panel/tamano') || Request::is('panel/tamano/*/edit'))?'active':''}} ">
-          <a href="{{ route('tamano.index') }}">
-            <span class="sidebar-mini-icon">LT</span>
-            <span class="sidebar-normal"> Lista de tamaños </span>
+        <li class="{{ (Request::is('panel/rubros') || Request::is('panel/rubros/*/edit'))?'active':''}} ">
+          <a href="{{ route('rubros.index') }}">
+            <span class="sidebar-mini-icon">LR</span>
+            <span class="sidebar-normal"> Lista de Rubros </span>
           </a>
         </li>
-        <li class="{{ (Request::is('panel/tamano/create'))?'active':''}} ">
-          <a href="{{ route('tamano.create') }}">
-            <span class="sidebar-mini-icon">AT</span>
-            <span class="sidebar-normal"> Añadir Tamaño </span>
+        <li class="{{ (Request::is('panel/rubros/create'))?'active':''}} ">
+          <a href="{{ route('rubros.create') }}">
+            <span class="sidebar-mini-icon">AR</span>
+            <span class="sidebar-normal"> Añadir Rubros </span>
           </a>
         </li>
-        <li class="{{ (Request::is('panel/color') || Request::is('panel/color/*/edit'))?'active':''}} ">
-          <a href="{{ route('color.index') }}">
-            <span class="sidebar-mini-icon">LC</span>
-            <span class="sidebar-normal"> Lista de colores </span>
-          </a>
-        </li>
-        <li class="{{ (Request::is('panel/color/create'))?'active':''}} ">
-          <a href="{{ route('color.create') }}">
-            <span class="sidebar-mini-icon">AC</span>
-            <span class="sidebar-normal"> Añadir Color </span>
-          </a>
-        </li> --}}
-
         <li class="{{ (Request::is('panel/usos') || Request::is('panel/usos/*/edit'))?'active':''}} ">
           <a href="{{ route('usos.index') }}">
             <span class="sidebar-mini-icon">LU</span>

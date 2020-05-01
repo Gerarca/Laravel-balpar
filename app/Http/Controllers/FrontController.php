@@ -8,6 +8,7 @@ use App\DatosDinamico;
 use App\Testimonio;
 use App\Marca;
 use App\Uso;
+use App\Rubro;
 
 class FrontController extends Controller
 {
@@ -25,7 +26,8 @@ class FrontController extends Controller
     public function catalogo(){
         $marcas = Marca::orderBy('nombre')->get();
         $usos = Uso::orderBy('uso')->get();
-		return view('front.catalogo', compact('marcas', 'usos'));
+        $rubros = Rubro::orderBy('rubro')->get();
+		return view('front.catalogo', compact('marcas', 'usos', 'rubros'));
 	}
     public function producto(){
 		return view('front.producto');

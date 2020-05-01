@@ -56,17 +56,13 @@
               Rubro
             </h4>
             <ul>
-              <li class="p-t-4">
-                <a href="#" class="s-text13">
-                  Rubro 1
-                </a>
-              </li>
-
-              <li class="p-t-4">
-                <a href="#" class="s-text13">
-                  Rubro 2
-                </a>
-              </li>
+                @foreach($rubros as $rubro)
+                    <li class="p-t-4">
+                        <a href="#" class="s-text13">
+                            {{ $rubro->rubro }}
+                        </a>
+                    </li>
+                @endforeach
             </ul>
 
             <hr>
