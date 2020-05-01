@@ -44,7 +44,7 @@ Auth::routes();
 Route::group(['middleware' => 'role:usuario', 'middleware' => 'role:administrador'], function() {
 	Route::get('panel', 'PanelController@index')->name('panel.index');
 	Route::resource('panel/users', 'Panel\UsersController', ['except' => ['show']]);
-	Route::resource('panel/clientes', 'Panel\ClientesController', ['except' => ['show']]);
+	// Route::resource('panel/clientes', 'Panel\ClientesController', ['except' => ['show']]);
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::get('panel/editar_perfil', 'Panel\UsersController@editar_perfil')->name('editar_perfil');
 	Route::get('panel/opciones', ['as' => 'panel.opciones.index', 'uses' => 'Panel\OpcionesController@index']);
@@ -53,15 +53,10 @@ Route::group(['middleware' => 'role:usuario', 'middleware' => 'role:administrado
 	Route::get('panel/pedidos/export', 'Panel\PedidosController@export')->name('pedidos.export');
 	Route::get('panel/pedidos/{pedido}/edit', 'Panel\PedidosController@edit')->name('pedidos.edit');
 	Route::put('panel/pedidos/{pedido}', 'Panel\PedidosController@update')->name('pedidos.update');
-	Route::get('panel/solicitudes', 'Panel\SolicitudesController@index')->name('solicitudes.index');
-	Route::get('panel/solicitudes/{pedido}/edit', 'Panel\SolicitudesController@edit')->name('solicitudes.edit');
-	Route::put('panel/solicitudes/{pedido}', 'Panel\SolicitudesController@update')->name('solicitudes.update');
-	Route::get('panel/solicitudesPendientes', 'Panel\SolicitudesController@pendientes')->name('solicitudesPendientes.index');
+
 
 	Route::get('panel/reportes/ventas', 'Panel\ReporteController@ventas')->name('reportes.venta');
 	Route::post('panel/reportes/ventasAjax', 'Panel\ReporteController@ventasAjax')->name('reportes.ventaAjax');
-	Route::get('panel/reportes/solicitudes', 'Panel\ReporteController@solicitudes')->name('reportes.solicitud');
-	Route::post('panel/reportes/solicitudesAjax', 'Panel\ReporteController@solicitudesAjax')->name('reportes.solicitudAjax');
 	Route::get('panel/reportes/usuarios', 'Panel\ReporteController@usuarios')->name('reportes.usuario');
 	Route::post('panel/reportes/usuariosAjax', 'Panel\ReporteController@usuariosAjax')->name('reportes.usuarioAjax');
 	Route::get('panel/reportes/productos', 'Panel\ReporteController@productos')->name('reportes.producto');
@@ -74,7 +69,7 @@ Route::group(['middleware' => 'role:usuario', 'middleware' => 'role:administrado
 	Route::resource('panel/solicitudtarjeta', 'Panel\SolicitudTarjetaController', ['except' => ['show']]);
 	Route::resource('panel/newsletter', 'Panel\NewsletterController', ['except' => ['show']]);
 	Route::resource('panel/categorias', 'Panel\CategoriaController', ['except' => ['show']]);
-	Route::resource('panel/marca', 'Panel\MarcaController', ['except' => ['show']]);
+	Route::resource('panel/marcas', 'Panel\MarcaController', ['except' => ['show']]);
 	Route::resource('panel/sucursal', 'Panel\SucursalController', ['except' => ['show']]);
 	Route::resource('panel/color', 'Panel\ColorController', ['except' => ['show']]);
 	Route::resource('panel/tamano', 'Panel\TamanoController', ['except' => ['show']]);

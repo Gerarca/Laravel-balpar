@@ -274,22 +274,11 @@
           </h3>
         </div>
         <div class="marcas-carousel owl-carousel">
-          <div class="item-marca">
-            <a href="{{route('front.catalogo')}}"><img src="{{url('assets_front/images/sipel.png')}}"></a>
-          </div>
-          <div class="item-marca">
-            <a href="{{route('front.catalogo')}}"><img src="{{url('assets_front/images/quorion.jpg')}}"></a>
-          </div>
-          <div class="item-marca">
-            <a href="{{route('front.catalogo')}}"><img src="{{url('assets_front/images/sirman.jpg')}}"></a>
-          </div>
-          <div class="item-marca">
-            <a href="{{route('front.catalogo')}}"><img src="{{url('assets_front/images/dixter.gif')}}"></a>
-          </div>
-          <div class="item-marca">
-            <a href="{{route('front.catalogo')}}"><img src="{{url('assets_front/images/mundial.jpg')}}"></a>
-          </div>
-
+            @foreach($marcas as $marca)
+                <div class="item-marca">
+                    <a href="{{route('front.catalogo')}}"><img src="{{url('uploads/'. $marca->imagen)}}" alt="{{ $marca->nombre }}" title="{{ $marca->nombre }}"></a>
+                </div>
+            @endforeach
         </div>
 
       </div>

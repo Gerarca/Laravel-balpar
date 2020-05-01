@@ -8,16 +8,14 @@ class Marca extends Model
 {
     protected $table = 'marcas';
 
-    protected $fillable = [
-      'titulo', 'logo', 'banner', 'web', 'orden', 'user_id', 'id', 'cod_origen', 'destacado', 'id_categoria'
-    ];
+    protected $fillable = ['categoria_id', 'imagen', 'nombre'];
 
     public function productos(){
-      return $this->hasMany(Producto::class);
+        return $this->hasMany(Producto::class);
     }
 
     public function categoria(){
-      return $this->belongsTo(Categoria::class);
+        return $this->belongsTo(Categoria::class);
     }
 
 }
