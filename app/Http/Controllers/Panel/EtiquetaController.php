@@ -15,13 +15,6 @@ use App\Etiqueta;
 
 class EtiquetaController extends Controller
 {
-
-  public function __construct( Etiqueta $etiquetas)
-  {
-    $this->middleware('auth');
-    $this->etiquetas = $etiquetas;
-  }
-
     /**
      * Display a listing of the resource.
      *
@@ -29,9 +22,7 @@ class EtiquetaController extends Controller
      */
     public function index()
     {
-      $etiquetas = $this->etiquetas->orderBy('orden', 'desc')->get();
-
-      return view('panel.etiqueta.index', compact('etiquetas'));
+        return view('panel.etiquetas.index', ['etiquetas' => Etiqueta::orderBy('id', 'desc')->get()]);
     }
 
     /**
@@ -41,8 +32,7 @@ class EtiquetaController extends Controller
      */
     public function create(Etiqueta $etiqueta)
     {
-      $orden_maximo = $this->etiquetas->get()->count()+1;
-      return view('panel.etiqueta.form', compact('etiqueta', 'orden_maximo'));
+        return view('panel.etiquetas.form', compact('etiqueta'));
     }
 
     /**
@@ -53,35 +43,10 @@ class EtiquetaController extends Controller
      */
     public function store(Request $request)
     {
-      request()->validate([
-        'titulo'=> 'required|max:255',
-        'logo'=> 'image',
-        'banner'=> 'image'
-      ]);
-      $etiqueta = $this->etiquetas->create($request->only('titulo', 'orden') + ['user_id'=> \Auth::user()->id]);
-      if($request->hasFile('logo')) {
-          $imageName = str_slug($request->titulo).'-l-'.time() . '.' .$request->file('logo')->getClientOriginalExtension();
-          $request->file('logo')->move(base_path() . '/public/uploads/', $imageName);
-          Image::make(base_path() . '/public/uploads/' . $imageName)->fit(360, 360, function ($constraint) {
-              $constraint->upsize();
-              $constraint->aspectRatio();
-          })->encode('jpg', 60)->save();
+        Etiqueta::create(request()->validate(['nombre' => 'required|max:255']));
 
-          $etiqueta->fill(['logo' => $imageName])->save();
-      }
-      if($request->hasFile('banner')) {
-          $imageName = str_slug($request->titulo).'-b-'.time() . '.' .$request->file('banner')->getClientOriginalExtension();
-          $request->file('banner')->move(base_path() . '/public/uploads/', $imageName);
-          Image::make(base_path() . '/public/uploads/' . $imageName)->fit(360, 360, function ($constraint) {
-              $constraint->upsize();
-              $constraint->aspectRatio();
-          })->encode('jpg', 60)->save();
-
-          $etiqueta->fill(['banner' => $imageName])->save();
-      }
-
-        Session::flash('mensaje', 'La etiqueta '.$etiqueta->titulo.' ha sido creada correctamente');
-        return redirect(route('etiqueta.index'))->with('status', 'La etiqueta ha sido creada');
+        Session::flash('mensaje', 'La etiqueta ' . $request->nombre . ' ha sido creada correctamente');
+        return redirect(route('etiquetas.index'));
     }
 
     /**
@@ -101,11 +66,9 @@ class EtiquetaController extends Controller
      * @param  \App\Etiqueta  $etiqueta
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Etiqueta $etiqueta)
     {
-      $etiqueta = $this->etiquetas->findOrFail($id);
-      $orden_maximo = $this->etiquetas->get()->count()+1;
-      return view('panel.etiqueta.form', compact('etiqueta', 'orden_maximo'));
+        return view('panel.etiquetas.form', compact('etiqueta'));
     }
 
     /**
@@ -115,36 +78,12 @@ class EtiquetaController extends Controller
      * @param  \App\Etiqueta  $etiqueta
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Etiqueta $etiqueta)
     {
-      request()->validate([
-        'titulo'=> 'required|max:255'
-      ]);
-      $etiqueta = $this->etiquetas->findOrFail($id);
-      $etiqueta->fill($request->only('titulo', 'orden'))->save();
-      if($request->hasFile('logo')) {
-          $imageName = str_slug($request->titulo).'-l-'.time() . '.' .$request->file('logo')->getClientOriginalExtension();
-          $request->file('logo')->move(base_path() . '/public/uploads/', $imageName);
-          Image::make(base_path() . '/public/uploads/' . $imageName)->fit(360, 360, function ($constraint) {
-              $constraint->upsize();
-              $constraint->aspectRatio();
-          })->encode('jpg', 60)->save();
+        $etiqueta->fill($request->only('nombre'))->save();
 
-          $etiqueta->fill(['logo' => $imageName])->save();
-      }
-      if($request->hasFile('banner')) {
-          $imageName = str_slug($request->titulo).'-b-'.time() . '.' .$request->file('banner')->getClientOriginalExtension();
-          $request->file('banner')->move(base_path() . '/public/uploads/', $imageName);
-          Image::make(base_path() . '/public/uploads/' . $imageName)->fit(360, 360, function ($constraint) {
-              $constraint->upsize();
-              $constraint->aspectRatio();
-          })->encode('jpg', 60)->save();
-
-          $etiqueta->fill(['banner' => $imageName])->save();
-      }
-      Session::flash('mensaje', 'La etiqueta  '.$etiqueta->titulo.' ha sido actualizada correctamente');
-
-      return redirect(route('etiqueta.edit', $etiqueta->id))->with('status', 'La etiqueta ha sido actualizada');
+        Session::flash('mensaje', 'La etiqueta ' . $etiqueta->nombre . ' ha sido actualizado correctamente');
+        return redirect(route('etiquetas.edit', $etiqueta->id))->with('status', 'La etiqueta se actualizó correctamente.');
     }
 
     /**
@@ -153,11 +92,10 @@ class EtiquetaController extends Controller
      * @param  \App\Etiqueta  $etiqueta
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id)
+    public function destroy(Etiqueta $etiqueta)
     {
-      $etiqueta = $this->etiquetas->findOrFail($id);
-      $etiqueta->delete();
-      Session::flash('mensaje', 'La Etiqueta '. $etiqueta->titulo.' ha sido eliminada');
-      return redirect(route('etiqueta.index'));
+        $etiqueta->delete();
+        Session::flash('mensaje', 'La etiqueta ' . $etiqueta->nombre . ' ha sido eliminado');
+        return redirect(route('etiquetas.index'));
     }
 }

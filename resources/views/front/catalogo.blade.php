@@ -42,16 +42,13 @@
               Uso
             </h4>
             <ul>
-              <li class="p-t-4">
-                <a href="#" class="s-text13">
-                  Uso 1
-                </a>
-              </li>
-              <li class="p-t-4">
-                <a href="#" class="s-text13">
-                  Uso 2
-                </a>
-              </li>
+                @foreach($usos as $uso)
+                    <li class="p-t-4">
+                        <a href="#" class="s-text13">
+                            {{ $uso->uso }}
+                        </a>
+                    </li>
+                @endforeach
             </ul>
 
             <hr>
@@ -59,17 +56,13 @@
               Rubro
             </h4>
             <ul>
-              <li class="p-t-4">
-                <a href="#" class="s-text13">
-                  Rubro 1
-                </a>
-              </li>
-
-              <li class="p-t-4">
-                <a href="#" class="s-text13">
-                  Rubro 2
-                </a>
-              </li>
+                @foreach($rubros as $rubro)
+                    <li class="p-t-4">
+                        <a href="#" class="s-text13">
+                            {{ $rubro->rubro }}
+                        </a>
+                    </li>
+                @endforeach
             </ul>
 
             <hr>
@@ -77,23 +70,13 @@
               Etiquetas
             </h4>
             <ul class="tagcloud">
-              <li class="tag">
-                <a href="#" class="">
-                  Etiqueta 1
-                </a>
-              </li>
-
-              <li class="tag">
-                <a href="#" class="active">
-                  Etiqueta 2
-                </a>
-              </li>
-
-              <li class="tag">
-                <a href="#" class="">
-                  Etiqueta 3
-                </a>
-              </li>
+                @foreach($etiquetas as $etiqueta)
+                    <li class="tag">
+                        <a href="#" class=""> {{-- class="active" --}}
+                            {{ $etiqueta->nombre }}
+                        </a>
+                    </li>
+                @endforeach
             </ul>
           </div>
         </div>
