@@ -70,23 +70,13 @@
               Etiquetas
             </h4>
             <ul class="tagcloud">
-              <li class="tag">
-                <a href="#" class="">
-                  Etiqueta 1
-                </a>
-              </li>
-
-              <li class="tag">
-                <a href="#" class="active">
-                  Etiqueta 2
-                </a>
-              </li>
-
-              <li class="tag">
-                <a href="#" class="">
-                  Etiqueta 3
-                </a>
-              </li>
+                @foreach($etiquetas as $etiqueta)
+                    <li class="tag">
+                        <a href="#" class=""> {{-- class="active" --}}
+                            {{ $etiqueta->nombre }}
+                        </a>
+                    </li>
+                @endforeach
             </ul>
           </div>
         </div>

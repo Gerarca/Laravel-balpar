@@ -9,6 +9,7 @@ use App\Testimonio;
 use App\Marca;
 use App\Uso;
 use App\Rubro;
+use App\Etiqueta;
 
 class FrontController extends Controller
 {
@@ -27,7 +28,8 @@ class FrontController extends Controller
         $marcas = Marca::orderBy('nombre')->get();
         $usos = Uso::orderBy('uso')->get();
         $rubros = Rubro::orderBy('rubro')->get();
-		return view('front.catalogo', compact('marcas', 'usos', 'rubros'));
+        $etiquetas = Etiqueta::orderBy('nombre')->get();
+		return view('front.catalogo', compact('marcas', 'usos', 'rubros', 'etiquetas'));
 	}
     public function producto(){
 		return view('front.producto');
