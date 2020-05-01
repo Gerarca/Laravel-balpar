@@ -102,8 +102,8 @@
     </div>
   </li>
 
-  <li class="{{ (Request::is('panel/categorias/*') || Request::is('panel/categorias') || Request::is('panel/etiqueta/*') || Request::is('panel/etiqueta') || Request::is('panel/color/*') || Request::is('panel/color') || Request::is('panel/tamano/*') || Request::is('panel/tamano'))?'active':''}}">
-    <a data-toggle="collapse" href="#menu_categoria" class="{{ (Request::is('panel/categorias/*') || Request::is('panel/categorias') || Request::is('panel/etiqueta/*') || Request::is('panel/etiqueta') || Request::is('panel/color/*') || Request::is('panel/color') || Request::is('panel/tamano/*') || Request::is('panel/tamano'))?'collapsed':''}}">
+  <li class="{{ (Request::is('panel/categorias/*') || Request::is('panel/categorias') || Request::is('panel/etiqueta/*') || Request::is('panel/etiqueta') || Request::is('panel/usos/*') || Request::is('panel/usos') || Request::is('panel/tamano/*') || Request::is('panel/tamano'))?'active':''}}">
+    <a data-toggle="collapse" href="#menu_categoria" class="{{ (Request::is('panel/categorias/*') || Request::is('panel/categorias') || Request::is('panel/etiqueta/*') || Request::is('panel/etiqueta') || Request::is('panel/usos/*') || Request::is('panel/usos') || Request::is('panel/tamano/*') || Request::is('panel/tamano'))?'collapsed':''}}">
       <i class="fa fa-tags"></i>
       <p>
         Categorias
@@ -111,7 +111,7 @@
       </p>
     </a>
 
-    <div class="{{ (Request::is('panel/categorias/*') || Request::is('panel/categorias') || Request::is('panel/etiqueta/*') || Request::is('panel/etiqueta') || Request::is('panel/color/*') || Request::is('panel/color') || Request::is('panel/tamano/*') || Request::is('panel/tamano'))?'collapse show':'collapse'}} " id="menu_categoria">
+    <div class="{{ (Request::is('panel/categorias/*') || Request::is('panel/categorias') || Request::is('panel/etiqueta/*') || Request::is('panel/etiqueta') || Request::is('panel/usos/*') || Request::is('panel/usos') || Request::is('panel/tamano/*') || Request::is('panel/tamano'))?'collapse show':'collapse'}} " id="menu_categoria">
       <ul class="nav">
         <li class="{{ (Request::is('panel/categorias') || Request::is('panel/categorias/*/edit'))?'active':''}} ">
           <a href="{{ route('categorias.index') }}">
@@ -150,6 +150,18 @@
           </a>
         </li> --}}
 
+        <li class="{{ (Request::is('panel/usos') || Request::is('panel/usos/*/edit'))?'active':''}} ">
+          <a href="{{ route('usos.index') }}">
+            <span class="sidebar-mini-icon">LU</span>
+            <span class="sidebar-normal"> Lista de Usos </span>
+          </a>
+        </li>
+        <li class="{{ (Request::is('panel/usos/create'))?'active':''}} ">
+          <a href="{{ route('usos.create') }}">
+            <span class="sidebar-mini-icon">AU</span>
+            <span class="sidebar-normal"> Añadir Usos </span>
+          </a>
+        </li>
         <li class="{{ (Request::is('panel/etiqueta') || Request::is('panel/etiqueta/*/edit'))?'active':''}} ">
           <a href="{{ route('etiqueta.index') }}">
             <span class="sidebar-mini-icon">LE</span>

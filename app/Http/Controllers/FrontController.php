@@ -7,6 +7,7 @@ use App\Banner;
 use App\DatosDinamico;
 use App\Testimonio;
 use App\Marca;
+use App\Uso;
 
 class FrontController extends Controller
 {
@@ -23,7 +24,8 @@ class FrontController extends Controller
 	}
     public function catalogo(){
         $marcas = Marca::orderBy('nombre')->get();
-		return view('front.catalogo', compact('marcas'));
+        $usos = Uso::orderBy('uso')->get();
+		return view('front.catalogo', compact('marcas', 'usos'));
 	}
     public function producto(){
 		return view('front.producto');

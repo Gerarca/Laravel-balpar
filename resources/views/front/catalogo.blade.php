@@ -42,16 +42,13 @@
               Uso
             </h4>
             <ul>
-              <li class="p-t-4">
-                <a href="#" class="s-text13">
-                  Uso 1
-                </a>
-              </li>
-              <li class="p-t-4">
-                <a href="#" class="s-text13">
-                  Uso 2
-                </a>
-              </li>
+                @foreach($usos as $uso)
+                    <li class="p-t-4">
+                        <a href="#" class="s-text13">
+                            {{ $uso->uso }}
+                        </a>
+                    </li>
+                @endforeach
             </ul>
 
             <hr>

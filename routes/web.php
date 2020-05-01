@@ -76,6 +76,7 @@ Route::group(['middleware' => 'role:usuario', 'middleware' => 'role:administrado
 	Route::resource('panel/etiqueta', 'Panel\EtiquetaController', ['except' => ['show']]);
 	Route::resource('panel/datos_dinamicos', 'Panel\DatosDinamicoController', ['except' => ['show', 'create', 'store', 'destroy']]);
 	Route::resource('panel/testimonios', 'Panel\TestimonioController', ['except' => ['show']]);
+	Route::resource('panel/usos', 'Panel\UsoController', ['except' => ['show']]);
 
 	Route::get('panel/producto/{cod_articulo}/cuotas', 'Panel\CuotasController@index')->name('panel.cuotas.index');
 	Route::post('panel/producto/{cod_articulo}/cuotas', 'Panel\CuotasController@store')->name('panel.cuotas.store');
