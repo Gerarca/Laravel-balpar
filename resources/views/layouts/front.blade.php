@@ -60,7 +60,7 @@
                 <a href="javascript:void(0)">Productos</a>
                 <ul class="sub_menu">
                     @foreach($categories as $category)
-                        <li><a href="{{route('front.catalogo')}}">{{ $category->categoria }}</a></li>
+                        <li><a href="{{route('front.catalogo.categoria', ['categoria' => $category->id, 'nombre' => Str::slug($category->categoria)])}}">{{ $category->categoria }}</a></li>
                     @endforeach
                 </ul>
               </li>
@@ -88,10 +88,13 @@
             <i class="fas fa-search header-icon1 js-show-header-dropdown"></i>
             <div class="header-cart header-dropdown search-dropdown">
               <div class="search-product pos-relative bo4 of-hidden">
-                <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Buscar">
-                <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4 btn-search-toggle">
-                  <i class="fs-12 fa fa-search" aria-hidden="true"></i>
-                </button>
+                  <form action="{{ route('front.buscar.catalogo') }}" method="post">
+                      @csrf
+                      <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search_product" placeholder="Buscar">
+                      <button type="submit" class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4 btn-search-toggle">
+                          <i class="fs-12 fa fa-search" aria-hidden="true"></i>
+                      </button>
+                  </form>
               </div>
             </div>
           </div>
@@ -106,7 +109,7 @@
                     <img src="{{url('assets_front/images/prod1.jpg')}}">
                   </div>
                   <div class="header-cart-item-txt">
-                    <a href="{{route('front.producto')}}" class="header-cart-item-name">
+                    <a href="{{route('front.producto', ['producto' => 1, 'nombre' => 'prueba'])}}" class="header-cart-item-name">
                       Nombre Producto
                     </a>
                     <span class="header-cart-item-info">Cantidad: 1</span>
@@ -118,7 +121,7 @@
                     <img src="{{url('assets_front/images/prod1.jpg')}}">
                   </div>
                   <div class="header-cart-item-txt">
-                    <a href="{{route('front.producto')}}" class="header-cart-item-name">
+                    <a href="{{route('front.producto', ['producto' => 1, 'nombre' => 'prueba'])}}" class="header-cart-item-name">
                       Nombre Producto
                     </a>
                     <span class="header-cart-item-info">Cantidad: 1</span>

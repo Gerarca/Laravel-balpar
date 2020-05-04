@@ -13,6 +13,10 @@ body, p,.s-text7,.main_menu>li>a,.header-cart-item-name,.header-cart-item-info,.
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
   font-family: Poppins-Bold!important;
 }
+div.s-text8 p{
+    font-family: Poppins!important;
+    font-size: 13px;
+}
 p,.s-text8 {
   color: #333;
 }

@@ -30,85 +30,31 @@
             Destacados Comercial
           </h3>
           <p class="text-secondary mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <a href="{{route('front.catalogo')}}" class="btn btn-primary s-text1 trans-0-4 w-auto mb-5">
+          <a href="{{ route('front.catalogo.destacado', ['destacado' => 1, 'nombre' => 'destacados-comercial']) }}" class="btn btn-primary s-text1 trans-0-4 w-auto mb-5">
             Ver más productos
           </a>
         </div>
         <div class="col-lg-6">
           <div class="wrap-slick wrap-comercial">
             <div class="slick-comercial">
-              <div class="item-slick2 p-l-15 p-r-15">
-                <div class="block2">
-                  <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                    <a href="{{route('front.producto')}}"><img src="{{url('assets_front/images/prod1.jpg')}}"></a>
-                  </div>
-                  <div class="block2-txt p-t-20">
-                    <a href="{{route('front.producto')}}" class="block2-name dis-block product-name">
-                      Nombre Producto
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="item-slick2 p-l-15 p-r-15">
-                <div class="block2">
-                  <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                    <a href="{{route('front.producto')}}"><img src="{{url('assets_front/images/prod2.jpg')}}"></a>
-                  </div>
-                  <div class="block2-txt p-t-20">
-                    <a href="{{route('front.producto')}}" class="block2-name dis-block product-name">
-                      Nombre Producto
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="item-slick2 p-l-15 p-r-15">
-                <div class="block2">
-                  <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                    <a href="{{route('front.producto')}}"><img src="{{url('assets_front/images/prod3.jpg')}}"></a>
-                  </div>
-                  <div class="block2-txt p-t-20">
-                    <a href="{{route('front.producto')}}" class="block2-name dis-block product-name">
-                      Nombre Producto
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="item-slick2 p-l-15 p-r-15">
-                <div class="block2">
-                  <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                    <a href="{{route('front.producto')}}"><img src="{{url('assets_front/images/prod4.jpg')}}"></a>
-                  </div>
-                  <div class="block2-txt p-t-20">
-                    <a href="{{route('front.producto')}}" class="block2-name dis-block product-name">
-                      Nombre Producto
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="item-slick2 p-l-15 p-r-15">
-                <div class="block2">
-                  <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                    <a href="{{route('front.producto')}}"><img src="{{url('assets_front/images/prod5.jpg')}}"></a>
-                  </div>
-                  <div class="block2-txt p-t-20">
-                    <a href="{{route('front.producto')}}" class="block2-name dis-block product-name">
-                      Nombre Producto
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="item-slick2 p-l-15 p-r-15">
-                <div class="block2">
-                  <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                    <a href="{{route('front.producto')}}"><img src="{{url('assets_front/images/prod3.jpg')}}"></a>
-                  </div>
-                  <div class="block2-txt p-t-20">
-                    <a href="{{route('front.producto')}}" class="block2-name dis-block product-name">
-                      Nombre Producto
-                    </a>
-                  </div>
-                </div>
-              </div>
+
+                @foreach($productos_comerciales as $producto_comercial)
+                    <div class="item-slick2 p-l-15 p-r-15">
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                <a href="{{route('front.producto', ['producto' => $producto_comercial->id, 'nombre' => Str::slug($producto_comercial->nombre)])}}">
+                                    <img src="{{url('storage/productos/'. $producto_comercial->imagen)}}">
+                                </a>
+                            </div>
+                            <div class="block2-txt p-t-20">
+                                <a href="{{route('front.producto', ['producto' => $producto_comercial->id, 'nombre' => Str::slug($producto_comercial->nombre)])}}" class="block2-name dis-block product-name">
+                                    {{ $producto_comercial->nombre }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
             </div>
           </div>
         </div>
@@ -155,85 +101,31 @@
               Destacados Industrial
             </h3>
             <p class="text-secondary mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <a href="{{route('front.catalogo')}}" class="btn btn-primary s-text1 trans-0-4 w-auto mb-5">
+            <a href="{{ route('front.catalogo.destacado', ['destacado' => 2, 'nombre' => 'destacados-industrial']) }}" class="btn btn-primary s-text1 trans-0-4 w-auto mb-5">
               Ver más productos
             </a>
           </div>
           <div class="col-lg-6 offset-lg-1">
             <div class="wrap-slick wrap-industrial">
               <div class="slick-industrial">
-                <div class="item-slick2 p-l-15 p-r-15">
-                  <div class="block2">
-                    <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                      <a href="{{route('front.producto')}}"><img src="{{url('assets_front/images/prod5.jpg')}}"></a>
-                    </div>
-                    <div class="block2-txt p-t-20">
-                      <a href="{{route('front.producto')}}" class="block2-name dis-block product-name">
-                        Nombre Producto
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="item-slick2 p-l-15 p-r-15">
-                  <div class="block2">
-                    <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                      <a href="{{route('front.producto')}}"><img src="{{url('assets_front/images/prod4.jpg')}}"></a>
-                    </div>
-                    <div class="block2-txt p-t-20">
-                      <a href="{{route('front.producto')}}" class="block2-name dis-block product-name">
-                        Nombre Producto
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="item-slick2 p-l-15 p-r-15">
-                  <div class="block2">
-                    <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                      <a href="{{route('front.producto')}}"><img src="{{url('assets_front/images/prod3.jpg')}}"></a>
-                    </div>
-                    <div class="block2-txt p-t-20">
-                      <a href="{{route('front.producto')}}" class="block2-name dis-block product-name">
-                        Nombre Producto
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="item-slick2 p-l-15 p-r-15">
-                  <div class="block2">
-                    <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                      <a href="{{route('front.producto')}}"><img src="{{url('assets_front/images/prod2.jpg')}}"></a>
-                    </div>
-                    <div class="block2-txt p-t-20">
-                      <a href="{{route('front.producto')}}" class="block2-name dis-block product-name">
-                        Nombre Producto
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="item-slick2 p-l-15 p-r-15">
-                  <div class="block2">
-                    <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                      <a href="{{route('front.producto')}}"><img src="{{url('assets_front/images/prod1.jpg')}}"></a>
-                    </div>
-                    <div class="block2-txt p-t-20">
-                      <a href="{{route('front.producto')}}" class="block2-name dis-block product-name">
-                        Nombre Producto
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="item-slick2 p-l-15 p-r-15">
-                  <div class="block2">
-                    <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                      <a href="{{route('front.producto')}}"><img src="{{url('assets_front/images/prod3.jpg')}}"></a>
-                    </div>
-                    <div class="block2-txt p-t-20">
-                      <a href="{{route('front.producto')}}" class="block2-name dis-block product-name">
-                        Nombre Producto
-                      </a>
-                    </div>
-                  </div>
-                </div>
+
+                  @foreach($productos_industriales as $producto_industrial)
+                      <div class="item-slick2 p-l-15 p-r-15">
+                          <div class="block2">
+                              <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                  <a href="{{route('front.producto', ['producto' => $producto_industrial->id, 'nombre' => Str::slug($producto_industrial->nombre)])}}">
+                                      <img src="{{url('storage/productos/'. $producto_industrial->imagen)}}">
+                                  </a>
+                              </div>
+                              <div class="block2-txt p-t-20">
+                                  <a href="{{route('front.producto', ['producto' => $producto_industrial->id, 'nombre' => Str::slug($producto_industrial->nombre)])}}" class="block2-name dis-block product-name">
+                                      {{ $producto_industrial->nombre }}
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  @endforeach
+
               </div>
             </div>
           </div>
@@ -276,7 +168,9 @@
         <div class="marcas-carousel owl-carousel">
             @foreach($marcas as $marca)
                 <div class="item-marca">
-                    <a href="{{route('front.catalogo')}}"><img src="{{url('uploads/'. $marca->imagen)}}" alt="{{ $marca->nombre }}" title="{{ $marca->nombre }}"></a>
+                    <a href="{{ route('front.catalogo.marca', ['marca' => $marca->id, 'nombre' => Str::slug($marca->nombre)]) }}">
+                        <img src="{{url('uploads/'. $marca->imagen)}}" alt="{{ $marca->nombre }}" title="{{ $marca->nombre }}">
+                    </a>
                 </div>
             @endforeach
         </div>
