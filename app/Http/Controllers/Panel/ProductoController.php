@@ -11,12 +11,15 @@ use App\Imports\ProductosImport;
 use Image;
 use DB;
 use Session;
+use Str;
 use App\Producto;
 use App\Categoria;
 use App\Marca;
+use App\Uso;
+use App\Rubro;
+use App\Etiqueta;
 use App\ImagenProducto;
 use App\Proveedor;
-use App\Etiqueta;
 
 
 class ProductoController extends Controller
@@ -32,159 +35,95 @@ class ProductoController extends Controller
 
     public function index()
     {
-      	$productos = $this->productos->orderBy('id', 'asc')->get();
+      	$productos = $this->productos->orderBy('id', 'desc')->get();
       	return view('panel.producto.index', compact('productos'));
     }
 
 
-    public function create(Producto $producto, Categoria $categoria)
+    public function create(Producto $producto)
     {
-      	return view('panel.producto.import');
+        $categorias = Categoria::orderBy('categoria')->get();
+        $marcas = Marca::orderBy('nombre')->get();
+        $etiquetas = Etiqueta::orderBy('nombre')->get();
+      	return view('panel.producto.form', compact('producto', 'categorias', 'marcas', 'etiquetas'));
     }
 
     public function store(Request $request)
     {
-        $productos = Excel::toArray(new ProductosImport(), request()->file('file'));
-        $aux_hash=md5(date('Y-m-d H:i:s'));
-        if (sizeof($productos[0])>=1) {
-        	foreach ($productos[0] as $pos => $producto_array) {
-	            $cod_categoria=$producto_array['cod_categoria'];
-	            $categoria=$producto_array['categoria'];
-	            $cod_subcategoria=$producto_array['cod_subcategoria'];
-	            $subcategoria=$producto_array['subcategoria'];
-	            $cod_marca=$producto_array['cod_marca'];
-	            $marca=$producto_array['marca'];
-	            $sku=$producto_array['sku'];
-	            $referencia=$producto_array['referencia'];
-	            $codigo_de_barra=$producto_array['codigo_de_barra'];
-	            $producto=$producto_array['producto'];
-	            $precio_retail=$producto_array['precio_retail'];
-	            $stock=$producto_array['stock_sol'];
-	            $visible=(strtoupper($producto_array['mostrar'])=='NO')?0:1;
-	            $peso=$producto_array['peso'];
-	            $tamano=$producto_array['tamano'];
-	            $descripcion=$producto_array['descripcion'];
-	            $especificaciones=$producto_array['especificaciones'];
-	            $cod_articulo=$sku;
-	            $imagen_principal='default.jpg';
-            	//cuotas
-              	$array_precio_cuotas=array();
-              	for ($i=1; $i <100 ; $i++) {
-                	if (isset($producto_array['cuota_'.$i]) && $producto_array['cuota_'.$i]>0) {
-                  		$array_precio_cuotas[$i]=$producto_array['cuota_'.$i];
-            		}
-              	}
-           	 	//cuotas
+        request()->validate([
+            'categoria_id' => 'required|exists:categorias,id',
+            'marca_id' => 'required|exists:marcas,id',
+            'uso_id' => 'required|exists:usos,id',
+            'rubro_id' => 'required|exists:rubros,id',
+            'nombre' => 'required|max:255',
+            'subtitulo' => 'required',
+            'cod_articulo' => 'required|max:255',
+            'descripcion' => 'required',
+            'informacion' => 'required',
+            'imagen' => 'required|image',
+            'imagen2' => 'image',
+            'imagen3' => 'image',
+            'imagen4' => 'image'
+        ]);
 
-            	$array_imagenes_extras=array();
-            	if (strlen($cod_articulo)>=1) {
-              		$imagenes=Storage::disk('ftp')->allFiles('/'.$cod_articulo);
-              		foreach ($imagenes as $posi => $imagen) {
-                		if (strpos($imagen, '.jpg') !== false) {
-                    		$imagen_ftp=Storage::disk('ftp')->get($imagen);
-                    		$copiar=Storage::disk('public')->put('/productos/'.$cod_articulo.'_'.$posi.'.jpg', $imagen_ftp);
-                    		if ($copiar && $imagen_principal=='default.jpg') {
-                      			if (strlen($imagen)>=1) {
-                        			$imagen_principal=$cod_articulo.'_'.$posi.'.jpg';
-                      			}
-                    		} else {
-                      			$imagen_ftp=Storage::disk('ftp')->get($imagen);
-                  				$copiar=Storage::disk('public')->put('/productos/'.$cod_articulo.'_'.$posi.'.jpg', $imagen_ftp);
-                      			if ($copiar) {
-                        			$imagen_extra=$cod_articulo.'_'.$posi.'.jpg';
-                        			array_push($array_imagenes_extras, $imagen_extra);
-                      			}
-                			}
-                		}
-              		}
+        $request['visible'] = $request['visible'] ? '1' : '0';
+      	$request['destacado_comercial'] = $request['destacado_comercial'] ? '1' : '0';
+      	$request['destacado_industrial'] = $request['destacado_industrial'] ? '1' : '0';
 
-              		// Categoria
-              		$existe_categoria = $this->categorias->query()->where('cod_origen', $cod_categoria)->where('cod_padre', NULL)->first();
-              		if ($existe_categoria == NULL) {
-                		$existe_categoria = $this->categorias->query()->create(['titulo' => $categoria, 'orden' => '1', 'cod_origen'=>$cod_categoria, 'user_id' => 1]);
-              		} else {
-                		$existe_categoria->fill(['titulo'=>$categoria])->save();
-              		}
-              		$cod_categoria_local = $existe_categoria->id;
-              		// Categoria
+        $imageName = 'i-'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen')->getClientOriginalExtension();
+        $destino = base_path() . '/public/storage/productos/';
+        $request->file('imagen')->move($destino, $imageName);
+        Image::make($destino . $imageName)->resize(220, 326, function ($constraint) {
+            $constraint->upsize();
+            $constraint->aspectRatio();
+        })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName);
 
-              		// Sub_Categoria
-              		$existe_sub_categoria = $this->categorias->query()->where('cod_origen', $cod_subcategoria)->where('cod_padre', $cod_categoria_local)->first();
-              		if ($existe_sub_categoria == NULL) {
-                		$existe_sub_categoria = $this->categorias->query()->create(['titulo' => $subcategoria, 'orden' => '1', 'cod_origen'=>$cod_subcategoria,'cod_padre'=>$cod_categoria_local , 'user_id' => 1]);
-              		} else {
-                		$existe_sub_categoria->fill(['titulo'=>$subcategoria])->save();
-              		}
-              		$cod_sub_categoria = $existe_sub_categoria->id;
-              		// Sub_Categoria
-
-			  		//Marca
-              		$existe_marca = $this->marcas->query()->where('cod_origen',$cod_marca)->first();
-              		if ($existe_marca == NULL) {
-                		$existe_marca=$this->marcas->query()->create([ 'titulo' => $marca, 'orden' => '1', 'user_id' => 1, 'cod_origen'=>$cod_marca]);
-              		}
-              		//Marca
-
-              		// Producto
-              		$existe_producto = $this->productos->query()->find($cod_articulo);
-              		if ($existe_producto == NULL) {
-                		$existe_producto = $this->productos->query()->create([
-	                  		'titulo' => $producto,
-	                  		'cod_articulo' => $cod_articulo,
-	                  		'imagen' => $imagen_principal,
-	                  		'categoria_id' => $cod_sub_categoria,
-	                  		'marca_id' => $existe_marca->id,
-	                  		'descripcion' => $descripcion,
-	                  		'especificaciones' => $especificaciones,
-	                  		'user_id' => '1',
-	                  		'oferta_semana' => '0',
-	                  		'recomendado' => '0',
-	                  		'mas_vendido' => '0',
-	                  		'proveedor_id' => 1,
-	                  		'sku' => $sku,
-	                  		'referencia' => $referencia,
-	                  		'codigo_barra' => $codigo_de_barra,
-	                  		'precio_retail' => $precio_retail,
-	                  		'stock' => $stock,
-	                  		'peso' => $peso,
-	                  		'tamano' => $tamano,
-	                  		'visible' => $visible
-                  		]);
-                	} else {
-                  		$existe_producto->fill([
-                  			'titulo' => $producto,
-                  			'imagen' => $imagen_principal,
-                  			'categoria_id' => $cod_sub_categoria,
-                  			'marca_id' => $existe_marca->id,
-                  			'sku' => $sku,
-                  			'referencia' => $referencia,
-                  			'codigo_barra' => $codigo_de_barra,
-                  			'precio_retail' => $precio_retail,
-                  			'stock' => $stock,
-                  			'peso' => $peso,
-                  			'tamano' => $tamano,
-                  			'visible' => $visible
-                  		])->save();
-                	}
-                	// Producto
-
-                	foreach ($array_imagenes_extras as $key => $imagen_extra) {
-                  		if (strlen($imagen_extra)>=1) {
-                    		$imagen_extra_existe=ImagenProducto::where('cod_articulo',$cod_articulo)->where('imagen', $imagen_extra)->first();
-                    		if ($imagen_extra_existe==NULL) {
-                      			ImagenProducto::create(['codigo_imagen'=>$aux_hash, 'imagen'=>$imagen_extra, 'cod_articulo'=>$cod_articulo, 'orden'=>$posi, 'user_id'=>1]);
-                    		}else {
-                      			$imagen_extra_existe->fill(['codigo_imagen'=>$aux_hash])->save();
-                    		}
-                  		}
-                	}
-                	ImagenProducto::where('cod_articulo',$cod_articulo)->where('codigo_imagen', '!=',$aux_hash)->delete();
-                	//  crear relación $array_precio_cuotas
-            	}
-          	}
+        if($request->hasFile('imagen2')){
+            $imageName2 = 'i2'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen2')->getClientOriginalExtension();
+            $destino = base_path() . '/public/storage/productos/';
+            $request->file('imagen2')->move($destino, $imageName2);
+            Image::make($destino . $imageName2)->resize(220, 326, function ($constraint) {
+                $constraint->upsize();
+                $constraint->aspectRatio();
+            })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName2);
+        } else {
+            $imageName2 = '';
         }
-      	Session::flash('mensaje', 'La importación ha sido creado correctamente');
-      	return redirect(route('producto.index'))->with('status', 'El producto ha sido creado');
+
+        if($request->hasFile('imagen3')){
+            $imageName3 = 'i3'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen3')->getClientOriginalExtension();
+            $destino = base_path() . '/public/storage/productos/';
+            $request->file('imagen3')->move($destino, $imageName3);
+            Image::make($destino . $imageName3)->resize(220, 326, function ($constraint) {
+                $constraint->upsize();
+                $constraint->aspectRatio();
+            })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName3);
+        } else {
+            $imageName3 = '';
+        }
+
+        if($request->hasFile('imagen4')){
+            $imageName4 = 'i4'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen4')->getClientOriginalExtension();
+            $destino = base_path() . '/public/storage/productos/';
+            $request->file('imagen4')->move($destino, $imageName4);
+            Image::make($destino . $imageName4)->resize(220, 326, function ($constraint) {
+                $constraint->upsize();
+                $constraint->aspectRatio();
+            })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName4);
+        } else {
+            $imageName4 = '';
+        }
+
+        $producto = Producto::create(
+            $request->only(
+                'categoria_id', 'marca_id', 'uso_id', 'rubro_id', 'nombre', 'subtitulo',
+                'cod_articulo', 'descripcion', 'informacion', 'visible', 'destacado_comercial', 'destacado_industrial'
+            ) + ['imagen' => $imageName] + ['imagen2' => $imageName2] + ['imagen3' => $imageName3] + ['imagen4' => $imageName4]);
+
+        $producto->etiquetas()->attach(request('etiquetas'));
+
+      	Session::flash('mensaje', 'El producto '. $producto->nombre .' ha sido creado correctamente');
+      	return redirect(route('producto.index'));
     }
 
     public function show(Producto $producto)
@@ -192,53 +131,96 @@ class ProductoController extends Controller
         return false;
     }
 
-    public function edit($id)
+    public function edit(Producto $producto)
     {
-      	$producto = $this->productos->findOrFail($id);
-      	$categorias = $this->categorias->getPadresConHijos();
-      	$marcas = $this->marcas->orderBy('orden', 'desc')->get();
-      	$categoria = $this->categorias->findOrFail($producto->categoria_id);
-      	$etiquetas_seleccionadas=$producto->etiquetas;
-      	$etiquetas_no_seleccionadas=$this->productos->etiquetasNoSeleccionadas($producto->cod_articulo);
-      	return view('panel.producto.form', compact('producto', 'categorias', 'marcas', 'categoria', 'etiquetas_seleccionadas', 'etiquetas_no_seleccionadas'));
+        $categorias = Categoria::orderBy('categoria')->get();
+        $etiquetas = Etiqueta::orderBy('nombre')->get();
+      	return view('panel.producto.form', compact('producto', 'categorias', 'etiquetas'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Producto $producto)
     {
-      	request()->validate([
-	        'titulo' => 'required|max:255',
-	        'marca_id' => 'required',
-	        'categoria_id' => 'required',
-      	]);
+        request()->validate([
+            'categoria_id' => 'required|exists:categorias,id',
+            'marca_id' => 'required|exists:marcas,id',
+            'uso_id' => 'required|exists:usos,id',
+            'rubro_id' => 'required|exists:rubros,id',
+            'nombre' => 'required|max:255',
+            'subtitulo' => 'required',
+            'cod_articulo' => 'required|max:255',
+            'descripcion' => 'required',
+            'informacion' => 'required',
+            'imagen' => 'image',
+            'imagen2' => 'image',
+            'imagen3' => 'image',
+            'imagen4' => 'image'
+        ]);
 
-      	$request['visible'] = $request['visible'] ? '1' : '0';
-      	$request['oferta_semana'] = $request['oferta_semana'] ? '1' : '0';
-      	$request['recomendado'] = $request['recomendado'] ? '1' : '0';
-      	$request['mas_vendido'] = $request['mas_vendido'] ? '1' : '0';
+        $request['visible'] = $request['visible'] ? '1' : '0';
+        $request['destacado_comercial'] = $request['destacado_comercial'] ? '1' : '0';
+        $request['destacado_industrial'] = $request['destacado_industrial'] ? '1' : '0';
 
-      	$producto = $this->productos->findOrFail($id);
-      	$producto->fill($request->only('titulo', 'categoria_id', 'marca_id', 'descripcion', 'especificaciones', 'visible', 'oferta_semana', 'recomendado', 'mas_vendido'))->save();
+        if($request->hasFile('imagen')){
+            $imageName = 'i'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen')->getClientOriginalExtension();
+            $destino = base_path() . '/public/storage/productos/';
+            $request->file('imagen')->move($destino, $imageName);
+            Image::make($destino . $imageName)->resize(220, 326, function ($constraint) {
+                $constraint->upsize();
+                $constraint->aspectRatio();
+            })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName);
+            $producto->fill(['imagen' => $imageName])->save();
+        }
 
-		if ($request->hasFile('imagen')) {
-			$imageName = str_slug($request->cod_articulo). time() .'.' . $request->file('imagen')->getClientOriginalExtension();
- 		   	$request->file('imagen')->move(base_path() . '/public/storage/productos/', $imageName);
- 		   	Image::make(base_path() . '/public/storage/productos/' . $imageName)->encode('jpg', 60)->save();
-			$producto->fill(['imagen' => $imageName])->save();
-      	}
+        if($request->hasFile('imagen2')){
+            $imageName2 = 'i2'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen2')->getClientOriginalExtension();
+            $destino = base_path() . '/public/storage/productos/';
+            $request->file('imagen2')->move($destino, $imageName2);
+            Image::make($destino . $imageName2)->resize(220, 326, function ($constraint) {
+                $constraint->upsize();
+                $constraint->aspectRatio();
+            })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName2);
+            $producto->fill(['imagen2' => $imageName2])->save();
+        }
 
-      	$producto->guardarEtiquetas($request['etiquetas'], \Auth::user()->id);
-      	$producto->guardarTamanos($request['tamanos'], \Auth::user()->id);
-      	$producto->guardarColores($request['colores'], \Auth::user()->id);
+        if($request->hasFile('imagen3')){
+            $imageName3 = 'i3'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen3')->getClientOriginalExtension();
+            $destino = base_path() . '/public/storage/productos/';
+            $request->file('imagen3')->move($destino, $imageName3);
+            Image::make($destino . $imageName3)->resize(220, 326, function ($constraint) {
+                $constraint->upsize();
+                $constraint->aspectRatio();
+            })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName3);
+            $producto->fill(['imagen3' => $imageName3])->save();
+        }
 
-      	Session::flash('mensaje', 'El producto '.$producto->titulo.' ha sido creado correctamente');
-      	return redirect(route('producto.index'))->with('status', 'El producto ha sido creado');
+        if($request->hasFile('imagen4')){
+            $imageName4 = 'i4'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen4')->getClientOriginalExtension();
+            $destino = base_path() . '/public/storage/productos/';
+            $request->file('imagen4')->move($destino, $imageName4);
+            Image::make($destino . $imageName4)->resize(220, 326, function ($constraint) {
+                $constraint->upsize();
+                $constraint->aspectRatio();
+            })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName4);
+            $producto->fill(['imagen4' => $imageName4])->save();
+        }
+
+        $producto->fill(
+            $request->only(
+                'categoria_id', 'marca_id', 'uso_id', 'rubro_id', 'nombre', 'subtitulo',
+                'cod_articulo', 'descripcion', 'informacion', 'visible', 'destacado_comercial', 'destacado_industrial'
+            )
+        )->save();
+
+        $producto->etiquetas()->sync(request('etiquetas'));
+
+      	Session::flash('mensaje', 'El producto '. $producto->nombre .' ha sido actualizado correctamente');
+      	return redirect(route('producto.edit', $producto->id));
     }
 
-    public function destroy( $id)
+    public function destroy(Producto $producto)
     {
-      	$producto = $this->productos->findOrFail($id);
       	$producto->delete();
-      	Session::flash('mensaje', 'El Producto '. $producto->titulo.' ha sido eliminado');
+      	Session::flash('mensaje', 'El Producto '. $producto->nombre.' ha sido eliminado');
       	return redirect(route('producto.index'));
     }
 

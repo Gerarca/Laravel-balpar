@@ -11,4 +11,9 @@ class Uso extends Model
     public function categoria(){
         return $this->belongsTo(Categoria::class);
     }
+
+    public function productos(){
+        return $this->hasMany(Producto::class);
+    }
+    
 }

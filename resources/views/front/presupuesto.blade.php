@@ -26,7 +26,7 @@
                   <img src="{{url('assets_front/images/prod1.jpg')}}">
                 </div>
               </td>
-              <td class="column-2"><a href="{{route('front.producto')}}">Nombre Producto</a></td>
+              <td class="column-2"><a href="{{route('front.producto', ['producto' => 1, 'nombre' => 'prueba'])}}">Nombre Producto</a></td>
               <td class="column-4" data-title="Cantidad: ">
                 <div class="flex-w bo5 of-hidden w-size17">
                   <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
@@ -49,7 +49,7 @@
                   <img src="{{url('assets_front/images/prod1.jpg')}}">
                 </div>
               </td>
-              <td class="column-2"><a href="{{route('front.producto')}}">Nombre Producto</a></td>
+              <td class="column-2"><a href="{{route('front.producto', ['producto' => 1, 'nombre' => 'prueba'])}}">Nombre Producto</a></td>
               <td class="column-4" data-title="Cantidad: ">
                 <div class="flex-w bo5 of-hidden w-size17">
                   <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">

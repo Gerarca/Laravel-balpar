@@ -15,12 +15,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'FrontController@index')->name('front.index');
 Route::get('/contacto', 'FrontController@contacto')->name('front.contacto');
-Route::get('/catalogo', 'FrontController@catalogo')->name('front.catalogo');
-Route::get('/producto', 'FrontController@producto')->name('front.producto');
+Route::get('/catalogo/{categoria}/{nombre}', 'FrontController@catalogo_categoria')->name('front.catalogo.categoria');
+Route::get('/catalogo/marca/{marca}/{nombre}', 'FrontController@catalogo_marca')->name('front.catalogo.marca');
+Route::get('/catalogo/uso/{uso}/{nombre}', 'FrontController@catalogo_uso')->name('front.catalogo.uso');
+Route::get('/catalogo/rubro/{rubro}/{nombre}', 'FrontController@catalogo_rubro')->name('front.catalogo.rubro');
+Route::get('/catalogo/etiqueta/{etiqueta}/{nombre}', 'FrontController@catalogo_etiqueta')->name('front.catalogo.etiqueta');
+Route::get('/catalogo/destacados/{destacado}/{nombre}', 'FrontController@catalogo_destacado')->name('front.catalogo.destacado');
+Route::get('/producto/{producto}/{nombre}', 'FrontController@producto')->name('front.producto');
 Route::get('/presupuesto', 'FrontController@presupuesto')->name('front.presupuesto');
 Route::get('/nosotros', 'FrontController@nosotros')->name('front.nosotros');
 Route::get('/servicio_tecnico', 'FrontController@servicio_tecnico')->name('front.servicio_tecnico');
 Route::post('/dejar_testimonio', 'FrontController@cargar_testimonio')->name('cargar.testimonio');
+Route::post('/buscar_catalogo', 'FrontController@buscar_catalogo')->name('front.buscar.catalogo');
 
 Route::post('/ajax/addProducto', 'Ajax\CarritoController@addProducto')->name('ajax.addProducto');
 Route::get('/ajax/getProductos', 'Ajax\CarritoController@getProductos')->name('ajax.getProductos');
@@ -29,7 +35,6 @@ Route::post('/ajax/delProducto', 'Ajax\CarritoController@delProducto')->name('aj
 Route::post('send_contacto', 'FrontController@sendContacto')->name('front.contacto.send');
 Route::post('add_newsletter', 'FrontController@addNewsletter')->name('front.newsletter.add');
 Route::post('/ajax/getDescuento', 'Ajax\CarritoController@getDescuento')->name('ajax.getDescuento');
-
 
 
 Route::get('/marcas', 'FrontController@marcas')->name('front.marcas');
@@ -85,10 +90,13 @@ Route::group(['middleware' => 'role:usuario', 'middleware' => 'role:administrado
 	Route::delete('panel/producto/{cod_articulo}/cuotas', 'Panel\CuotasController@delete')->name('panel.cuotas.delete');
 	#-- Productos --#
 	Route::resource('panel/producto', 'Panel\ProductoController', ['except' => ['show']]);
-	Route::get('panel/producto/crear', 'Panel\ProductoController@crearIndividual')->name('producto.crear');
-	Route::post('panel/producto/guardar', 'Panel\ProductoController@guardarIndividual')->name('producto.guardar');
-	Route::post('panel/producto/{id}/guardar_fotos', 'Panel\ProductoController@subirFotos')->name('producto.guardar.fotos');
-	Route::get('panel/producto/galeria', 'Panel\ProductoController@galeriaFotos')->name('producto.obtener.galeria');
-	Route::post('panel/producto/eliminar_galeria', 'Panel\ProductoController@eliminarImagen')->name('producto.eliminar.galeria');
-	Route::post('panel/producto/editar_orden', 'Panel\ProductoController@actualizarOrden')->name('producto.editar.galeria');
+	Route::post('/getMarcas', 'Panel\AjaxController@marcas')->name('get.marcas');
+	Route::post('/getUsos', 'Panel\AjaxController@usos')->name('get.usos');
+	Route::post('/getRubros', 'Panel\AjaxController@rubros')->name('get.rubros');
+	// Route::get('panel/producto/crear', 'Panel\ProductoController@crearIndividual')->name('producto.crear');
+	// Route::post('panel/producto/guardar', 'Panel\ProductoController@guardarIndividual')->name('producto.guardar');
+	// Route::post('panel/producto/{id}/guardar_fotos', 'Panel\ProductoController@subirFotos')->name('producto.guardar.fotos');
+	// Route::get('panel/producto/galeria', 'Panel\ProductoController@galeriaFotos')->name('producto.obtener.galeria');
+	// Route::post('panel/producto/eliminar_galeria', 'Panel\ProductoController@eliminarImagen')->name('producto.eliminar.galeria');
+	// Route::post('panel/producto/editar_orden', 'Panel\ProductoController@actualizarOrden')->name('producto.editar.galeria');
 });

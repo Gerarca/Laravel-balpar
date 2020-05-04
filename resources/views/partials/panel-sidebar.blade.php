@@ -86,14 +86,8 @@
             <span class="sidebar-normal"> Lista de productos </span>
           </a>
         </li>
-        <li class="{{ (Request::is('panel/producto/create'))?'active':''}} ">
+		<li class="{{ (Request::is('panel/producto/create'))?'active':''}} ">
           <a href="{{ route('producto.create') }}">
-            <span class="sidebar-mini-icon">IP</span>
-            <span class="sidebar-normal"> Importar Productos </span>
-          </a>
-        </li>
-		<li class="{{ (Request::is('panel/producto/crear'))?'active':''}} ">
-          <a href="{{ route('producto.crear') }}">
             <span class="sidebar-mini-icon">CP</span>
             <span class="sidebar-normal"> Crear Producto </span>
           </a>

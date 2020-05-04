@@ -5,7 +5,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('front.index')}}">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="{{route('front.catalogo')}}">Catálogo</a></li>
+        {{-- <li class="breadcrumb-item"><a href="{{route('front.catalogo')}}">Catálogo</a></li> --}}
         <li class="breadcrumb-item active" aria-current="page">Nombre Producto</li>
       </ol>
     </nav>
@@ -17,27 +17,46 @@
         <div class="wrap-slick3 flex-sb flex-w">
           <div class="wrap-slick3-dots"></div>
           <div class="slick3">
-            <div class="item-slick3" data-thumb="{{url('assets_front/images/prod5.jpg')}}">
+            <div class="item-slick3" data-thumb="{{url('storage/productos/'. $producto->imagen)}}">
               <div class="wrap-pic-w">
-                <img src="{{url('assets_front/images/prod5.jpg')}}">
+                <img src="{{url('storage/productos/'. $producto->imagen)}}">
               </div>
             </div>
-            <div class="item-slick3" data-thumb="{{url('assets_front/images/prod6.jpg')}}">
-              <div class="wrap-pic-w">
-                <img src="{{url('assets_front/images/prod6.jpg')}}">
-              </div>
-            </div>
+            @if($producto->imagen2 <> '')
+                <div class="item-slick3" data-thumb="{{url('storage/productos/'. $producto->imagen2)}}">
+                  <div class="wrap-pic-w">
+                    <img src="{{url('storage/productos/'. $producto->imagen2)}}">
+                  </div>
+                </div>
+            @endif
+
+            @if($producto->imagen3 <> '')
+                <div class="item-slick3" data-thumb="{{url('storage/productos/'. $producto->imagen3)}}">
+                  <div class="wrap-pic-w">
+                    <img src="{{url('storage/productos/'. $producto->imagen3)}}">
+                  </div>
+                </div>
+            @endif
+
+            @if($producto->imagen4 <> '')
+                <div class="item-slick3" data-thumb="{{url('storage/productos/'. $producto->imagen4)}}">
+                  <div class="wrap-pic-w">
+                    <img src="{{url('storage/productos/'. $producto->imagen4)}}">
+                  </div>
+                </div>
+            @endif
+
           </div>
         </div>
       </div>
 
       <div class="w-size14 p-t-30 respon5">
         <h4 class="product-detail-name m-text16 p-b-13 font-weight-bold">
-          Nombre Producto
+          {{ $producto->nombre }}
         </h4>
 
         <p class="s-text8 p-t-10">
-          Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+          {{ $producto->subtitulo }}
         </p>
 
         <div class="p-t-10 p-b-40">
@@ -64,8 +83,14 @@
         </div>
 
         <div class="p-b-40">
-          <span class="s-text8 m-r-35"><strong>Codigo:</strong> MUG-01</span>
-          <span class="s-text8 tags"><strong>Etiquetas:</strong> <a href="{{route('front.catalogo')}}">Etiqueta</a>, <a href="{{route('front.catalogo')}}">Etiqueta</a></span>
+          <span class="s-text8 m-r-35"><strong>Codigo:</strong> {{ $producto->cod_articulo }}</span>
+          <span class="s-text8 tags"><strong>Etiquetas:</strong>
+                @foreach($producto->etiquetas as $etiqueta)
+                  <a href="{{ route('front.catalogo.etiqueta', ['etiqueta' => $etiqueta, 'nombre' => Str::slug($etiqueta->nombre)]) }}">
+                      {{ $etiqueta->nombre }}
+                  </a>{{ $loop->last ? '' : ',' }}
+                @endforeach
+          </span>
         </div>
 
         <div class="wrap-dropdown-content bo6 p-t-15 p-b-14 active-dropdown-content">
@@ -76,9 +101,9 @@
           </h5>
 
           <div class="dropdown-content dis-none p-t-15 p-b-23">
-            <p class="s-text8">
-              Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
-            </p>
+              <div class="s-text8">
+                {!! $producto->descripcion !!}
+              </div>
           </div>
         </div>
 
@@ -90,9 +115,9 @@
           </h5>
 
           <div class="dropdown-content dis-none p-t-15 p-b-23">
-            <p class="s-text8">
-              Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
-            </p>
+            <div class="s-text8">
+              {!! $producto->informacion !!}
+          </div>
           </div>
         </div>
       </div>
