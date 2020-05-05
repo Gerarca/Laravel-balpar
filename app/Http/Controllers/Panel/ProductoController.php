@@ -118,7 +118,8 @@ class ProductoController extends Controller
             $request->only(
                 'categoria_id', 'marca_id', 'uso_id', 'rubro_id', 'nombre', 'subtitulo',
                 'cod_articulo', 'descripcion', 'informacion', 'visible', 'destacado_comercial', 'destacado_industrial'
-            ) + ['imagen' => $imageName] + ['imagen2' => $imageName2] + ['imagen3' => $imageName3] + ['imagen4' => $imageName4]);
+            ) + ['imagen' => $imageName] + ['imagen2' => $imageName2] + ['imagen3' => $imageName3]
+              + ['imagen4' => $imageName4] + ['stock' => 10]);
 
         $producto->etiquetas()->attach(request('etiquetas'));
 

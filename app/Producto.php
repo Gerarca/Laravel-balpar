@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class Producto extends Model
 {
     protected $fillable = [
-        'categoria_id', 'marca_id', 'uso_id', 'rubro_id', 'nombre', 'subtitulo', 'cod_articulo', 'descripcion',
+        'categoria_id', 'marca_id', 'uso_id', 'rubro_id', 'nombre', 'subtitulo', 'cod_articulo', 'descripcion', 'stock',
         'informacion', 'imagen', 'imagen2', 'imagen3', 'imagen4', 'visible', 'destacado_comercial', 'destacado_industrial'
     ];
 
