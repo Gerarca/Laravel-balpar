@@ -10,6 +10,15 @@
 <meta name="format-detection" content="email=no">
 <title></title>
 <link href="http://fonts.googleapis.com/css?family=Lora:400,400italic,700" rel="stylesheet" type="text/css">
+
+@php
+
+	$color = '#0f4795';
+	// $logo = 'logo-1588102004.png';
+	// $nombre_empresa = 'Nombre empresa';
+
+@endphp
+
 <style type="text/css">
 /**
  * Commerce
@@ -445,8 +454,8 @@ h6,
                                 </tr>
                               </tbody>
                             </table><!-- /.icon_holder:icon_primary -->
-                            <h1 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 32px;line-height: 40px;font-weight: bold;text-transform: uppercase;letter-spacing: 4px;color: #30393d;">Orden N&deg; PED-{{$carrito->id}}</h1>
-                            <p style="font-family: Helvetica, Arial, sans-serif;font-size: 16px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;"><em>{{$carrito->comentarios}}</em></p>
+                            <h1 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 32px;line-height: 40px;font-weight: bold;text-transform: uppercase;letter-spacing: 4px;color: #30393d;">Orden N&deg; PED-{{ $carrito->id }}</h1>
+                            <p style="font-family: Helvetica, Arial, sans-serif;font-size: 16px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;"><em>{{ $carrito->mensaje }}</em></p>
                             <table class="hruler hruler_primary" width="80" border="0" align="center" cellpadding="0" cellspacing="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 62px;margin-left: auto;margin-right: auto;clear: both;">
                               <tbody>
                                 <tr>
@@ -460,7 +469,7 @@ h6,
                                 </tr>
                               </tbody>
                             </table><!-- /.hruler:hruler_primary -->
-                            <h3 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 22px;line-height: 30px;font-weight: normal;color: #30393d;">Hemos recibido tu pedido. Nos comunicaremos contigo en el transcurso de las horas para realizar la entrega en la dirección registrada <br /> </h3>
+                            <h3 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 22px;line-height: 30px;font-weight: normal;color: #30393d;">Hemos recibido tu pedido. Nos comunicaremos contigo en el transcurso de las horas para responder a tu solicitud de presupuesto. <br /> </h3>
                           </td><!-- /.column_cell -->
                         </tr>
                       </tbody>
@@ -500,7 +509,7 @@ h6,
                       <tr>
                         <td width="300" align="center" valign="top">
                   <![endif]-->
-                  <div class="col-2" style="display: inline-block;width: 100%;vertical-align: top;text-align: center;max-width: 300px;">
+                  {{-- <div class="col-2" style="display: inline-block;width: 100%;vertical-align: top;text-align: center;max-width: 300px;">
                     <table class="column" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 100%;vertical-align: top;">
                       <tbody>
                         <tr>
@@ -517,16 +526,14 @@ h6,
                               </tbody>
                             </table><!-- /.hruler:hruler_secondary -->
                             <p style="font-family: Helvetica, Arial, sans-serif;font-size: 16px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;">
-	                           {{ $carrito->direccion }}<br>
-	                           {{ $carrito->barrio }}<br>
-	                           {{ $carrito->ciudad->ciudad }}<br>
-	                           {{ $carrito->departamento }}<br>
+	                          Carrito direccion<br>
+
 													 </p>
                           </td><!-- /.column_cell -->
                         </tr>
                       </tbody>
                     </table><!-- /.column -->
-                  </div><!-- /.col-2 -->
+                  </div><!-- /.col-2 --> --}}
                   <!--[if (gte mso 9)|(IE)]>
                       </td>
                       <td width="300" align="center" valign="top">
@@ -548,9 +555,10 @@ h6,
                               </tbody>
                             </table><!-- /.hruler:hruler_secondary -->
                             <p style="font-family: Helvetica, Arial, sans-serif;font-size: 16px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;">
-	                            {{$carrito->nombre}}<br>
-                              {{$carrito->email}}<br>
-                              {{$carrito->telefono}}<br>
+	                            {{ $carrito->nombre }}<br>
+								{{ $carrito->telefono }}<br>
+								{{ $carrito->email }}<br>
+								{{ $carrito->empresa }}
 															</p>
                           </td><!-- /.column_cell -->
                         </tr>
@@ -600,10 +608,10 @@ h6,
 													 <td class="column_cell font_default" align="center" valign="top" style="padding: 8px 16px;font-family: Helvetica, Arial, sans-serif;font-size: 16px;text-align: left;vertical-align: top;color: {{ $color }};">
 															<h4 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 19px;line-height: 28px;font-weight: normal;color: #4e5558;">
 																<span style="color: #afb0b1;"></span>
-																 <strong>{{$detalle->producto->titulo }} {{(strlen($detalle->variacion)>=1)?'['.$detalle->variacion.']':''}}</strong>
+																 <strong>{{$detalle->producto->nombre }}</strong>
 															 </h4>
 															 <h6 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 0;margin-bottom: 8px;padding: 0;font-size: 30px;line-height: 34px;font-weight: bold;color: {{ $color }};">
-																 {{$detalle->cantidad }} X{{'GS '.number_format ($detalle->precio,0,",",".")}}
+																 {{$detalle->cantidad }}
 															 </h6>
 														 </td>
 													 </tr>
@@ -619,12 +627,7 @@ h6,
 
 
 
-
-
-
-
-
-      <table class="content" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+      {{-- <table class="content" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
         <tbody>
           <tr>
             <td class="content_cell order_total order_total_right" align="center" valign="top" style="padding: 0;text-align: center;background-color: rgba(255, 255, 255, 0);border-top: 1px solid;border-color: rgba(255, 255, 255, 0);font-size: 0 !important;">
@@ -648,7 +651,7 @@ h6,
                           <td class="column_cell font_default" align="center" valign="top" style="padding: 32px 16px;font-family: Helvetica, Arial, sans-serif;font-size: 16px;text-align: right;vertical-align: top;color: {{ $color }};">
                             <!-- <p style="font-family: Helvetica, Arial, sans-serif;font-size: 16px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;margin: 8px 0;"><u>SUBTOTAL</u>: %subtotal%<br>
                               <u>ENV&Iacute;O</u>: %envio%</p> -->
-                            <h1 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 18px;line-height: 24px;font-weight: bold;text-transform: uppercase;letter-spacing: 2px;margin: 8px 0;color: #4e5558;"><u>TOTAL</u>: <span class="amount" style="text-decoration: none;color: {{ $color }};">{{'GS '.number_format ($carrito->monto_total,0,",",".")}}<small style="font-size: 12px;line-height: 1;font-weight: normal;">  Env&iacute;o + IVA Incld.</small></span></h1>
+                            <h1 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 18px;line-height: 24px;font-weight: bold;text-transform: uppercase;letter-spacing: 2px;margin: 8px 0;color: #4e5558;"><u>TOTAL</u>: <span class="amount" style="text-decoration: none;color: Monto<small style="font-size: 12px;line-height: 1;font-weight: normal;">  Env&iacute;o + IVA Incld.</small></span></h1>
                           </td><!-- /.column_cell -->
                         </tr>
                       </tbody>
@@ -670,8 +673,8 @@ h6,
             </td><!-- /.content_cell:order_total_right -->
           </tr>
         </tbody>
-      </table><!-- /.content -->
-      <table class="content" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+      </table><!-- /.content --> --}}
+      {{-- <table class="content" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
         <tbody>
           <tr>
             <td class="content_cell product_row" align="center" valign="top" style="padding: 24px 0;text-align: center;background-color: #ffffff;border-top: 1px solid;border-color: rgba(255, 255, 255, 0);font-size: 0 !important;">
@@ -748,7 +751,7 @@ h6,
             </td><!-- /.content_cell:product_row -->
           </tr>
         </tbody>
-      </table><!-- /.content -->
+      </table><!-- /.content --> --}}
       <table class="footer" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
         <tbody>
           <tr>

@@ -74,45 +74,40 @@ class CarritoController extends Controller
 
     public function getProductos()
     {
-
-    $actual_cookie = Cookie::get('productos') ?? serialize([]);
-    $carrito_detalles = unserialize($actual_cookie);
-    $carrito_detalles = array_map(function ($detalle) {
-        $producto = Producto::query()->find($detalle['cod_articulo']);
-        if ($producto==null) {
-          return false;
-        }
-        $detalle['titulo'] = $producto->titulo;
-        $detalle['imagen'] = asset('storage/productos/' . $producto->imagen);
-        $detalle['precio'] = $producto->getPrecio();
-        $detalle['url'] = route('front.productos.ver', [$producto->cod_articulo, Str::slug($producto->titulo)]);
-        return $detalle;
-    }, $carrito_detalles);
-
+        $actual_cookie = Cookie::get('productos') ?? serialize([]);
+        $carrito_detalles = unserialize($actual_cookie);
+        $carrito_detalles = array_map(function ($detalle) {
+            $producto = Producto::where('cod_articulo', $detalle['cod_articulo'])->first();
+            if ($producto==null) {
+              return false;
+            }
+            $detalle['nombre'] = $producto->nombre;
+            $detalle['imagen'] = asset('storage/productos/' . $producto->imagen);
+            $detalle['url'] = route('front.producto', [$producto->id, Str::slug($producto->nombre)]);
+            return $detalle;
+        }, $carrito_detalles);
 
         return $carrito_detalles;
     }
 
     public function delProducto(Request $request)
     {
-      $actual_cookie = Cookie::get('productos') ?? serialize([]);
-      $carrito_detalles = unserialize($actual_cookie);
-      $eliminar = array_first($carrito_detalles, function ($detalle) use ($request) {
-          return
-              $detalle['cod_articulo'] == $request->cod_articulo ;
-      });
+        $actual_cookie = Cookie::get('productos') ?? serialize([]);
+        $carrito_detalles = unserialize($actual_cookie);
+        $eliminar = array_first($carrito_detalles, function ($detalle) use ($request) {
+            return
+            $detalle['cod_articulo'] == $request->cod_articulo ;
+        });
 
-      foreach ($carrito_detalles as $key => $value) {
-          if ($value === $eliminar) {
-              unset($carrito_detalles[$key]);
-          }
-      }
-      $carrito_detalles = array_values($carrito_detalles);
+        foreach ($carrito_detalles as $key => $value) {
+            if ($value === $eliminar) {
+                unset($carrito_detalles[$key]);
+            }
+        }
+        $carrito_detalles = array_values($carrito_detalles);
 
-      $new_cookie = Cookie::forever('productos', serialize($carrito_detalles));
-      Cookie::queue($new_cookie);
-
-
+        $new_cookie = Cookie::forever('productos', serialize($carrito_detalles));
+        Cookie::queue($new_cookie);
         return response()->json(['success' => 'El producto fue eliminado.']);
     }
     public function getDescuento(Request $request){
