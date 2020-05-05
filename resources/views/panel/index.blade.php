@@ -3,7 +3,7 @@
 @section('content')
   <div class="content">
     @if (isset(Auth::user()->roles()->first()->name) && Auth::user()->hasRole('Administrador'))
-      <div class="row">
+      {{-- <div class="row">
         <div class="col-md-6 col-sm-6">
             <div class="card card-stats">
               <div class="card-body ">
@@ -96,7 +96,7 @@
             </div>
           </div>
 
-      </div>
+      </div> --}}
 
 
     @endif
