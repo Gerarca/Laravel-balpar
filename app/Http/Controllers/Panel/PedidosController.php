@@ -50,24 +50,15 @@ class PedidosController extends Controller
       return view('panel.pedidos.form', compact('pedido'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Pedido $pedido)
     {
-      request()->validate([
-        'estado'=> 'required',
-        'estado_old'=> 'required'
-      ]);
-      $pedido = $this->pedidos->findOrFail($id);
-      if ($request->estado <> $request->estado_old) {
-        $respuesta=$pedido->updateEstado($request->estado);
-        if ($respuesta['status']=='success') {
-          return redirect(route('pedidos.edit', $pedido->id))->with('status', $respuesta['mensaje']);
+        request()->validate([
+            'estado'=> 'required'
+        ]);
 
-        }else {
-          return Redirect::back()->withErrors([ $respuesta['mensaje']]);
-        }
-      }else {
-        return redirect(route('pedidos.edit', $pedido->id))->with('status', 'No hay cambios por realizar');
-      }
+        $pedido->fill($request->only('estado'))->save();
+        Session::flash('mensaje', 'El pedido de '. $request->nombre .' se ha realizado.');
+        return redirect(route('pedidos.index'));
 
     }
 

@@ -301,6 +301,16 @@
                         data: {
                             cod_articulo:cod_articulo, cantidad:cantidad
                         },
+                        beforeSend: function() {
+                            Swal.fire({
+                                onBeforeOpen: () => {
+                                  Swal.showLoading()
+                                },
+                                allowEscapeKey: false,
+                                allowOutsideClick: false,
+                                text: 'Procesando...',
+                            })
+                        },
                         success: function (x) {
                             Swal.fire({
                                 title: 'Exito',

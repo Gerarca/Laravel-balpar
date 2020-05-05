@@ -60,7 +60,7 @@
           Datos del cliente
         </h5>
         <p class="mb-4">Completa tus datos para que nuestro equipo comercial se ponga en contacto y te facilite el presupuesto que estás necesitando</p>
-        <form action="{{ route('front.carritoFinalizar') }}" method="post">
+        <form action="{{ route('front.carritoFinalizar') }}" method="post" id="FormSolicitud">
             @csrf
             <div class="bo4 of-hidden size15 m-b-20">
                 <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="nombre" value="{{ old('nombre') }}" required placeholder="Nombre y Apellido">
@@ -88,4 +88,20 @@
 @endsection
 
 @section('especifico')
+
+    <script>
+
+    $("#FormSolicitud").submit(function(){
+        Swal.fire({
+            onBeforeOpen: () => {
+              Swal.showLoading()
+            },
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            text: 'Procesando solicitud, espere por favor',
+        })
+    });
+
+    </script>
+
 @endsection

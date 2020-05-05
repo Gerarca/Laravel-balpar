@@ -22,12 +22,12 @@
             <span class="sidebar-normal"> Lista de pedidos </span>
           </a>
         </li>
-        <li class="">
+        {{-- <li class="">
           <a href="{{ route('pedidos.export') }}">
             <span class="sidebar-mini-icon">EP</span>
             <span class="sidebar-normal"> Exportar pedidos </span>
           </a>
-        </li>
+        </li> --}}
 
         {{-- <li class="{{ (Request::is('panel/solicitudes') || Request::is('panel/solicitudes/*/edit'))?'active':''}} ">
           <a href="{{ route('solicitudes.index') }}">
@@ -208,7 +208,7 @@
       </ul>
     </div>
   </li> --}}
-  <li class="{{ (Request::is('panel/ciudad/*') || Request::is('panel/ciudad'))?'active':''}}">
+  {{-- <li class="{{ (Request::is('panel/ciudad/*') || Request::is('panel/ciudad'))?'active':''}}">
     <a data-toggle="collapse" href="#menu_ciudad" class="{{ (Request::is('panel/ciudad/*') || Request::is('panel/ciudad'))?'collapsed':''}}">
       <i class="nc-icon nc-istanbul"></i>
       <p>
@@ -232,7 +232,7 @@
         </li>
       </ul>
     </div>
-  </li>
+  </li> --}}
   {{-- <li class="{{ (Request::is('panel/solicitudtarjeta/*') || Request::is('panel/solicitudtarjeta'))?'active':''}}">
     <a data-toggle="" href="{{ route('solicitudtarjeta.index') }}" class="{{ (Request::is('panel/solicitudtarjeta/*') || Request::is('panel/solicitudtarjeta'))?'collapsed':''}}">
       <i class="nc-icon nc-credit-card"></i>
