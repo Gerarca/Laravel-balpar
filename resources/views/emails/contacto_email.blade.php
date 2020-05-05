@@ -10,6 +10,21 @@
 <meta name="format-detection" content="email=no">
 <title></title>
 <link href="https://fonts.googleapis.com/css?family=Lora:400,400italic,700" rel="stylesheet" type="text/css">
+
+@php
+
+	$color = '#0f4795';
+	// $logo = 'logo-1588102004.png';
+	// $nombre_empresa = 'Depende';
+	// $asunto = 'El titulo';
+	// $mensaje = 'Mensaje prueba';
+	// $nombre = 'Nombre prueba';
+	// $email = 'prueba@gmail';
+	// $direccion = 'direccion';
+	// $telefono = '8979464';
+
+@endphp
+
 <style type="text/css">
 /**
  * Commerce
@@ -445,7 +460,7 @@ h6,
                                 </tr>
                               </tbody>
                             </table><!-- /.icon_holder:icon_primary -->
-                            <h1 style="font-family: 'Helvetica Neue LT Std' !important;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 32px;line-height: 40px;font-weight: bold;text-transform: uppercase;letter-spacing: 4px;color: {{ $color }};">Contacto con {{$nombre_empresa}}</h1>
+                            <h1 style="font-family: 'Helvetica Neue LT Std' !important;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 32px;line-height: 40px;font-weight: bold;text-transform: uppercase;letter-spacing: 4px;color: {{ $color }};">{{$asunto}}</h1>
                             <p style="font-family: 'Helvetica Neue LT Std' !important;font-size: 16px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;"><em>{{$mensaje}}</em></p>
                             <table class="hruler hruler_primary" width="80" border="0" align="center" cellpadding="0" cellspacing="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 62px;margin-left: auto;margin-right: auto;clear: both;">
                               <tbody>
@@ -523,8 +538,9 @@ h6,
                             </table><!-- /.hruler:hruler_secondary -->
                             <p style="font-family: 'Helvetica Neue LT Std' !important;font-size: 16px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;">
 															{{ $nombre }}<br>
-															{{ $email }}<br>
+															{{ $direccion }}<br>
 															{{ $telefono }}<br>
+															{{ $email }}
 														</p>
                           </td><!-- /.column_cell -->
                         </tr>
