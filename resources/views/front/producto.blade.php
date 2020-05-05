@@ -67,14 +67,14 @@
                 <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
                   <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
                 </button>
-                <input class="size8 m-text18 t-center num-product" type="number" name="num-product" value="1">
+                <input id="cantidad_input" class="size8 m-text18 t-center num-product" type="number" name="num-product" value="1">
                 <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
                   <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
                 </button>
               </div>
 
               <div class="btn-wrapper">
-                <button class="btn btn-primary flex-c-m sizefull s-text1 trans-0-4 w-100">
+                <button class="btn btn-primary flex-c-m sizefull s-text1 trans-0-4 w-100 add-cart" data-prod="{{ $producto->cod_articulo }}">
                   Solicitar Presupuesto
                 </button>
               </div>

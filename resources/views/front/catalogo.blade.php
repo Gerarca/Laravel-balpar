@@ -105,18 +105,20 @@
           <button role="button" class="btn btn-outline-primary btn_filter d-lg-none">Categorías</button>
           <div class="row">
             @foreach($productos as $producto)
-              <div class="col-6 col-sm-6 col-md-4 col-lg-4 p-b-50">
-                  <div class="block2">
-                      <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                          <a href="{{route('front.producto', ['producto' => $producto->id, 'nombre' => Str::slug($producto->nombre)])}}"><img src="{{url('storage/productos/'. $producto->imagen)}}"></a>
-                      </div>
-                      <div class="block2-txt p-t-20">
-                          <a href="{{route('front.producto', ['producto' => $producto->id, 'nombre' => Str::slug($producto->nombre)])}}" class="block2-name dis-block product-name">
-                              {{ $producto->nombre }}
-                          </a>
-                      </div>
-                  </div>
-              </div>
+                @if($producto->visible <> 0)
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-4 p-b-50">
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                <a href="{{route('front.producto', ['producto' => $producto->id, 'nombre' => Str::slug($producto->nombre)])}}"><img src="{{url('storage/productos/'. $producto->imagen)}}"></a>
+                            </div>
+                            <div class="block2-txt p-t-20">
+                                <a href="{{route('front.producto', ['producto' => $producto->id, 'nombre' => Str::slug($producto->nombre)])}}" class="block2-name dis-block product-name">
+                                    {{ $producto->nombre }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             @endforeach
           </div>
         </div>

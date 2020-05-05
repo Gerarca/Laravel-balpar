@@ -27,6 +27,8 @@ Route::get('/nosotros', 'FrontController@nosotros')->name('front.nosotros');
 Route::get('/servicio_tecnico', 'FrontController@servicio_tecnico')->name('front.servicio_tecnico');
 Route::post('/dejar_testimonio', 'FrontController@cargar_testimonio')->name('cargar.testimonio');
 Route::post('/buscar_catalogo', 'FrontController@buscar_catalogo')->name('front.buscar.catalogo');
+Route::post('/carrito', 'FrontController@carritoFinalizar')->name('front.carritoFinalizar');
+// Route::view('/email', 'emails.confirmacion_compra');
 
 Route::post('/ajax/addProducto', 'Ajax\CarritoController@addProducto')->name('ajax.addProducto');
 Route::get('/ajax/getProductos', 'Ajax\CarritoController@getProductos')->name('ajax.getProductos');

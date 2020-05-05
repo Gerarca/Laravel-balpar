@@ -1,69 +1,64 @@
 @extends('layouts.panel')
 
 @section('content')
-  <div class="content">
+    <div class="content">
         <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">Ciudades</h4>
-              </div>
-              <div class="card-body">
-                <div class="toolbar">
-                  <!--        Here you can write extra buttons/actions for the toolbar              -->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Ciudades</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="toolbar">
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        </div>
+                        <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Orden</th>
+                                    <th>Ciudad</th>
+                                    <th>Delivery</th>
+                                    <th>Fecha de creación</th>
+                                    <th>Habilitado</th>
+
+                                    <th class="disabled-sorting text-right">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Orden</th>
+                                    <th>Ciudad</th>
+                                    <th>Delivery</th>
+                                    <th>Fecha de creación</th>
+                                    <th>Habilitado</th>
+                                    <th class="disabled-sorting text-right">Acciones</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @foreach($ciudades as $ciudad)
+                                    <tr>
+                                        <td class="text-center">{{ $ciudad->orden }}</td>
+                                        <td>{{ $ciudad->ciudad }}</td>
+                                        <td>{{ 'GS. '.number_format ($ciudad->delivery,0,",",".") }}</td>
+                                        <td>{{ $ciudad->created_at }}</td>
+                                        <td class="text-center">{{ $ciudad->visible == 1 ? 'Sí' : 'No' }}</td>
+                                        <td class="text-right">
+                                            <a href="{{ route('ciudad.edit', $ciudad->id) }}" class="btn btn-warning btn-link btn-icon btn-sm edit "><i class="fa fa-edit"></i></a>
+                                            <a href="#" class="btn btn-danger btn-link btn-icon btn-sm remove btn-delete" data-id="{{ $ciudad->id }}" data-toggle="modal"  data-target="#modal-default" data-route="{{ route('ciudad.destroy', $ciudad->id) }}" data-title="{{ $ciudad->ciudad }}"><i class="fa fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- end content-->
                 </div>
-                <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                  <thead>
-                    <tr>
-                      <th>Ciudad</th>
-                      <th>Delivery</th>
-                      <th>Fecha de creación</th>
-                      <th>Orden</th>
-                      <th>Habilitado</th>
-
-                      <th class="disabled-sorting text-right">Acciones</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Ciudad</th>
-                      <th>Delivery</th>
-
-                      <th>Fecha de creación</th>
-                      <th>Orden</th>
-                      <th>Habilitado</th>
-                      <th class="disabled-sorting text-right">Acciones</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                      @foreach($ciudades as $ciudad)
-                        <tr>
-                          <td>{{ $ciudad->ciudad }}</td>
-                          <td>{{ 'GS. '.number_format ($ciudad->delivery,0,",",".") }}</td>
-
-                          <td>{{ $ciudad->created_at }}</td>
-                          <td>{{ $ciudad->orden }}</td>
-                          <td>{{ $ciudad->visible==1?'Si':'No' }}</td>
-                          <td class="text-right">
-                            <a href="{{ route('ciudad.edit', $ciudad->id) }}" class="btn btn-warning btn-link btn-icon btn-sm edit "><i class="fa fa-edit"></i></a>
-                            {{-- <a href="#" class="btn btn-danger btn-link btn-icon btn-sm remove btn-delete" data-id="{{ $ciudad->id }}" data-toggle="modal"  data-target="#modal-default" data-route="{{ route('ciudad.destroy', $ciudad->id) }}" data-title="{{ $ciudad->name }}"><i class="fa fa-times"></i></a> --}}
-
-                          </td>
-                        </tr>
-                      @endforeach
-
-
-                  </tbody>
-                </table>
-              </div>
-              <!-- end content-->
+                <!--  end card  -->
             </div>
-            <!--  end card  -->
-          </div>
-          <!-- end col-md-12 -->
+            <!-- end col-md-12 -->
         </div>
         <!-- end row -->
-      </div>
+    </div>
 @endsection
 
 

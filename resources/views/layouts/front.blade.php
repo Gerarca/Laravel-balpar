@@ -103,30 +103,8 @@
           <div class="header-wrapicon header-wrapicon2">
             <i class="fas fa-receipt header-icon1 js-show-header-dropdown"></i>
             <div class="header-cart header-dropdown">
-              <ul class="header-cart-wrapitem">
-                <li class="header-cart-item">
-                  <div class="header-cart-item-img">
-                    <img src="{{url('assets_front/images/prod1.jpg')}}">
-                  </div>
-                  <div class="header-cart-item-txt">
-                    <a href="{{route('front.producto', ['producto' => 1, 'nombre' => 'prueba'])}}" class="header-cart-item-name">
-                      Nombre Producto
-                    </a>
-                    <span class="header-cart-item-info">Cantidad: 1</span>
-                  </div>
-                </li>
+              <ul class="header-cart-wrapitem cart-products-container">
 
-                <li class="header-cart-item">
-                  <div class="header-cart-item-img">
-                    <img src="{{url('assets_front/images/prod1.jpg')}}">
-                  </div>
-                  <div class="header-cart-item-txt">
-                    <a href="{{route('front.producto', ['producto' => 1, 'nombre' => 'prueba'])}}" class="header-cart-item-name">
-                      Nombre Producto
-                    </a>
-                    <span class="header-cart-item-info">Cantidad: 1</span>
-                  </div>
-                </li>
               </ul>
               <div class="header-cart-buttons">
                 <div class="w-100 pt-3">
@@ -266,6 +244,138 @@
 				Swal.fire("EXITO","{{ session('status') }}","success");
 
 			@endif
+
+        });
+
+        $(document).ready(function(){
+            const getProductos = function () {
+            $('.cart-products-container').html('');
+            $.ajax({
+                url: '{{ route('ajax.getProductos') }}',
+                beforeSend: function () {
+                    $('.cart-sidebar .product').remove();
+                },
+                success: function (respuesta) {
+
+                    if (respuesta.length) {
+
+                        Object.values(respuesta).forEach(item => {
+                            $('.cart-products-container').append(`
+
+                                <li class="header-cart-item">
+                                  <div class="header-cart-item-img">
+                                    <img src="${item.imagen}">
+                                  </div>
+                                  <div class="header-cart-item-txt">
+                                    <a href="${item.url}" class="header-cart-item-name">
+                                      ${item.nombre}
+                                    </a>
+                                    <span class="header-cart-item-info">Cantidad: ${item.cantidad}</span>
+                                  </div>
+                                </li>
+
+                                `);
+                            });
+                        } else {
+                            $('.cart-products-container').append('Sin producto en el carrito');
+                        }
+                    }
+                });
+            };
+
+            $(function () {
+                getProductos();
+            });
+
+            $('.add-cart').each(function() {
+                $(this).on('click', function() {
+                    var cod_articulo=$(this).data('prod');
+                    var cantidad=$('#cantidad_input').val();
+                    cantidad=(cantidad>=1)?cantidad:1;
+                    $.ajax({
+                        url: '{{ route('ajax.addProducto') }}',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        method: 'POST',
+                        data: {
+                            cod_articulo:cod_articulo, cantidad:cantidad
+                        },
+                        beforeSend: function() {
+                            Swal.fire({
+                                onBeforeOpen: () => {
+                                  Swal.showLoading()
+                                },
+                                allowEscapeKey: false,
+                                allowOutsideClick: false,
+                                text: 'Procesando...',
+                            })
+                        },
+                        success: function (x) {
+                            Swal.fire({
+                                title: 'Exito',
+                                text: "El producto fue agregado exitosamente a tu carrito.",
+                                icon: 'success',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#28a745',
+                                confirmButtonText: 'Ir al carrito',
+                                cancelButtonText: 'Ver más productos'
+                            }).then((result) => {
+                              if (result.value) {
+                                window.location = "{{route('front.presupuesto')}}"
+                              }
+                            })
+
+                        },
+                        error: function (x) {
+                            if (x.responseJSON && x.responseJSON.hasOwnProperty('respuesta')) {
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: x.responseJSON.error,
+                                    icon: 'error',
+                                    showCloseButton: true
+                                });
+                            }
+                        },
+                        complete: function () {
+                            getProductos();
+                        }
+                    });
+
+                });
+            });
+
+            const delProducto = function (cod_articulo, cb = null) {
+                $.ajax({
+                    url: '{{ route('ajax.delProducto') }}',
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    data: {
+                        cod_articulo
+                    },
+                    success: function (r) {
+                        if (typeof cb === "function") {
+                            cb();
+                        }
+                    },
+                    complete: function() {
+                        getProductos();
+                    }
+                });
+            };
+
+            $(document).on('click', '.cart-delete', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).parent().parent().remove();
+                const product = $(this).parents('.product');
+                const cod_articulo = $(this).data('cod');
+
+                delProducto(cod_articulo);
+            });
 
         });
 

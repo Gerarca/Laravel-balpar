@@ -1,66 +1,56 @@
 @extends('layouts.panel')
 
 @section('content')
-  <div class="content">
-      <div class="row">
-        <div class="col-md-12">
-          <form id="RegisterValidation" action="{{$ciudad->id ? route('ciudad.update', $ciudad->id): route('ciudad.store') }}" method="post" enctype="multipart/form-data">
-            {{ csrf_field() }}
-            @if ($ciudad->id)
-              {{ method_field('PATCH') }}
-            @endif
-            <div class="card ">
-              <div class="card-header ">
-                <h4 class="card-title">{!! $ciudad->id ? 'Editar Ciudad <b>'.$ciudad->name.'</b>' : 'Añadir Ciudad' !!}</h4>
-              </div>
-              <div class="card-body ">
-                <div class="form-group has-label">
-                  <label for="ciudad">
-                    Ciudad *
-                  </label>
-                  <input class="form-control" id="ciudad" name="ciudad" type="text" required="true" value="{{$ciudad->ciudad?$ciudad->ciudad:old('ciudad')}}" />
-                </div>
-                <div class="form-group has-label">
-                  <label for="delivery">
-                    Delivery
-                  </label>
-                  <input class="form-control" id="delivery" name="delivery" type="number" min="0" step="1" value="{{$ciudad->delivery?$ciudad->delivery:old('delivery')}}" />
-                </div>
-
-
-
-                <div class="form-group has-label">
-                  <label for="orden">
-                    Orden
-                  </label>
-                  <select class="form-control" id="orden" name="orden">
-                    @for ($i=1; $i <= $orden_maximo; $i++)
-                      <option value="{{ $i }}" {{ $i==$ciudad->orden?'selected=""':''}}>{{$i}}</option>
-                    @endfor
-                  </select>
-                </div>
-
-                <div class="form-group has-label">
-                  <label for="visible">
-                    Habilitado
-                  </label>
-                  <input class="bootstrap-switch" type="checkbox" data-toggle="switch" name="visible" {{$ciudad->visible==1?'checked':''}} data-on-label="<i class='nc-icon nc-check-2'></i>" data-off-label="<i class='nc-icon nc-simple-remove'></i>" data-on-color="success" data-off-color="success" />
-                </div>
-
-
-                <div class="category form-category">* Campos requeridos</div>
-              </div>
-              <div class="card-footer text-right">
-
-                <button type="submit" class="btn btn-primary">{{$ciudad->exists ? 'Guardar ciudad' : 'Crear nueva ciudad'}}</button>
-              </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <form id="RegisterValidation" action="{{$ciudad->id ? route('ciudad.update', $ciudad->id): route('ciudad.store') }}" method="post" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    @if ($ciudad->id)
+                        {{ method_field('PATCH') }}
+                    @endif
+                    <div class="card ">
+                        <div class="card-header ">
+                            <h4 class="card-title">{!! $ciudad->id ? 'Editar Ciudad <b>'.$ciudad->ciudad.'</b>' : 'Añadir Ciudad' !!}</h4>
+                        </div>
+                        <div class="card-body ">
+                            <div class="form-group has-label">
+                                <label for="ciudad">
+                                    Ciudad *
+                                </label>
+                                <input class="form-control" id="ciudad" name="ciudad" type="text" required="true" value="{{$ciudad->ciudad?$ciudad->ciudad:old('ciudad')}}" />
+                            </div>
+                            <div class="form-group has-label">
+                                <label for="delivery">
+                                    Delivery
+                                </label>
+                                <input class="form-control" id="delivery" name="delivery" type="number" min="0" step="1" value="{{$ciudad->delivery?$ciudad->delivery:old('delivery')}}" />
+                            </div>
+                            <div class="form-group has-label">
+                                <label for="orden">
+                                    Orden
+                                </label>
+                                <select class="form-control" id="orden" name="orden">
+                                    @for ($i=1; $i <= $orden_maximo; $i++)
+                                        <option value="{{ $i }}" {{ $i == $ciudad->orden ? 'selected' : '' }}>{{ $i }}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                            <div class="form-group has-label">
+                                <label for="visible">
+                                    Habilitado
+                                </label>
+                                <input class="bootstrap-switch" type="checkbox" data-toggle="switch" name="visible" {{$ciudad->visible==1?'checked':''}} data-on-label="<i class='nc-icon nc-check-2'></i>" data-off-label="<i class='nc-icon nc-simple-remove'></i>" data-on-color="success" data-off-color="success" />
+                            </div>
+                            <div class="category form-category">* Campos requeridos</div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <button type="submit" class="btn btn-primary">{{$ciudad->exists ? 'Guardar ciudad' : 'Crear nueva ciudad'}}</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-          </form>
         </div>
-
-
-
-      </div>
     </div>
 @endsection
 
@@ -115,14 +105,13 @@
         @endforeach
       @endif
       @if(session()->has('mensaje'))
-      $.notify({
-        // options
-        message: '{{ session()->get('mensaje') }}'
-      },{
-        // settings
-        type: 'success'
-      });
-
+          $.notify({
+            // options
+            message: '{{ session()->get('mensaje') }}'
+          },{
+            // settings
+            type: 'success'
+          });
       @endif
     });
   </script>

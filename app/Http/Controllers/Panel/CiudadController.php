@@ -19,14 +19,6 @@ use App\Ciudad;
 
 class CiudadController extends Controller
 {
-
-    public function __construct(User $users, Role $roles, Ciudad $ciudades)
-    {
-      $this->middleware('auth');
-      $this->users = $users;
-      $this->roles = $roles;
-      $this->ciudades = $ciudades;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -34,9 +26,7 @@ class CiudadController extends Controller
      */
     public function index()
     {
-      $ciudades = $this->ciudades->orderBy('orden', 'desc')->get();
-
-      return view('panel.ciudad.index', compact('ciudades'));
+      return view('panel.ciudad.index', ['ciudades' => Ciudad::orderBy('orden', 'desc')->get()]);
     }
 
     /**
@@ -46,7 +36,7 @@ class CiudadController extends Controller
      */
     public function create(Ciudad $ciudad)
     {
-        $orden_maximo = $this->ciudades->get()->count()+1;
+        $orden_maximo = Ciudad::all()->count() + 1;
         return view('panel.ciudad.form', compact('ciudad', 'orden_maximo'));
     }
 
@@ -58,17 +48,22 @@ class CiudadController extends Controller
      */
     public function store(Request $request)
     {
-      request()->validate([
-        'ciudad'=> 'required|max:255',
-        'delivery'=> 'required',
-      ]);
+        request()->validate([
+            'ciudad'=> 'required|max:255',
+            'delivery'=> 'required',
+        ]);
 
+        $orden_actual = Ciudad::where('orden', '>=', $request['orden']);
 
-      $request['visible']=$request['visible']?'1':'0';
-      $ciudad = $this->ciudades->create($request->only('ciudad', 'delivery', 'orden', 'visible') + ['user_id'=> \Auth::user()->id]);
+        if($orden_actual->exists()){
+            $orden_actual->increment('orden');
+        }
 
-      Session::flash('mensaje', 'La ciudad '.$ciudad->ciudad.' ha sido creada correctamente');
-        return redirect(route('ciudad.index'))->with('status', 'La ciudad ha sido creada');
+        $request['visible'] = $request['visible'] ? '1' : '0';
+        $ciudad = Ciudad::create($request->only('ciudad', 'delivery', 'orden', 'visible'));
+
+        Session::flash('mensaje', 'La ciudad '.$ciudad->ciudad.' ha sido creada correctamente');
+        return redirect(route('ciudad.index'));
     }
 
     /**
@@ -88,10 +83,9 @@ class CiudadController extends Controller
      * @param  \App\Ciudad  $ciudad
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Ciudad $ciudad)
     {
-        $ciudad = $this->ciudades->findOrFail($id);
-        $orden_maximo = $this->ciudades->get()->count()+1;
+        $orden_maximo = Ciudad::all()->count();
         return view('panel.ciudad.form', compact('ciudad', 'orden_maximo'));
     }
 
@@ -102,21 +96,26 @@ class CiudadController extends Controller
      * @param  \App\Ciudad  $ciudad
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Ciudad $ciudad)
     {
-      request()->validate([
-        'ciudad'=> 'required|max:255',
-        'delivery'=> 'required',
-      ]);
-      $request['visible']=$request['visible']?'1':'0';
-      $ciudad = $this->ciudades->findOrFail($id);
-      $ciudad->fill($request->only('ciudad', 'delivery', 'orden', 'visible'))->save();
+        request()->validate([
+            'ciudad'=> 'required|max:255',
+            'delivery'=> 'required',
+        ]);
 
+        if(request()->orden != $ciudad->orden){
 
+            $orden_viejo = Ciudad::where('orden', $request["orden"]);
+            $orden_viejo->update(['orden' => $ciudad->orden]);
+            $ciudad->orden = request('orden');
+            $ciudad->save();
+        }
 
-      Session::flash('mensaje', 'La ciudad  '.$ciudad->ciudad.' ha sido actualizada correctamente');
+        $request['visible'] = $request['visible'] ? '1' : '0';
+        $ciudad->fill($request->only('ciudad', 'delivery', 'orden', 'visible'))->save();
 
-      return redirect(route('ciudad.edit', $ciudad->id))->with('status', 'La ciudad ha sido actualizada');
+        Session::flash('mensaje', 'La ciudad  '.$ciudad->ciudad.' ha sido actualizada correctamente');
+        return redirect(route('ciudad.edit', $ciudad->id));
     }
 
     /**
@@ -125,12 +124,16 @@ class CiudadController extends Controller
      * @param  \App\Ciudad  $ciudad
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id)
+    public function destroy(Ciudad $ciudad)
     {
-      $ciudad = $this->ciudades->findOrFail($id);
+        $orden_actual = Ciudad::where('orden', '>=', $ciudad['orden']);
 
-      $ciudad->delete();
-      Session::flash('mensaje', 'El Ciudad '. $ciudad->ciudad.' ha sido eliminada');
-      return redirect(route('ciudad.index'));
+        if($orden_actual->exists()){
+            $orden_actual->decrement('orden');
+        }
+
+        $ciudad->delete();
+        Session::flash('mensaje', 'El Ciudad '. $ciudad->ciudad.' ha sido eliminada');
+        return redirect(route('ciudad.index'));
     }
 }

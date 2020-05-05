@@ -34,7 +34,11 @@
                         @if($option->type == 'text' && $option->name <> 'carrusel_1' && $option->name <> 'carrusel_2')
                           <div class="form-group has-label">
                             <label for="option_{{$option->name}}">
-                              {!! $option->title !!}
+                                @if($option->name == 'mail_pedido')
+                                    Mail de confirmación de presupuesto (separado por commas para varios)
+                                @else
+                                    {!! $option->title !!}
+                                @endif
                             </label>
                             <input class="form-control" id="option_{{$option->name}}" name="{{$option->name}}" type="text"  value="{{ $option->value }}" />
                           </div>

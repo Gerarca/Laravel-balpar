@@ -12,7 +12,7 @@ class PedidoDetalle extends Model
 
   protected $fillable = [
 
-    'pedido_id', 'cod_articulo', 'cantidad', 'precio', 'total', 'estado','variacion'
+    'pedido_id', 'cod_articulo', 'cantidad', 'precio', 'total', 'estado'
 
   ];
   public function producto()

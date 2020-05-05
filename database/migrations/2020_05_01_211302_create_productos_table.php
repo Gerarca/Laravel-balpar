@@ -21,7 +21,7 @@ class CreateProductosTable extends Migration
             $table->unsignedBigInteger('rubro_id')->nullable();
             $table->string('nombre');
             $table->text('subtitulo');
-            $table->string('cod_articulo');
+            $table->string('cod_articulo')->unique();
             $table->text('descripcion');
             $table->text('informacion');
             $table->string('imagen');
@@ -31,6 +31,7 @@ class CreateProductosTable extends Migration
             $table->integer('visible')->default(0);
             $table->integer('destacado_comercial')->default(0);
             $table->integer('destacado_industrial')->default(0);
+            $table->integer('stock')->nullable();
             $table->timestamps();
 
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');

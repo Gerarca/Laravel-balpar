@@ -14,10 +14,10 @@
               </div>
               <div class="card-body ">
                 <div class="form-group has-label">
-                  <label for="cliente">
+                  <label for="nombre">
                     Cliente
                   </label>
-                  <input class="form-control" id="cliente" name="cliente" type="text"value="{{$pedido->nombre}}" readonly="" />
+                  <input class="form-control" id="nombre" name="nombre" type="text"value="{{$pedido->nombre}}" readonly="" />
                 </div>
                 <div class="form-group has-label">
                   <label for="email">
@@ -26,36 +26,17 @@
                   <input class="form-control" id="email" name="email" type="text"value="{{$pedido->email}}" readonly="" />
                 </div>
                 <div class="form-group has-label">
-                  <label for="documento">
-                    Documento
+                  <label for="telefono">
+                    Telefono
                   </label>
-                  <input class="form-control" id="documento" name="documento" type="text"value="{{$pedido->documento}}" readonly="" />
+                  <input class="form-control" id="telefono" name="telefono" type="text"value="{{$pedido->telefono}}" readonly="" />
                 </div>
-                @if (strlen($pedido->telefono)>=1)
-                  <div class="form-group has-label">
-                    <label for="telefono">
-                      Teléfono
-                    </label>
-                    <input class="form-control" id="telefono" name="telefono" type="text"value="{{$pedido->telefono}}" readonly="" />
-                  </div>
-                @endif
-
                 <div class="form-group has-label">
-                  <label for="direccion">
-                    Dirección
+                  <label for="empresa">
+                    Empresa
                   </label>
-                  <input class="form-control" id="direccion" name="direccion" type="text"value="{{$pedido->direccion}}" readonly="" />
+                  <input class="form-control" id="empresa" name="empresa" type="text"value="{{$pedido->empresa}}" readonly="" />
                 </div>
-                @if (strlen($pedido->ciudad->ciudad)>=1)
-                  <div class="form-group has-label">
-                    <label for="ciudad">
-                      Ciudad
-                    </label>
-                    <input class="form-control" id="ciudad" name="ciudad" type="text"value="{{$pedido->ciudad->ciudad}} " readonly="" />
-                  </div>
-                @endif
-
-
                 <div class="form-group has-label">
                   <label for="created_at">
                     Fecha de Pedido
@@ -63,61 +44,17 @@
                   <input class="form-control" id="created_at" name="created_at" type="text"value="{{ date("d/m/Y H:i:s",strtotime($pedido->created_at))}}" readonly="" />
                 </div>
 
-
-                @if (strlen($pedido->metodo)>=1)
-                  <div class="form-group has-label">
-                    <label for="metodo">
-                      Método de Pago
-                    </label>
-                    <input class="form-control" id="metodo" name="metodo" type="text"value="{{$pedido->metodo}}" readonly="" />
-                  </div>
-                @endif
-
-                <div class="form-group has-label">
-                  <label for="envio">
-                    Monto envio
-                  </label>
-                  <input class="form-control" id="envio" name="envio" type="text"value="{{ $pedido->printMontoEnvio() }}" readonly="" />
-                </div>
-                @if ($pedido->descuento>=1)
-                  <div class="form-group has-label">
-                    <label for="envio">
-                      Descuento
-                    </label>
-                    <input class="form-control" id="envio" name="envio" type="text"value="{{ $pedido->printDescuento() }}" readonly="" />
-                  </div>
-                @endif
-                <div class="form-group has-label">
-                  <label for="monto_total">
-                    Monto total
-                  </label>
-                  <input class="form-control" id="monto_total" name="monto_total" type="text"value="{{ $pedido->printMontoTotal()}}" readonly="" />
-                </div>
-
-                <div class="form-group has-label">
-                  <label for="estado">
-                    Estado *
-                  </label>
-                  <select class="form-control select-2" id="estado" name="estado">
-                    @if ($pedido->estado==1)
-                      <option value="1" {{ $pedido->estado==1?'selected=""':''}}>Pendiente</option>
-                    @endif
-                    @if ($pedido->estado<>3)
-                      <option value="2" {{ $pedido->estado==2?'selected=""':''}}>Confirmado / Enviado</option>
-                    @endif
-                    @if ($pedido->estado<>2)
-                      <option value="3" {{ $pedido->estado==3?'selected=""':''}}>Rechazado</option>
-                    @endif
-                    @if ($pedido->estado==4)
-                      <option value="4" {{ $pedido->estado==4?'selected=""':''}}>Paso a solicitud de crédito</option>
-                    @endif
-                  </select>
-                </div>
                 <div class="category form-category">* Campos requeridos</div>
               </div>
               <div class="card-footer text-right">
-                <input type="hidden" name="estado_old" value="{{$pedido->estado}}">
-                <button type="submit" class="btn btn-primary">Actualizar estado</button>
+                @if($pedido->estado == 1)
+                    <input type="hidden" name="estado" value="2">
+                    <button type="submit" class="btn btn-warning">Actualizar estado</button>
+                    <a href="{{ route('pedidos.index') }}" class="btn btn-info">Cerrar</a>
+                @else
+                    <button type="button" class="btn btn-success">Realizado</button>
+                    <a href="{{ route('pedidos.index') }}" class="btn btn-info">Cerrar</a>
+                @endif
               </div>
             </div>
           </form>
