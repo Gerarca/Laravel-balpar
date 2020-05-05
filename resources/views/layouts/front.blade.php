@@ -267,7 +267,7 @@
                                     <img src="${item.imagen}">
                                   </div>
                                   <div class="header-cart-item-txt">
-                                    <a href="${item.nombre}" class="header-cart-item-name">
+                                    <a href="${item.url}" class="header-cart-item-name">
                                       ${item.nombre}
                                     </a>
                                     <span class="header-cart-item-info">Cantidad: ${item.cantidad}</span>

@@ -33,7 +33,7 @@
                         </a>
                     </td>
                     <td class="column-4" data-title="Cantidad: ">
-                        <div class="flex-w bo5 of-hidden w-size17">
+                        {{-- <div class="flex-w bo5 of-hidden w-size17">
                             <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
                                 <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
                             </button>
@@ -43,7 +43,8 @@
                             <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
                                 <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
                             </button>
-                        </div>
+                        </div> --}}
+                        {{ $detalle['cantidad'] }}
                     </td>
                     <td class="column-5"><button type="button" name="button" class="cart-delete" title="Quitar Producto" data-cod="{{ $detalle['cod_articulo'] }}"><i class="fas fa-trash"></i></button></td>
                 </tr>
