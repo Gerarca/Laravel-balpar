@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Rules\ReCaptchaRule;
 use Illuminate\Support\Facades\Cookie;
 use App\Banner;
 use App\DatosDinamico;
@@ -15,6 +16,7 @@ use App\Rubro;
 use App\Etiqueta;
 use App\Pedido;
 use App\PedidoDetalle;
+use App\Opcion;
 use Str;
 
 class FrontController extends Controller
@@ -187,6 +189,109 @@ class FrontController extends Controller
         }else {
             return view('front.resumen', compact('pedido'));
         }
+    }
+
+    public function sendContacto(Request $request){
+
+        $validator = \Validator::make(
+            $request->all(), [
+                'nombre' => 'required|max:255',
+                'email' => 'required|email|max:255',
+                'telefono' => 'required|max:255',
+                'asunto' => 'required|integer',
+                'mensaje' => 'required',
+			    'g-recaptcha-response' => ['required', new ReCaptchaRule() ]
+            ]
+        );
+
+        if($request->asunto == '1'){
+            $asunto = 'Contacto';
+        } else if ($request->asunto == '2'){
+            request()->validate([ 'archivo' => 'required' ]);
+            $asunto = 'Trabajá con nosotros';
+        } else {
+            $asunto = 'Quejas y Sugerencias';
+        }
+
+        if ($validator->fails()) {
+            return redirect('contacto')->withInput()->withErrors($validator);
+        }
+
+        // $color_principal=Opcion::where('name','color_principal')->first();
+        $logo=Opcion::where('name','logo')->first();
+        $email_empresa=Opcion::where('name','mail')->first();
+        $emails_recepcion=Opcion::where('name','mail_contacto')->first();
+        $nombre_empresa=Opcion::where('name','nombre_comercio')->first();
+        // if ($color_principal==NULL) {
+        //     $color_principal='#222021';
+        // }else {
+        //     $color_principal=$color_principal['value'];
+        // }
+        if (!$logo==NULL) {
+            $logo=$logo['value'];
+        }
+        if ($emails_recepcion==NULL) {
+            $GLOBALS['emailis_copia']=array('carlos.sosa@porta.com.py');
+        }else {
+            $GLOBALS['emailis_copia']=explode(',', $email_empresa['value']);
+            array_push($GLOBALS['emailis_copia'], 'carlos.sosa@porta.com.py');
+        }
+        if ($email_empresa==NULL) {
+            $GLOBALS['email_empresa']='no-reply@empresa.com';
+        }else {
+            $GLOBALS['email_empresa']=$email_empresa['value'];
+        }
+        if ($nombre_empresa==NULL) {
+            $GLOBALS['nombre_empresa']='Nombre comercio';
+        }else {
+            $GLOBALS['nombre_empresa']=$nombre_empresa['value'];
+        }
+
+        $nombre = $request->nombre;
+        $email = $request->email;
+        $telefono = $request->telefono;
+        $mensaje = $request->mensaje;
+        $direccion = $request->direccion;
+
+        $GLOBALS['email']=$email;
+        $GLOBALS['nombre']=$nombre;
+        $GLOBALS['asunto']=$asunto;
+
+        if($request->hasFile('archivo')) {
+            $filePathName = Str::slug($nombre).'-'.time() . '.' .$request->file('archivo')->getClientOriginalExtension();
+            $request->file('archivo')->move(base_path() . '/public/uploads/', $filePathName);
+        }else {
+            $filePathName=NULL;
+        }
+
+        $GLOBALS['filePathName']=$filePathName;
+
+        \Mail::send('emails.contacto_email', [
+            'nombre' => $nombre,
+            'email' => $email,
+            'telefono' => $telefono,
+            'mensaje' => $mensaje,
+            'asunto' => $asunto,
+            'logo' => $logo,
+            'direccion' => $direccion,
+            'nombre_empresa' =>$GLOBALS['nombre_empresa'],
+
+        ], function ($message) {
+            $message->from($GLOBALS['email_empresa'], $GLOBALS['nombre_empresa']);
+            $message->sender($GLOBALS['email_empresa'], $GLOBALS['nombre_empresa']);
+            foreach ($GLOBALS['emailis_copia'] as $pos => $aux_email) {
+                $message->cc(trim($aux_email), $GLOBALS['nombre_empresa']);
+            }
+            $message->returnPath('desarrollo@porta.com.py');
+            $message->to($GLOBALS['email'], $GLOBALS['nombre'])->subject($GLOBALS['asunto']);
+            if (strlen($GLOBALS['filePathName'])>=1) {
+                $message->attach(base_path() . '/public/uploads/'. $GLOBALS['filePathName']);
+            }
+            $message->getSwiftMessage();
+        });
+
+        return redirect('contacto')->with('status', 'El mensaje se envio de manera correcta!');
+
     }
 
 }

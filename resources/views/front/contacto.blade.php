@@ -58,12 +58,13 @@
           </div>
         </div>
         <div class="col-md-6 p-b-30">
-          <form class="leave-comment">
+          <form class="leave-comment" action="{{ route('front.contacto.send') }}" method="POST" enctype="multipart/form-data" id="FormContacto">
+              @csrf
             <h4 class="p-b-36 p-t-15">
               Contactanos
             </h4>
             <div class="bo4 of-hidden size15 m-b-20">
-              <select class="sizefull s-text7 border-0 p-l-22 p-r-22" name="asunto" id="asunto">
+              <select class="sizefull s-text7 border-0 p-l-22 p-r-22" name="asunto" id="asunto" required>
                 <option value="" selected disabled>Asunto</option>
                 <option value="1">Contacto</option>
                 <option value="2">Trabajá con nosotros</option>
@@ -71,26 +72,27 @@
               </select>
             </div>
             <div class="of-hidden size15 m-b-20" id="cv-input">
-              <input class="sizefull s-text7 p-l-22 p-r-22" type="file" name="cv" accept="application/msword,application/pdf,.docx">
+              <input class="sizefull s-text7 p-l-22 p-r-22" type="file" name="archivo" accept="application/msword,application/pdf,.docx">
             </div>
             <div class="bo4 of-hidden size15 m-b-20">
-              <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="Nombre">
+              <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="nombre" required value="{{ old('nombre') }}" placeholder="Nombre">
             </div>
             <div class="bo4 of-hidden size15 m-b-20">
-              <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="Dirección">
+              <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="direccion" value="{{ old('direccion') }}" placeholder="Dirección">
             </div>
 
             <div class="bo4 of-hidden size15 m-b-20">
-              <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="phone-number" placeholder="Teléfono">
+              <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="telefono" required value="{{ old('telefono') }}" placeholder="Teléfono">
             </div>
 
             <div class="bo4 of-hidden size15 m-b-20">
-              <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="email" placeholder="Email">
+              <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="email" required value="{{ old('email') }}" placeholder="Email">
             </div>
 
-            <textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" name="message" placeholder="Mensaje"></textarea>
+            <textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" name="mensaje" required placeholder="Mensaje">{{ old('mensaje') }}</textarea>
 
             <div class="w-size25">
+              <div class="g-recaptcha" data-sitekey="6LcjBfMUAAAAALX80qvyB0pUoE0LtECnyKbsUV9O"></div>
               <button class="btn btn-primary flex-c-m size2 m-text3 trans-0-4">
                 Enviar
               </button>
@@ -131,38 +133,54 @@
 @endsection
 
 @section('especifico')
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
   <script>
   $("#cv-input").hide();
   $("#asunto").on('change', function() {
-    let asunto = $("#asunto option:selected").val();
-    if (asunto == 2) {
-      $("#cv-input").show();
-    } else {
-      $("#cv-input").hide();
-    }
+      let asunto = $("#asunto option:selected").val();
+      if (asunto == 2) {
+          $("#cv-input").show();
+      } else {
+          $("#cv-input").hide();
+      }
   });
 
   $('.testimonios-carousel').owlCarousel({
-    margin:30,
-    loop:true,
-    autoplay:true,
-    autoplayTimeout:3000,
-    nav:true,
-    navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
-    dots:false,
-    responsiveClass:true,
-    responsive:{
-      0:{
-        items:2,
-      },
-      600:{
-        items:3,
-      },
-      1000:{
-        items:5,
+      margin:30,
+      loop:true,
+      autoplay:true,
+      autoplayTimeout:3000,
+      nav:true,
+      navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
+      dots:false,
+      responsiveClass:true,
+      responsive:{
+          0:{
+              items:2,
+          },
+          600:{
+              items:3,
+          },
+          1000:{
+              items:5,
+          }
       }
-    }
   })
+
+  $("#FormContacto").submit(function(){
+      Swal.fire({
+          onBeforeOpen: () => {
+            Swal.showLoading()
+          },
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+          text: 'Enviando mensaje, espere por favor',
+      })
+  });
+
+
 
   </script>
 @endsection

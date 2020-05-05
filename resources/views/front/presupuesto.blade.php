@@ -91,16 +91,16 @@
 
     <script>
 
-    $("#FormSolicitud").submit(function(){
-        Swal.fire({
-            onBeforeOpen: () => {
-              Swal.showLoading()
-            },
-            allowEscapeKey: false,
-            allowOutsideClick: false,
-            text: 'Procesando solicitud, espere por favor',
-        })
-    });
+        $("#FormSolicitud").submit(function(){
+            Swal.fire({
+                onBeforeOpen: () => {
+                  Swal.showLoading()
+                },
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                text: 'Procesando solicitud, espere por favor',
+            })
+        });
 
     </script>
 
