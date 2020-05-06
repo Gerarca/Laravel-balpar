@@ -18,7 +18,7 @@
 							<label>
 								Categoria
 							</label>
-							<select id="categoria" class="form-control" name="categoria_id">
+							<select id="categoria" class="form-control categoria_list" name="categoria_id">
                                 <option value="" selected disabled>Seleccionar categoría</option>
                                 @foreach($categorias as $categoria)
                                     @if($producto->categoria)
@@ -33,12 +33,16 @@
 							<label for="marca_id">
 								Marca
 							</label>
-							<select class="form-control" id="marcas" name="marca_id" readonly="">
+							<select class="form-control" id="marcas" name="marca_id">
 								@if($producto->id)
-                                    @foreach($producto->categoria->marcas as $marca)
-                                        <option value="{{ $marca->id }}" {{ $marca->id == $producto->marca_id ? 'selected' : '' }}>{{ $marca->nombre }}</option>
-                                    @endforeach
-                                @endif
+									@foreach($marcas as $marca)
+	                                    <option value="{{ $marca->id }}" {{ $marca->id == $producto->marca_id ? 'selected' : '' }}>{{ $marca->nombre }}</option>
+	                                @endforeach
+								@else
+									@foreach($marcas as $marca)
+	                                    <option value="{{ $marca->id }}">{{ $marca->nombre }}</option>
+	                                @endforeach
+								@endif
 							</select>
 						</div>
 						<div class="form-group has-label">
@@ -324,16 +328,13 @@
         		});
       		});
 
-			@if($producto->id)
-	            $("#marcas").select2({
-	                placeholder: 'Seleccionar marca'
-	            });
-            @else
-	            $("#marcas").select2({
-	                placeholder: 'Seleccionar marca',
-	                disabled: true
-	            });
-            @endif
+            $("#marcas").select2({
+                placeholder: 'Seleccionar marca'
+            });
+
+			$(".categoria_list").select2({
+                placeholder: 'Seleccionar categoría'
+            });
 
 			@if($producto->id)
 	            $("#usos").select2({
@@ -371,36 +372,6 @@
 
 			$('#categoria').on('change', function () {
 	            var valor = $(this).val();
-
-	            $.ajax({
-	                url: '{{ route('get.marcas') }}',
-	                method: 'POST',
-	                headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-	                data: {valor: valor},
-	                beforeSend: function () {
-	                    $("#marcas").empty();
-	                },
-	                success: function (r) {
-
-	                    $("#marcas").empty();
-	                    $("#marcas").select2({
-	                        placeholder: 'Seleccionar marca',
-	                        disabled: false
-	                    });
-
-	                    if (r.length == 0) {
-	                        $("#marcas").html('<option>Sin resultados</option>');
-	                    }
-
-	                    for (let i = 0; i < r.length; i++) {
-
-	                        let marcas = `
-	                            <option value="${r[i].id}">${r[i].nombre}</option>
-	                        `;
-	                        $("#marcas").append(marcas);
-	                    }
-	                }
-	            });
 
 				$.ajax({
 	                url: '{{ route('get.usos') }}',

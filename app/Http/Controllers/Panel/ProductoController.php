@@ -135,8 +135,9 @@ class ProductoController extends Controller
     public function edit(Producto $producto)
     {
         $categorias = Categoria::orderBy('categoria')->get();
+        $marcas = Marca::orderBy('nombre')->get();
         $etiquetas = Etiqueta::orderBy('nombre')->get();
-      	return view('panel.producto.form', compact('producto', 'categorias', 'etiquetas'));
+      	return view('panel.producto.form', compact('producto', 'categorias', 'marcas', 'etiquetas'));
     }
 
     public function update(Request $request, Producto $producto)

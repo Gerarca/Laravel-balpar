@@ -16,7 +16,6 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Categoría</th>
                                     <th>Logo</th>
                                     <th>Marca</th>
                                     <th>Fecha de creación</th>
@@ -26,7 +25,6 @@
                             <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>Categoría</th>
                                     <th>Logo</th>
                                     <th>Marca</th>
                                     <th>Fecha de creación</th>
@@ -37,7 +35,6 @@
                                 @foreach($marcas as $marca)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $marca->categoria->categoria }}</td>
                                         <td class="text-center"><img src="{{ url('uploads/'.$marca->imagen) }}" alt="{{ $marca->nombre }}" width="100"></td>
                                         <td>{{ $marca->nombre }}</td>
                                         <td>{{ $marca->created_at }}</td>

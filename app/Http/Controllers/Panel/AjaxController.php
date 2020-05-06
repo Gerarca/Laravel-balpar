@@ -11,18 +11,18 @@ use App\Rubro;
 
 class AjaxController extends Controller
 {
-    public function marcas(Request $request)
-    {
-        $marcas = Marca::where('categoria_id', '=', $request->valor)->get();
-        $valores = [];
-        foreach ($marcas as $marca) {
-            $valores[] = array(
-                'id' => $marca->id,
-                'nombre' => $marca->nombre
-            );
-        }
-        return $valores;
-    }
+    // public function marcas(Request $request)
+    // {
+    //     $marcas = Marca::where('categoria_id', '=', $request->valor)->get();
+    //     $valores = [];
+    //     foreach ($marcas as $marca) {
+    //         $valores[] = array(
+    //             'id' => $marca->id,
+    //             'nombre' => $marca->nombre
+    //         );
+    //     }
+    //     return $valores;
+    // }
 
     public function usos(Request $request)
     {

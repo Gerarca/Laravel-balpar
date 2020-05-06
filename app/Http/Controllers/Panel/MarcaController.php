@@ -13,7 +13,6 @@ use DB;
 use Session;
 use Str;
 use App\Marca;
-use App\Categoria;
 
 class MarcaController extends Controller
 {
@@ -34,8 +33,7 @@ class MarcaController extends Controller
      */
     public function create(Marca $marca)
     {
-        $categorias = Categoria::orderBy('categoria')->get();
-        return view('panel.marcas.form', compact('marca', 'categorias'));
+        return view('panel.marcas.form', compact('marca'));
     }
 
     /**
@@ -47,7 +45,6 @@ class MarcaController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'categoria_id' => 'required|exists:categorias,id',
             'nombre' => 'required|max:255',
             'imagen' => 'required|image'
         ]);
@@ -56,7 +53,7 @@ class MarcaController extends Controller
         $imagenName = Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen')->getClientOriginalExtension();
         $request->file('imagen')->move(base_path() . '/public/uploads/', $imagenName);
 
-        $marca = Marca::create($request->only('categoria_id', 'nombre') + ['imagen' => $imagenName]);
+        $marca = Marca::create($request->only('nombre') + ['imagen' => $imagenName]);
 
         Session::flash('mensaje', 'La marca '.$marca->nombre.' ha sido creada correctamente');
         return redirect(route('marcas.index'));
@@ -81,8 +78,7 @@ class MarcaController extends Controller
      */
     public function edit(Marca $marca)
     {
-        $categorias = Categoria::orderBy('categoria')->get();
-        return view('panel.marcas.form', compact('marca', 'categorias'));
+        return view('panel.marcas.form', compact('marca'));
     }
 
     /**
@@ -95,12 +91,11 @@ class MarcaController extends Controller
     public function update(Request $request, Marca $marca)
     {
         request()->validate([
-            'categoria_id' => 'required|exists:categorias,id',
             'nombre' => 'required|max:255',
             'imagen' => 'image'
         ]);
 
-        $marca->fill($request->only('categoria_id', 'nombre'))->save();
+        $marca->fill($request->only('nombre'))->save();
 
         //Portada
         if($request->hasFile('imagen')){

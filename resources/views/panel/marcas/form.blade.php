@@ -15,17 +15,6 @@
                         </div>
                         <div class="card-body ">
                             <div class="form-group has-label">
-                                <label for="categoria">
-                                    Categoría *
-                                </label>
-                                <select id="categoria" name="categoria_id" class="form-control">
-                                    <option></option>
-                                    @foreach($categorias as $categoria)
-                                        <option value="{{ $categoria->id }}" {{ $marca->categoria_id == $categoria->id ? 'selected' : '' }}>{{ $categoria->categoria }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group has-label">
                                 <label for="nombre">
                                     Nombre *
                                 </label>

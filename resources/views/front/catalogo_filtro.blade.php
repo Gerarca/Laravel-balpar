@@ -34,6 +34,24 @@
               </form>
             </div>
 
+            <h4 class="m-text11 p-b-7 font-weight-bold">
+              Marca
+            </h4>
+            <ul>
+                @foreach($marcas as $marca_item)
+                    <li class="p-t-4">
+                        <a href="{{ route('front.catalogo.marca', ['marca' => $marca_item->id, 'nombre' => Str::slug($marca_item->nombre)]) }}" class="s-text13"
+                            @if(isset($marca))
+                                style="{{ $marca_item->id == $marca->id ? 'color: #12488f; font-weight: 500;' : '' }}"
+                            @endif
+                            >
+                            {{ $marca_item->nombre }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+
+            <hr>
             <h4 class="m-text11 p-b-7 font-weight-bold ">
               Etiquetas
             </h4>

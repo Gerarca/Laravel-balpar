@@ -36,38 +36,44 @@ class FrontController extends Controller
 	}
     public function catalogo_categoria(Categoria $categoria){
         $productos = $categoria->productos;
+        $marcas = Marca::orderBy('nombre')->get();
         $etiquetas = Etiqueta::orderBy('nombre')->get();
-		return view('front.catalogo', compact('categoria', 'productos', 'etiquetas'));
+		return view('front.catalogo', compact('categoria', 'productos', 'etiquetas', 'marcas'));
 	}
     public function catalogo_marca(Marca $marca){
-        $categoria = $marca->categoria;
+        $marcas = Marca::orderBy('nombre')->get();
         $productos = $marca->productos;
         $etiquetas = Etiqueta::orderBy('nombre')->get();
-		return view('front.catalogo', compact('categoria', 'marca', 'productos', 'etiquetas'));
+        $asunto = ['asunto' => 'Marca', 'titulo' => $marca->nombre];
+		return view('front.catalogo_filtro', compact('marcas', 'marca', 'productos', 'etiquetas', 'asunto'));
 	}
     public function catalogo_uso(Uso $uso){
         $categoria = $uso->categoria;
         $productos = $uso->productos;
+        $marcas = Marca::orderBy('nombre')->get();
         $etiquetas = Etiqueta::orderBy('nombre')->get();
-		return view('front.catalogo', compact('categoria', 'uso', 'productos', 'etiquetas'));
+		return view('front.catalogo', compact('categoria', 'uso', 'productos', 'etiquetas', 'marcas'));
 	}
     public function catalogo_rubro(Rubro $rubro){
         $categoria = $rubro->categoria;
         $productos = $rubro->productos;
+        $marcas = Marca::orderBy('nombre')->get();
         $etiquetas = Etiqueta::orderBy('nombre')->get();
-		return view('front.catalogo', compact('categoria', 'rubro', 'productos', 'etiquetas'));
+		return view('front.catalogo', compact('categoria', 'rubro', 'productos', 'etiquetas', 'marcas'));
 	}
     public function catalogo_etiqueta(Etiqueta $etiqueta){
         $productos = $etiqueta->productos;
+        $marcas = Marca::orderBy('nombre')->get();
         $etiquetas = Etiqueta::orderBy('nombre')->get();
         $asunto = ['asunto' => 'Etiqueta', 'titulo' => $etiqueta->nombre];
-		return view('front.catalogo_filtro', compact('productos', 'etiqueta', 'etiquetas', 'asunto'));
+		return view('front.catalogo_filtro', compact('productos', 'etiqueta', 'etiquetas', 'marcas', 'asunto'));
 	}
     public function buscar_catalogo(Request $request){
         $productos = Producto::where('nombre', 'LIKE', '%' . request('search_product') . '%')->get();
+        $marcas = Marca::orderBy('nombre')->get();
         $etiquetas = Etiqueta::orderBy('nombre')->get();
         $asunto = ['asunto' => 'Búsqueda', 'titulo' => request('search_product')];
-        return view('front.catalogo_filtro', compact('productos', 'etiqueta', 'etiquetas', 'asunto'));
+        return view('front.catalogo_filtro', compact('productos', 'etiqueta', 'etiquetas', 'marcas', 'asunto'));
     }
     public function catalogo_destacado(Request $request){
 
@@ -79,9 +85,10 @@ class FrontController extends Controller
             $productos = Producto::where('destacado_industrial', 1)->orderBy('id', 'desc')->get();
         }
 
+        $marcas = Marca::orderBy('nombre')->get();
         $etiquetas = Etiqueta::orderBy('nombre')->get();
         $asunto = ['asunto' => 'Destacado', 'titulo' => $titulo];
-        return view('front.catalogo_filtro', compact('productos', 'etiquetas', 'asunto'));
+        return view('front.catalogo_filtro', compact('productos', 'etiquetas', 'marcas', 'asunto'));
     }
     public function producto(Producto $producto){
 		return view('front.producto', compact('producto'));
