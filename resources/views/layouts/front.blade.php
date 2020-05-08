@@ -58,10 +58,17 @@
               </li>
               <li class="has-menu">
                 <a href="javascript:void(0)">Productos</a>
-                <ul class="sub_menu">
+                <ul class="sub_menu py-0">
                     @foreach($categories as $category)
-                        <li><a href="{{route('front.catalogo.categoria', ['categoria' => $category->id, 'nombre' => Str::slug($category->categoria)])}}">{{ $category->categoria }}</a></li>
+                        <li class="has-submenu">
+                          <a href="{{route('front.catalogo.categoria', ['categoria' => $category->id, 'nombre' => Str::slug($category->categoria)])}}">{{ $category->categoria }}</a>
+                          <ul class="theme_menu submenu">
+                            <li><a href="#">Test</a></li>
+                            <li><a href="#">Test</a></li>
+                          </ul>
+                        </li>
                     @endforeach
+                    <li><a href="javascript:void(0)" class="font-weight-bold">Ver todos los productos</a> </li>
                 </ul>
               </li>
               <li class="has-menu">
@@ -230,6 +237,10 @@
         $(this).find(".sub_menu").toggleClass("show");
         $(this).toggleClass("open");
       });
+      // $(".has-submenu").click(function(){
+      //   $(this).find(".theme_menu").toggleClass("show");
+      //   $(this).toggleClass("open");
+      // });
 
         $(document).ready(function(){
 
