@@ -18,7 +18,7 @@
                 <i class="fas fa-map-marker-alt"></i>
               </div>
               <div class="col-11">
-                <h5 class="font-weight-bold">Dirección</h5>
+                <h5 class="font-weight-bold mb-2">Dirección</h5>
                 <p class="description">
                   <a href="https://goo.gl/maps/UFVu7vSabQt3WCTW8" target="_blank">Av. Madame Lynch esq. Soriano Gonzalez - Asunción, Paraguay</a>
                 </p>
@@ -31,10 +31,21 @@
                 <i class="fas fa-phone"></i>
               </div>
               <div class="col-11">
-                <h5 class="font-weight-bold">Teléfono</h5>
+                <h5 class="font-weight-bold mb-2">Teléfono</h5>
                 <p class="description">
-                  <a href="tel:+595 991 166277">+595 991 166277</a> <br>
-                  <a href="tel:021 511 475">021 511 475</a>
+                  <div class="mb-2">
+                    <p class="info-text">Ventas</p>
+                    <a href="tel:+595 991 166277">+595 991 166 277</a> <br>
+                  </div>
+                  <div class="">
+                    <p class="info-text">Servicio de Asistencia Técnica</p>
+                    <a href="tel:+595 992 267 406">+595 992 267 406</a>
+                  </div>
+                  <div class="mb-2">
+                    <p class="info-text">Línea baja</p>
+                    <a href="tel:021 511 475">021-511-475</a><br>
+                    <a href="tel:021 520 062">021-520-062</a>
+                  </div>
                 </p>
               </div>
             </div>
@@ -45,9 +56,16 @@
                 <i class="fas fa-envelope"></i>
               </div>
               <div class="col-11">
-                <h5 class="font-weight-bold">Email</h5>
+                <h5 class="font-weight-bold mb-2">Email</h5>
                 <p class="description">
-                  <a href="mailto:ventas@balpar.com.py">ventas@balpar.com.py</a>
+                  <div class="mb-2">
+                    <p class="info-text">Ventas</p>
+                    <a href="mailto:ventas@balpar.com.py">ventas@balpar.com.py</a>
+                  </div>
+                  <div class="">
+                    <p class="info-text">Servicio técnico</p>
+                    <a href="mailto:sac@balpar.com.py">sac@balpar.com.py</a>
+                  </div>
                 </p>
               </div>
             </div>

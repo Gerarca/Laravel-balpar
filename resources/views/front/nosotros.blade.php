@@ -46,7 +46,7 @@
           Misión
         </h4>
         <span class="s-text8">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Brindar la mejor cooperación a nuestros clientes para ayudarles a potenciar y optimizar sus objetivos, contribuyendo así al desarrollo integral de nuestro país.
         </span>
       </div>
 
@@ -55,16 +55,22 @@
           Visión
         </h4>
         <span class="s-text8">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Lograr el reconocimiento de la sociedad y de nuestros clientes, como empresa que ofrece soluciones innovadoras y convenientes, basadas en la excelencia e integridad profesional de su equipo humano.
         </span>
       </div>
 
       <div class="flex-col-c w-size5 p-l-15 p-r-15 p-t-16 p-b-15 respon1 box-info box-info1" style="background-image:url({{url('assets_front/images/doc.svg')}});">
         <h4 class="m-text12 t-center text-color">
-          Políticas
+          Valores y compromisos
         </h4>
         <span class="s-text8">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          <ul class="disc-list">
+            <li>Potenciar el respeto y la dignidad de las personas en el ambiente de trabajo.</li>
+            <li>Respetar la salud y la seguridad ocupacional, cuidando el estricto cumplimiento de las leyes.</li>
+            <li>Promover la integridad, la honestidad y el desarrollo de nuestro equipo humano, como elementos fundamentales para el progreso colectivo.</li>
+            <li>Impulsar el crecimiento personal y la mejora continua como prioridades en los objetivos de optimización de la calidad e innovación.</li>
+            <li>Concientizar en la necesidad del cuidado del medio ambiente en todos los procesos del trabajo.</li>
+          </ul>
         </span>
       </div>
     </div>

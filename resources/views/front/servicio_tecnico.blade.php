@@ -1,5 +1,5 @@
 @extends('layouts.front')
-@section('title','Servicios |')
+@section('title','Servicio Técnico |')
 @section('content')
 
   <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(assets_front/images/nosotros.jpg);">
@@ -8,61 +8,49 @@
     </h2>
   </section>
 
+  <section class="p-t-40 p-b-30 bg-light">
+  <div class="container-sm text-center" style="max-width:830px;">
+    <p class="mb-3"><strong class="text-color">BALPAR S.A</strong>, empresa Paraguaya con más de 28 años de experiencia en el mercado, brindando asistencia integral especializada por profesionales altamente calificados, con la finalidad de realizar Mantenimiento Preventivo de Piezas, Calibración de Equipos de Pesaje; Balanzas, Básculas y la Reparación de Equipos dañados en todas las marcas que representamos, reafirmando así nuestro compromiso con cada cliente.</p>
+    <p class="text-color font-weight-bold mb-3">Nuestro objetivo principal es poder construir vínculos reales con nuestros clientes, logrando lazos con cada uno a lo largo del tiempo. </p>
+  </div>
+</section>
+
   <section class="bgwhite p-t-50 p-b-50">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 p-b-30 box-info box-info1">
-          <div class="m-b-25">
-            <h5 class="font-weight-bold">
-              Contacto Servicio 1
-            </h5>
-            <ul>
-              <li class="p-b-9 m-t-10">
-                <a href="https://goo.gl/maps/UFVu7vSabQt3WCTW8" target="_blank" class="s-text7">
-                  <i class="fas fa-map-marker-alt" aria-hidden="true"></i> Av. Madame Lynch esq. Soriano Gonzalez - Asunción, Paraguay
-                </a>
-              </li>
-              <li class="p-b-9">
-                <a href="tel:021 511 475" class="s-text7">
-                  <i class="fas fa-phone" aria-hidden="true"></i> 021 511 475
-                </a>
-              </li>
-            </ul>
+        <div class="col-md-6 p-b-30 box-info box-info1 justify-content-start">
+          <div class="container tw-box w-100 m-b-40">
+            <h4 class="p-b-36">
+              Servicio de Asistencia Técnica
+            </h4>
           </div>
-          <div class="m-b-25">
-            <h5 class="font-weight-bold">
-              Contacto Servicio 2
-            </h5>
-            <ul>
-              <li class="p-b-9 m-t-10">
-                <a href="https://goo.gl/maps/UFVu7vSabQt3WCTW8" target="_blank" class="s-text7">
-                  <i class="fas fa-map-marker-alt" aria-hidden="true"></i> Av. Madame Lynch esq. Soriano Gonzalez - Asunción, Paraguay
-                </a>
-              </li>
-              <li class="p-b-9">
-                <a href="tel:021 511 475" class="s-text7">
-                  <i class="fas fa-phone" aria-hidden="true"></i> 021 511 475
-                </a>
-              </li>
-            </ul>
+          <div class="container tw-box w-100 m-b-40">
+            <div class="row">
+              <div class="col-1 tw-box-icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div class="col-11">
+                <h5 class="font-weight-bold">Teléfono</h5>
+                <p class="description">
+                  <a href="tel:+595 992 267 406">+595 992 267 406</a>
+                </p>
+              </div>
+            </div>
           </div>
-          <div class="m-b-25">
-            <h5 class="font-weight-bold">
-              Contacto Servicio 3
-            </h5>
-            <ul>
-              <li class="p-b-9 m-t-10">
-                <a href="https://goo.gl/maps/UFVu7vSabQt3WCTW8" target="_blank" class="s-text7">
-                  <i class="fas fa-map-marker-alt" aria-hidden="true"></i> Av. Madame Lynch esq. Soriano Gonzalez - Asunción, Paraguay
-                </a>
-              </li>
-              <li class="p-b-9">
-                <a href="tel:021 511 475" class="s-text7">
-                  <i class="fas fa-phone" aria-hidden="true"></i> 021 511 475
-                </a>
-              </li>
-            </ul>
+          <div class="container tw-box w-100 m-b-40">
+            <div class="row">
+              <div class="col-1 tw-box-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="col-11">
+                <h5 class="font-weight-bold">Email</h5>
+                <p class="description">
+                  <a href="mailto:sat@balpar.com.py">sat@balpar.com.py</a>
+                </p>
+              </div>
+            </div>
           </div>
+
         </div>
 
         <div class="col-md-6 p-b-30 box-info">

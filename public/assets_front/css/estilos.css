@@ -450,6 +450,7 @@ li.breadcrumb-item {
   z-index: 1;
   /* background-size: contain; */
   background-size: 60%;
+  align-items: start;
 }
 .box-info1:after {
   content: '';
@@ -457,7 +458,7 @@ li.breadcrumb-item {
   background: #fff;
   width: 100%;
   height: 100%;
-  opacity: 0.89;
+  opacity: 0.95;
   z-index: 0;
 }
 
@@ -766,4 +767,13 @@ span.counter,#contador-section .m-text9{
   background: #fff;
   top: 0;
   left: 50%;
+}
+ul.disc-list li {
+  list-style: disc!important;
+  list-style-position: inside!important;
+}
+p.info-text {
+  font-size: 13px;
+  color: #0f4795;
+  margin-bottom: -5px;
 }

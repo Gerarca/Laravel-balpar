@@ -21,7 +21,7 @@
   {{-- css --}}
   <link rel="stylesheet" type="text/css" href="{{url('assets_front/css/util.min.css')}}">
   <link rel="stylesheet" type="text/css" href="{{url('assets_front/css/main.min.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{url('assets_front/css/estilos.css?v=1.3')}}">
+  <link rel="stylesheet" type="text/css" href="{{url('assets_front/css/estilos.css?v=1.4')}}">
 
 </head>
 <body class="animsition">
@@ -32,7 +32,7 @@
         <div class="topbar-social">
           <a href="https://www.facebook.com/Balanzas-Paraguayas-SA-Balpar-848894218561129/" target="_blank" class="topbar-social-item fab fa-facebook-f"></a>
           <a href="https://www.instagram.com/balparpy/" target="_blank" class="topbar-social-item fab fa-instagram"></a>
-          <a href="#" class="topbar-social-item fab fa-linkedin"></a>
+          <a href="https://www.linkedin.com/company/49076293" target="_blank" class="topbar-social-item fab fa-linkedin"></a>
         </div>
         <div class="topbar-child2">
           <span class="topbar-links d-none d-lg-block">
@@ -68,8 +68,6 @@
                 <a href="javascript:void(0)">Servicios</a>
                 <ul class="sub_menu">
                   <li><a href="{{route('front.servicio_tecnico')}}">Servicio Técnico</a></li>
-                  <li><a href="{{route('front.servicio_tecnico')}}">Ejemplo 2</a></li>
-                  <li><a href="{{route('front.servicio_tecnico')}}">Ejemplo 3</a></li>
                 </ul>
               </li>
               <li>
@@ -208,7 +206,7 @@
   <a role="button" href="https://m.me/848894218561129" target="_blank" class="btn-floating btn-fbm" title="¡Escríbenos por FB Messenger!">
     <img src="{{url('assets_front/images/messenger.svg')}}" style="height:30px;">
   </a>
-  <a role="button" href="javascript:void(0)" class="btn-floating btn-wha btn-success" title="¡Escríbenos por Whatsapp!"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+  <a role="button" href="https://api.whatsapp.com/send?phone=595991166277&text=Hola!%20Estoy%20escribiendo%20desde%20el%20sitio%20web%20de%20Balpar%20y%20tengo%20una%20consulta." target="_blank" class="btn-floating btn-wha btn-success" title="¡Escríbenos por Whatsapp!"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
 
   <script src="{{url('assets_front/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
   <script src="{{url('assets_front/vendor/animsition/js/animsition.min.js')}}"></script>

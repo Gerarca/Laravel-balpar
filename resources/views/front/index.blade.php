@@ -13,8 +13,9 @@
 
   <section class="p-t-80 p-b-80">
     <div class="container-sm text-center" style="max-width:830px;">
-      <h2 class="m-text17 text-color m-b-10">Innovación para un país en expansión</h2>
-      <p class="text-secondary mb-3">En BALPAR asumimos el compromiso de contribuir con el crecimiento económico del país proveyendo a las pequeñas, medianas y grandes empresas productos y servicios de altísima calidad que garantizan el éxito de sus negocios; lo que se traduce en fuentes de trabajo e ingresos para los colaboradores de tales empresas beneficiando de esa manera al país. </p>
+      <h2 class="m-text17 text-color m-b-10 text-uppercase">Presentes en todo el territorio nacional brindando calidad y soluciones integrales para tu empresa</h2>
+      <p class="text-secondary mb-3">En <strong class="text-color">BALPAR S.A</strong>, Empresa Paraguaya con más de 25 años de experiencia en el mercado, líder en el rubro de Pesaje Comercial, Pesaje Industrial, Góndolas para Supermercados Mayoristas y Minoristas, Higiene Industrial y Sistemas inteligentes de Control de Tráfico.</p>
+      <p class="text-secondary mb-3">Asumimos el compromiso de contribuir con el crecimiento económico del país proveyendo, asesorando y creciendo con las pequeñas, medianas y grandes empresas, otorgando nuestros  productos y servicios, comprometidos con nuestros clientes en ofrecer los mayores estándares de calidad que garantizan el éxito para su negocio, lo que  se traduce en fuentes de trabajo.</p>
       <a href="{{route('front.nosotros')}}" class="btn btn-primary s-text1 trans-0-4 w-auto">
         Más sobre Nosotros
       </a>
