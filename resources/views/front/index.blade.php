@@ -136,7 +136,7 @@
     </section>
 
     {{-- Testimonios --}}
-    <section class="newproduct p-b-80 p-t-80">
+    {{-- <section class="newproduct p-b-80 p-t-80">
         <div class="container">
             <div class="sec-title">
                 <h3 class="m-text5 t-center text-color mb-4">
@@ -156,7 +156,7 @@
                 @endforeach
             </div>
         </div>
-    </section>
+    </section> --}}
 
     {{-- Marcas --}}
     <section class="newproduct p-b-80 p-t-80">

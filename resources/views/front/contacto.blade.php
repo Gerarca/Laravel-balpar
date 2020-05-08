@@ -122,7 +122,7 @@
   </section>
 
     {{-- Testimonios --}}
-    <section class="newproduct p-b-80 p-t-80">
+    {{-- <section class="newproduct p-b-80 p-t-80">
         <div class="container">
             <div class="sec-title">
                 <h3 class="m-text5 t-center text-color mb-4">
@@ -142,7 +142,7 @@
                 @endforeach
             </div>
         </div>
-    </section>
+    </section> --}}
 
   <section>
     <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14427.314806682854!2d-57.5541044!3d-25.3099587!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa2e47a29fc2f49e3!2sBalpar%20S.A.!5e0!3m2!1ses-419!2spy!4v1583264226416!5m2!1ses-419!2spy" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
