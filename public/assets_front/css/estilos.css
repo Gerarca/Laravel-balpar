@@ -777,3 +777,13 @@ p.info-text {
   color: #0f4795;
   margin-bottom: -5px;
 }
+
+.works .block3{
+  border: 1px solid #f2f2f2;
+  margin-bottom: 25px;
+  transition: all ease .3s;
+}
+.works .block3:hover {
+  box-shadow: 2px 2px 17px 2px #e2e2e2;
+}
+

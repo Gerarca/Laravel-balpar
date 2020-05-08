@@ -43,7 +43,7 @@
           </span>
         </div>
       </div>
-      <div class="wrap_header container px-0">
+      <div class="wrap_header container-fluid px-0">
         <a href="{{route('front.index')}}" class="logo">
           <img src="{{url('assets_front/images/logo.png')}}" alt="Logo" style="max-height: 25px;">
         </a>
@@ -69,6 +69,9 @@
                 <ul class="sub_menu">
                   <li><a href="{{route('front.servicio_tecnico')}}">Servicio Técnico</a></li>
                 </ul>
+              </li>
+              <li>
+                <a href="{{route('front.trabajos_realizados')}}">Trabajos Realizados</a>
               </li>
               <li>
                 <a href="{{route('front.contacto')}}">Contacto</a>
