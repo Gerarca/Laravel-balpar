@@ -729,6 +729,12 @@ input.num-product {
     font-size: 10px;
   }
 }
+
+@media (min-width:767px) {
+  .main_menu>li{
+    padding: 20px 11px;
+  }
+}
 .container-menu-header{
   background: #fff;
 }
