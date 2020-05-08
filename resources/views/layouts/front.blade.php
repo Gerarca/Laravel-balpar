@@ -36,7 +36,7 @@
         </div>
         <div class="topbar-child2">
           <span class="topbar-links d-none d-lg-block">
-            <a href="{{url('assets_front/public/ejemplo.pdf')}}" download><i class="fas fa-file-download"></i> Descargar Catálogo</a>
+            <a href="{{route('front.catalogos')}}"><i class="fas fa-file-download"></i> Descargar Catálogo</a>
           </span>
           <span class="topbar-phone">
             <a href="tel:021 511 475"><i class="fas fa-phone"></i> 021 511 475</a>

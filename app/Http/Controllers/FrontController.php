@@ -122,6 +122,9 @@ class FrontController extends Controller
     public function trabajos_realizados(){
 		return view('front.trabajos_realizados');
 	}
+    public function catalogos(){
+		return view('front.catalogos');
+	}
     public function cargar_testimonio(Request $request)
     {
         request()->validate([

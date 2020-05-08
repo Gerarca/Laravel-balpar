@@ -824,3 +824,37 @@ ul.theme_menu.submenu {
     border-bottom: 1px solid #eaeaea;
   }
 }
+
+.anchor-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 15px 5px;
+  position: relative;
+}
+
+.anchor-item::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.2);
+  width: 1px;
+  height: 40%;
+  right: 0;
+}
+
+.anchor-links {
+  color: #fff;
+  font-size: 16px;
+}
+.btn-secondary {
+  background-color: #14b7dd;
+  border-color: #14b7dd;
+}
+.btn-secondary:hover,.btn-secondary:focus,.btn-secondary:active {
+  background-color: #4fceef;
+  border-color: #4fceef;
+}
+html {
+  scroll-behavior: smooth;
+}
