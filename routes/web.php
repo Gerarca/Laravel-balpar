@@ -87,6 +87,7 @@ Route::group(['middleware' => 'role:usuario', 'middleware' => 'role:administrado
 	Route::resource('panel/testimonios', 'Panel\TestimonioController', ['except' => ['show']]);
 	Route::resource('panel/usos', 'Panel\UsoController', ['except' => ['show']]);
 	Route::resource('panel/rubros', 'Panel\RubroController', ['except' => ['show']]);
+	Route::resource('panel/trabajos', 'Panel\TrabajoController', ['except' => ['show']]);
 
 	Route::get('panel/producto/{cod_articulo}/cuotas', 'Panel\CuotasController@index')->name('panel.cuotas.index');
 	Route::post('panel/producto/{cod_articulo}/cuotas', 'Panel\CuotasController@store')->name('panel.cuotas.store');
