@@ -97,7 +97,7 @@ class FrontController extends Controller
         $productos = Producto::orderBy('id', 'desc')->get();
         $etiquetas = Etiqueta::orderBy('nombre')->get();
         $asunto = ['asunto' => 'Productos', 'titulo' => 'Todos los productos'];
-		return view('front.catalogo_filtro', compact('marcas', 'marca', 'productos', 'etiquetas', 'asunto'));
+		return view('front.catalogo_filtro', compact('marcas', 'productos', 'etiquetas', 'asunto'));
 	}
     public function producto(Producto $producto){
 		return view('front.producto', compact('producto'));
