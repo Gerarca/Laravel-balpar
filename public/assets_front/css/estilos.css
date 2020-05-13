@@ -434,7 +434,7 @@ li.breadcrumb-item {
 .box-info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   padding: 45px 15px;
   align-items: center;
 }
@@ -450,8 +450,8 @@ li.breadcrumb-item {
   position: relative;
   z-index: 1;
   /* background-size: contain; */
-  background-size: 60%;
-  align-items: start;
+  background-size: 56%;
+  /* align-items: start; */
 }
 .box-info1:after {
   content: '';
