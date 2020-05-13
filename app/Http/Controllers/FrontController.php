@@ -18,6 +18,7 @@ use App\Pedido;
 use App\PedidoDetalle;
 use App\Opcion;
 use App\Trabajo;
+use App\CategoriaCatalogo;
 use Str;
 
 class FrontController extends Controller
@@ -124,7 +125,8 @@ class FrontController extends Controller
 		return view('front.trabajos_realizados', ['trabajos' => Trabajo::orderBy('id', 'desc')->get()]);
 	}
     public function catalogos(){
-		return view('front.catalogos');
+        $categoria_catalogos = CategoriaCatalogo::orderBy('nombre')->get();
+		return view('front.catalogos', compact('categoria_catalogos'));
 	}
     public function cargar_testimonio(Request $request)
     {
