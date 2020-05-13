@@ -362,6 +362,70 @@
     </div>
   </li> --}}
 
+  <li class="{{ (Request::is('panel/trabajos/*') || Request::is('panel/trabajos'))?'active':''}}">
+    <a data-toggle="collapse" href="#menu_trabajo" class="{{ (Request::is('panel/trabajos/*') || Request::is('panel/trabajos'))?'collapsed':''}}">
+      <i class="fa fa-gears"></i>
+      <p>
+        Trabajos
+        <b class="caret"></b>
+      </p>
+    </a>
+    <div class="{{ (Request::is('panel/trabajos/*') || Request::is('panel/trabajos'))?'collapse show':'collapse'}} " id="menu_trabajo">
+      <ul class="nav">
+        <li class="{{ (Request::is('panel/trabajos') || Request::is('panel/trabajos/*/edit'))?'active':''}} ">
+          <a href="{{ route('trabajos.index') }}">
+            <span class="sidebar-mini-icon">LT</span>
+            <span class="sidebar-normal"> Lista de Trabajos </span>
+          </a>
+        </li>
+        <li class="{{ (Request::is('panel/trabajos/create'))?'active':''}} ">
+          <a href="{{ route('trabajos.create') }}">
+            <span class="sidebar-mini-icon">AT</span>
+            <span class="sidebar-normal"> Añadir Trabajos </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </li>
+
+  <li class="{{ (Request::is('panel/catalogos/*') || Request::is('panel/catalogos') || Request::is('panel/categoria_catalogos/*') || Request::is('panel/categoria_catalogos')  )?'active':''}}">
+    <a data-toggle="collapse" href="#menu_catalogo" class="{{ (Request::is('panel/catalogos/*') || Request::is('panel/catalogos') || Request::is('panel/categoria_catalogos/*') || Request::is('panel/categoria_catalogos') )?'collapsed':''}}">
+      <i class="fa fa-folder-open-o"></i>
+      <p>
+        Catálogos
+        <b class="caret"></b>
+      </p>
+    </a>
+    <div class="{{ (Request::is('panel/catalogos/*') || Request::is('panel/catalogos') || Request::is('panel/categoria_catalogos/*') || Request::is('panel/categoria_catalogos') )?'collapse show':'collapse'}} " id="menu_catalogo">
+      <ul class="nav">
+        <li class="{{ (Request::is('panel/categoria_catalogos') || Request::is('panel/categoria_catalogos/*/edit'))?'active':''}} ">
+          <a href="{{ route('categoria_catalogos.index') }}">
+            <span class="sidebar-mini-icon">LC</span>
+            <span class="sidebar-normal"> Lista de Categorías </span>
+          </a>
+        </li>
+        <li class="{{ (Request::is('panel/categoria_catalogos/create'))?'active':''}} ">
+          <a href="{{ route('categoria_catalogos.create') }}">
+            <span class="sidebar-mini-icon">AC</span>
+            <span class="sidebar-normal"> Añadir Categorías </span>
+          </a>
+        </li>
+        <li class="{{ (Request::is('panel/catalogos') || Request::is('panel/catalogos/*/edit'))?'active':''}} ">
+          <a href="{{ route('catalogos.index') }}">
+            <span class="sidebar-mini-icon">LC</span>
+            <span class="sidebar-normal"> Lista de Catálogos </span>
+          </a>
+        </li>
+        <li class="{{ (Request::is('panel/catalogos/create'))?'active':''}} ">
+          <a href="{{ route('catalogos.create') }}">
+            <span class="sidebar-mini-icon">AC</span>
+            <span class="sidebar-normal"> Añadir Catálogos </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </li>
+
   <li class="{{ (Request::is('panel/datos_dinamicos') || Request::is('panel/datos_dinamicos/*') || Request::is('panel/testimonios') || Request::is('panel/testimonios/*') )?'active':''}}">
         <a data-toggle="collapse" href="#menu_extra" class="{{ (Request::is('panel/datos_dinamicos') || Request::is('panel/datos_dinamicos/*') || Request::is('panel/testimonios') || Request::is('panel/testimonios/*') )?'collapsed':''}}">
             <i class="fa fa-commenting-o"></i>

@@ -18,72 +18,19 @@
   <section class="works p-t-5 p-b-65 bg-light">
     <div class="container-sm">
       <div class="row">
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-          <div class="block3">
-            <a class="block3-img">
-              <img src="{{url('assets_front/images/banner2.jpg')}}" class="img-fluid">
-            </a>
-            <div class="block3-txt p-4 bg-white">
-              <h5 class="p-b-7">Nombre Proyecto</h5>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</small>
+        @foreach($trabajos as $trabajo)
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+              <div class="block3">
+                <a class="block3-img">
+                  <img src="{{url('uploads/'. $trabajo->imagen)}}" class="img-fluid">
+                </a>
+                <div class="block3-txt p-4 bg-white">
+                  <h5 class="p-b-7">{{ $trabajo->nombre }}</h5>
+                  <small class="text-muted">{{ $trabajo->descripcion }}</small>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-          <div class="block3">
-            <a class="block3-img">
-              <img src="{{url('assets_front/images/banner2.jpg')}}" class="img-fluid">
-            </a>
-            <div class="block3-txt p-4 bg-white">
-              <h5 class="p-b-7">Nombre Proyecto</h5>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</small>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-          <div class="block3">
-            <a class="block3-img">
-              <img src="{{url('assets_front/images/banner2.jpg')}}" class="img-fluid">
-            </a>
-            <div class="block3-txt p-4 bg-white">
-              <h5 class="p-b-7">Nombre Proyecto</h5>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</small>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-          <div class="block3">
-            <a class="block3-img">
-              <img src="{{url('assets_front/images/banner2.jpg')}}" class="img-fluid">
-            </a>
-            <div class="block3-txt p-4 bg-white">
-              <h5 class="p-b-7">Nombre Proyecto</h5>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</small>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-          <div class="block3">
-            <a class="block3-img">
-              <img src="{{url('assets_front/images/banner2.jpg')}}" class="img-fluid">
-            </a>
-            <div class="block3-txt p-4 bg-white">
-              <h5 class="p-b-7">Nombre Proyecto</h5>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</small>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-          <div class="block3">
-            <a class="block3-img">
-              <img src="{{url('assets_front/images/banner2.jpg')}}" class="img-fluid">
-            </a>
-            <div class="block3-txt p-4 bg-white">
-              <h5 class="p-b-7">Nombre Proyecto</h5>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</small>
-            </div>
-          </div>
-        </div>
+        @endforeach
       </div>
     </div>
   </section>
