@@ -21,6 +21,7 @@ Route::get('/catalogo/uso/{uso}/{nombre}', 'FrontController@catalogo_uso')->name
 Route::get('/catalogo/rubro/{rubro}/{nombre}', 'FrontController@catalogo_rubro')->name('front.catalogo.rubro');
 Route::get('/catalogo/etiqueta/{etiqueta}/{nombre}', 'FrontController@catalogo_etiqueta')->name('front.catalogo.etiqueta');
 Route::get('/catalogo/destacados/{destacado}/{nombre}', 'FrontController@catalogo_destacado')->name('front.catalogo.destacado');
+Route::get('/catalogo/todos-los-productos', 'FrontController@catalogo_todos')->name('front.catalogo.todos');
 Route::get('/producto/{producto}/{nombre}', 'FrontController@producto')->name('front.producto');
 Route::get('/presupuesto', 'FrontController@presupuesto')->name('front.presupuesto');
 Route::get('/nosotros', 'FrontController@nosotros')->name('front.nosotros');

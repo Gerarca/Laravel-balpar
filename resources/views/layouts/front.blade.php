@@ -61,14 +61,27 @@
                 <ul class="sub_menu py-0">
                     @foreach($categories as $category)
                         <li class="has-submenu">
-                          <a href="{{route('front.catalogo.categoria', ['categoria' => $category->id, 'nombre' => Str::slug($category->categoria)])}}">{{ $category->categoria }}</a>
-                          <ul class="theme_menu submenu">
-                            <li><a href="#">Test</a></li>
-                            <li><a href="#">Test</a></li>
-                          </ul>
+                            <a href="{{route('front.catalogo.categoria', ['categoria' => $category->id, 'nombre' => Str::slug($category->categoria)])}}">{{ $category->categoria }}</a>
+                            <ul class="theme_menu submenu">
+                                @foreach($category->rubros as $rubro_category)
+                                    <li>
+                                        <a href="{{ route('front.catalogo.rubro', ['rubro' => $rubro_category->id, 'nombre' => Str::slug($rubro_category->rubro)]) }}">
+                                            {{ $rubro_category->rubro }}
+                                        </a>
+                                    </li>
+                                    @if($loop->iteration == 10)
+                                        <li>
+                                            <a href="{{route('front.catalogo.categoria', ['categoria' => $category->id, 'nombre' => Str::slug($category->categoria)])}}" class="font-weight-bold">
+                                                Ver todos
+                                            </a>
+                                        </li>
+                                        @php break; @endphp
+                                    @endif
+                                @endforeach
+                            </ul>
                         </li>
                     @endforeach
-                    <li><a href="javascript:void(0)" class="font-weight-bold">Ver todos los productos</a> </li>
+                    <li><a href="{{ route('front.catalogo.todos') }}" class="font-weight-bold">Ver todos los productos</a> </li>
                 </ul>
               </li>
               <li class="has-menu">
