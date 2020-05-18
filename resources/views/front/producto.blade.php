@@ -55,9 +55,9 @@
           {{ $producto->nombre }}
         </h4>
 
-        <p class="s-text8 p-t-10">
+        {{--<p class="s-text8 p-t-10">
           {{ $producto->subtitulo }}
-        </p>
+        </p>--}}
 
         <div class="p-t-10 p-b-40">
           <div class="flex-r-m flex-w p-t-10">
