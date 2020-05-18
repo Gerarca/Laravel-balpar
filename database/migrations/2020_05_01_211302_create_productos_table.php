@@ -36,8 +36,8 @@ class CreateProductosTable extends Migration
 
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
             $table->foreign('marca_id')->references('id')->on('marcas')->onDelete('cascade');
-            $table->foreign('uso_id')->references('id')->on('usos');
-            $table->foreign('rubro_id')->references('id')->on('rubros');
+            $table->foreign('uso_id')->references('id')->on('usos')->onDelete('set Null');
+            $table->foreign('rubro_id')->references('id')->on('rubros')->onDelete('set Null');
         });
     }
 

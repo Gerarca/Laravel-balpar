@@ -70,7 +70,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Esta acción es irreversible, está seguro que desa continuar?</p>
+                    <p>Todos los productos relacionados a esta marca serán eliminados.<br>Esta acción es irreversible, está seguro que desa continuar?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Cancelar</button>
