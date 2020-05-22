@@ -11,7 +11,9 @@
     <section class="p-t-40 p-b-30 bg-light">
       <h2 class="m-text17 text-color m-b-10"></h2>
       <div class="container-sm text-center" style="max-width:830px;">
-        <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p class="mb-3">Esta sección esta dedicada a cada cliente que confió  y dejo en nuestras manos su proyecto.</p>
+          <p class="mb-3">Nos alegra y llena de orgullo poder avanzar paso a paso juntos ofreciendo nuestros productos y servicios de la mas alta calidad, de forma útil y eficiente.</p>
+          <p class="mb-3">Trabajando arduamente para dar soluciones a las demandas de nuestros clientes.</p>
       </div>
     </section>
 
