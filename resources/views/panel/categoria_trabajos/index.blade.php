@@ -6,7 +6,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title">Proyectos Realizados</h4>
+                <h4 class="card-title">Categorías (<b>Trabajos Realizados</b>)</h4>
               </div>
               <div class="card-body">
                 <div class="toolbar">
@@ -17,8 +17,6 @@
                     <tr>
                       <th>#</th>
                       <th>Categoría</th>
-                      <th>Imagen</th>
-                      <th>Proyecto</th>
                       <th>Fecha de creación</th>
                       <th class="disabled-sorting text-right">Acciones</th>
                     </tr>
@@ -27,23 +25,19 @@
                     <tr>
                       <th>#</th>
                       <th>Categoría</th>
-                      <th>Imagen</th>
-                      <th>Proyecto</th>
                       <th>Fecha de creación</th>
                       <th class="disabled-sorting text-right">Acciones</th>
                     </tr>
                   </tfoot>
                   <tbody>
-                      @foreach($trabajos as $trabajo)
+                      @foreach($categorias as $categoria)
                         <tr>
                           <td class="text-center">{{ $loop->iteration }}</td>
-                          <td>{{ $trabajo->categoria->categoria }}</td>
-                          <td class="text-center"><img src="{{ url('uploads/'.$trabajo->imagen) }}" alt="{{ $trabajo->nombre }}" width="100"></td>
-                          <td>{{ $trabajo->nombre }}</td>
-                          <td>{{ $trabajo->created_at }}</td>
+                          <td>{{ $categoria->categoria }}</td>
+                          <td>{{ $categoria->created_at }}</td>
                           <td class="text-right">
-                              <a href="{{ route('trabajos.edit', $trabajo->id) }}" class="btn btn-warning btn-link btn-icon btn-sm edit "><i class="fa fa-edit"></i></a>
-                             <a href="#" class="btn btn-danger btn-link btn-icon btn-sm remove btn-delete" data-id="{{ $trabajo->id }}" data-toggle="modal"  data-target="#modal-default" data-route="{{ route('trabajos.destroy', $trabajo->id) }}" data-title="{{ $trabajo->nombre }}"><i class="fa fa-times"></i></a>
+                              <a href="{{ route('categoria_trabajos.edit', $categoria->id) }}" class="btn btn-warning btn-link btn-icon btn-sm edit "><i class="fa fa-edit"></i></a>
+                              <a href="#" class="btn btn-danger btn-link btn-icon btn-sm remove btn-delete" data-id="{{ $categoria->id }}" data-toggle="modal"  data-target="#modal-default" data-route="{{ route('categoria_trabajos.destroy', $categoria->id) }}" data-title="{{ $categoria->categoria }}"><i class="fa fa-times"></i></a>
                           </td>
                         </tr>
                       @endforeach
@@ -67,13 +61,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="ModalLabel">Eliminar trabajo</h5>
+        <h5 class="modal-title" id="ModalLabel">Eliminar categoria</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Esta acción es irreversible, está seguro que desa continuar?</p>
+        <p>Todos los rubros, usos y productos relacionados a esta categoría serán eliminados.<br>Esta acción es irreversible, está seguro que desa continuar?</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Cancelar</button>

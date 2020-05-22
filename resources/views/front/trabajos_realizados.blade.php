@@ -18,6 +18,31 @@
   <section class="works p-t-5 p-b-65 bg-light">
     <div class="container-sm">
       <div class="row">
+
+          <div class="sidebar col-sm-6 col-md-4 col-lg-3 p-b-50">
+              <div class="leftbar p-r-20 p-r-0-sm">
+
+                  <h4 class="m-text11 p-b-7 font-weight-bold">
+                      Categorías
+                  </h4>
+                  <ul>
+                      @foreach($categorias_trabajos as $categoria_trabajos)
+                          <li class="p-t-4">
+                              <a href="{{ route('front.categoria_trabajos_realizados', ['categoria_trabajo' => $categoria_trabajos->id, 'nombre' => Str::slug($categoria_trabajos->categoria)]) }}" class="s-text13"
+                                  @if(isset($marca))
+                                      style="{{ $categoria_trabajos->id == $marca->id ? 'color: #12488f; font-weight: 500;' : '' }}"
+                                  @endif
+                                  >
+                                  {{ $categoria_trabajos->categoria }}
+                              </a>
+                          </li>
+                      @endforeach
+                  </ul>
+
+
+              </div>
+          </div>
+
         @foreach($trabajos as $trabajo)
             <div class="col-12 col-sm-6 col-md-6 col-lg-4">
               <div class="block3">

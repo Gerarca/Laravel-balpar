@@ -27,6 +27,7 @@ Route::get('/presupuesto', 'FrontController@presupuesto')->name('front.presupues
 Route::get('/nosotros', 'FrontController@nosotros')->name('front.nosotros');
 Route::get('/servicio_tecnico', 'FrontController@servicio_tecnico')->name('front.servicio_tecnico');
 Route::get('/trabajos_realizados', 'FrontController@trabajos_realizados')->name('front.trabajos_realizados');
+Route::get('/trabajos_realizados/{categoria_trabajo}/{nombre}', 'FrontController@categoria_trabajos_realizados')->name('front.categoria_trabajos_realizados');
 Route::get('/catalogos', 'FrontController@catalogos')->name('front.catalogos');
 Route::post('/dejar_testimonio', 'FrontController@cargar_testimonio')->name('cargar.testimonio');
 Route::post('/buscar_catalogo', 'FrontController@buscar_catalogo')->name('front.buscar.catalogo');
@@ -91,6 +92,7 @@ Route::group(['middleware' => 'role:usuario', 'middleware' => 'role:administrado
 	Route::resource('panel/trabajos', 'Panel\TrabajoController', ['except' => ['show']]);
 	Route::resource('panel/categoria_catalogos', 'Panel\CategoriaCatalogoController', ['except' => ['show']]);
 	Route::resource('panel/catalogos', 'Panel\CatalogoController', ['except' => ['show']]);
+	Route::resource('panel/categoria_trabajos', 'Panel\CategoriaTrabajoController', ['except' => ['show']]);
 
 	Route::get('panel/producto/{cod_articulo}/cuotas', 'Panel\CuotasController@index')->name('panel.cuotas.index');
 	Route::post('panel/producto/{cod_articulo}/cuotas', 'Panel\CuotasController@store')->name('panel.cuotas.store');

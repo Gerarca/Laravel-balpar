@@ -15,6 +15,21 @@
                         </div>
                         <div class="card-body ">
                             <div class="form-group has-label">
+    							<label>
+    								Categoría
+    							</label>
+    							<select id="categoria" class="form-control" name="categoria_id">
+                                    <option value="" selected disabled>Seleccionar categoría</option>
+                                    @foreach($categorias as $categoria)
+                                        @if($trabajo->categoria)
+                                            <option value="{{ $categoria->id }}" {{ $trabajo->categoria !== null && $categoria->id == $trabajo->categoria->id ? 'selected' : '' }}>{{ $categoria->categoria }}</option>
+                                        @else
+                                            <option value="{{ $categoria->id }}">{{ $categoria->categoria }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+    						</div>
+                            <div class="form-group has-label">
                                 <label for="nombre">
                                     Nombre del proyecto *
                                 </label>

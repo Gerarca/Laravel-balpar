@@ -362,16 +362,28 @@
     </div>
   </li> --}}
 
-  <li class="{{ (Request::is('panel/trabajos/*') || Request::is('panel/trabajos'))?'active':''}}">
-    <a data-toggle="collapse" href="#menu_trabajo" class="{{ (Request::is('panel/trabajos/*') || Request::is('panel/trabajos'))?'collapsed':''}}">
+  <li class="{{ (Request::is('panel/trabajos/*') || Request::is('panel/trabajos') || Request::is('panel/categoria_trabajos/*') || Request::is('panel/categoria_trabajos') )?'active':''}}">
+    <a data-toggle="collapse" href="#menu_trabajo" class="{{ (Request::is('panel/trabajos/*') || Request::is('panel/trabajos') || Request::is('panel/categoria_trabajos/*') || Request::is('panel/categoria_trabajos') )?'collapsed':''}}">
       <i class="fa fa-gears"></i>
       <p>
         Trabajos
         <b class="caret"></b>
       </p>
     </a>
-    <div class="{{ (Request::is('panel/trabajos/*') || Request::is('panel/trabajos'))?'collapse show':'collapse'}} " id="menu_trabajo">
+    <div class="{{ (Request::is('panel/trabajos/*') || Request::is('panel/trabajos') || Request::is('panel/categoria_trabajos/*') || Request::is('panel/categoria_trabajos') )?'collapse show':'collapse'}} " id="menu_trabajo">
       <ul class="nav">
+          <li class="{{ (Request::is('panel/categoria_trabajos') || Request::is('panel/categoria_trabajos/*/edit'))?'active':''}} ">
+            <a href="{{ route('categoria_trabajos.index') }}">
+              <span class="sidebar-mini-icon">LC</span>
+              <span class="sidebar-normal"> Lista de Categorías </span>
+            </a>
+          </li>
+          <li class="{{ (Request::is('panel/categoria_trabajos/create'))?'active':''}} ">
+            <a href="{{ route('categoria_trabajos.create') }}">
+              <span class="sidebar-mini-icon">AC</span>
+              <span class="sidebar-normal"> Añadir Categorías </span>
+            </a>
+          </li>
         <li class="{{ (Request::is('panel/trabajos') || Request::is('panel/trabajos/*/edit'))?'active':''}} ">
           <a href="{{ route('trabajos.index') }}">
             <span class="sidebar-mini-icon">LT</span>
