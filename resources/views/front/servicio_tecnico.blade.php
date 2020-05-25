@@ -10,8 +10,8 @@
 
   <section class="p-t-40 p-b-30 bg-light">
   <div class="container-sm text-center" style="max-width:830px;">
-    <p class="mb-3"><strong class="text-color">BALPAR S.A</strong>, empresa Paraguaya con más de 28 años de experiencia en el mercado, brindando asistencia integral especializada por profesionales altamente calificados, con la finalidad de realizar Mantenimiento Preventivo de Piezas, Calibración de Equipos de Pesaje; Balanzas, Básculas y la Reparación de Equipos dañados en todas las marcas que representamos, reafirmando así nuestro compromiso con cada cliente.</p>
-    <p class="text-color font-weight-bold mb-3">Nuestro objetivo principal es poder construir vínculos reales con nuestros clientes, logrando lazos con cada uno a lo largo del tiempo. </p>
+    <p class="mb-3"><strong class="text-color">BALPAR S.A</strong>, empresa Paraguaya con más de 30 años de experiencia en el mercado, brindando asistencia integral especializada por profesionales altamente calificados, con la finalidad de realizar Mantenimiento Preventivo de Piezas, Calibración de Equipos de Pesaje; Balanzas, Básculas y la Reparación de Equipos dañados en todas las marcas que representamos, reafirmando así nuestro compromiso con cada cliente.</p>
+    <p class="text-color font-weight-bold mb-3">Nuestro objetivo principal es poder construir vínculos reales con nuestros clientes, logrando lazos con cada uno a lo largo del tiempo.</p>
   </div>
 </section>
 

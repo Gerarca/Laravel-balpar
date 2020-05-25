@@ -19,6 +19,7 @@ use App\PedidoDetalle;
 use App\Opcion;
 use App\Trabajo;
 use App\CategoriaCatalogo;
+use App\CategoriaTrabajo;
 use Str;
 
 class FrontController extends Controller
@@ -129,7 +130,14 @@ class FrontController extends Controller
 		return view('front.servicio_tecnico');
 	}
     public function trabajos_realizados(){
-		return view('front.trabajos_realizados', ['trabajos' => Trabajo::orderBy('id', 'desc')->get()]);
+        $categorias_trabajos = CategoriaTrabajo::whereHas('trabajos')->orderBy('categoria')->get();
+        $trabajos = Trabajo::orderBy('id', 'desc')->get();
+		return view('front.trabajos_realizados', ['categorias_trabajos' => $categorias_trabajos, 'trabajos' => $trabajos]);
+	}
+    public function categoria_trabajos_realizados(Request $request){
+        $categorias_trabajos = CategoriaTrabajo::whereHas('trabajos')->orderBy('categoria')->get();
+        $trabajos = Trabajo::where('categoria_id', $request->categoria_trabajo)->orderBy('id', 'desc')->get();
+		return view('front.trabajos_realizados', ['categorias_trabajos' => $categorias_trabajos, 'trabajos' => $trabajos]);
 	}
     public function catalogos(){
         $categoria_catalogos = CategoriaCatalogo::orderBy('nombre')->get();

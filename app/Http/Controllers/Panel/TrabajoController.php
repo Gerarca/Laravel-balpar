@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Panel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Trabajo;
+use App\CategoriaTrabajo;
 use Session;
 use Str;
 
@@ -27,7 +28,8 @@ class TrabajoController extends Controller
      */
     public function create(Trabajo $trabajo)
     {
-        return view('panel.trabajos.form', compact('trabajo'));
+        $categorias = CategoriaTrabajo::orderBy('categoria')->get();
+        return view('panel.trabajos.form', compact('trabajo', 'categorias'));
     }
 
     /**
@@ -39,6 +41,7 @@ class TrabajoController extends Controller
     public function store(Request $request)
     {
         request()->validate([
+            'categoria_id' => 'required',
             'nombre' => 'required|max:255',
             'descripcion' => 'required',
             'imagen' => 'required|image'
@@ -47,7 +50,7 @@ class TrabajoController extends Controller
         $imageName = Str::slug($request->nombre) . '-' . time() . '.' . $request->file('imagen')->getClientOriginalExtension();
         $request->file('imagen')->move(base_path() . '/public/uploads/', $imageName);
 
-        Trabajo::create($request->only('nombre', 'descripcion') + ['imagen' => $imageName]);
+        Trabajo::create($request->only('categoria_id', 'nombre', 'descripcion') + ['imagen' => $imageName]);
 
         Session::flash('mensaje', 'El proyecto ' . $request->nombre . ' ha sido creado correctamente');
         return redirect(route('trabajos.index'));
@@ -72,7 +75,8 @@ class TrabajoController extends Controller
      */
     public function edit(Trabajo $trabajo)
     {
-        return view('panel.trabajos.form', compact('trabajo'));
+        $categorias = CategoriaTrabajo::orderBy('categoria')->get();
+        return view('panel.trabajos.form', compact('trabajo', 'categorias'));
     }
 
     /**
@@ -85,10 +89,11 @@ class TrabajoController extends Controller
     public function update(Request $request, Trabajo $trabajo)
     {
         request()->validate([
+            'categoria_id' => 'required',
             'nombre' => 'required|max:255',
             'descripcion' => 'required'
         ]);
-        $trabajo->fill($request->only('nombre', 'descripcion'))->save();
+        $trabajo->fill($request->only('categoria_id', 'nombre', 'descripcion'))->save();
 
         if ($request->hasFile('imagen')) {
             $imageName = Str::slug($request->nombre) . '-' . time() . '.' . $request->file('imagen')->getClientOriginalExtension();

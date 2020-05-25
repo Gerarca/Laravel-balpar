@@ -14,7 +14,7 @@
   <section class="p-t-80 p-b-80">
     <div class="container-sm text-center" style="max-width:830px;">
       <h2 class="m-text17 text-color m-b-10 text-uppercase">Presentes en todo el territorio nacional brindando calidad y soluciones integrales para tu empresa</h2>
-      <p class="text-secondary mb-3">Empresa Paraguaya con más de 25 años de experiencia en el mercado, líder en el rubro de Pesaje Comercial, Pesaje Industrial, Góndolas para Supermercados Mayoristas y Minoristas, Cuchillos Profesionales,  Higiene Industrial y Sistemas inteligentes de Control de Tráfico.</p>
+      <p class="text-secondary mb-3">Empresa Paraguaya con más de 30 años de experiencia en el mercado, líder en el rubro de Pesaje Comercial, Pesaje Industrial, Góndolas para Supermercados Mayoristas y Minoristas, Cuchillos Profesionales, Higiene Industrial y Sistemas inteligentes de Control de Tráfico.</p>
       <p class="text-secondary mb-3">Asumimos el compromiso de contribuir con el crecimiento económico del país proveyendo, asesorando y creciendo con las pequeñas, medianas y grandes empresas, otorgando nuestros productos y servicios, comprometidos con nuestros clientes en ofrecer los mayores estándares de calidad que garantizan el éxito para su negocio, lo que se traduce en fuentes de trabajo.</p>
       <a href="{{route('front.nosotros')}}" class="btn btn-primary s-text1 trans-0-4 w-auto">
         Más sobre Nosotros
@@ -30,7 +30,9 @@
           <h3 class="m-text5 t-center text-color mb-4">
             Destacados Comercial
           </h3>
-          <p class="text-secondary mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <p class="text-secondary mb-3">Ideales para equipar tu Supermercado, Comercio, Auto Servicio o Despensa.</p>
+          <p class="text-secondary mb-3">Nuestras Góndolas ayudan a mejorar la rentabilidad de tu negocio, mejorando la visibilidad de tus productos de forma estratégica.</p>
+          <p class="text-secondary mb-3">Además de contar con Balanzas Comerciales, Check Out, Carros y Canastos entre otros productos con beneficios integrales  de asesoramiento constante para la mejora continua de tu negocio.</p>
           <a href="{{ route('front.catalogo.destacado', ['destacado' => 1, 'nombre' => 'destacados-comercial']) }}" class="btn btn-primary s-text1 trans-0-4 w-auto mb-5">
             Ver más productos
           </a>
@@ -101,7 +103,8 @@
             <h3 class="m-text5 t-center text-color mb-4">
               Destacados Industrial
             </h3>
-            <p class="text-secondary mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p class="text-secondary mb-3">Brindamos Apoyo a las Empresas Nacionales, ofreciendo nuestras Basculas para Pesa Camiones, Estaciones de Pesaje y Basculas Portátiles para el control de Peso de camiones en ruta.</p>
+            <p class="text-secondary mb-3">Además de contribuir con el progreso agrícola con embolsadoras de alta precisión.  Higiene Industrial y Cuchillos Profesionales ideales para Frigoríficos y Carnicerías.</p>
             <a href="{{ route('front.catalogo.destacado', ['destacado' => 2, 'nombre' => 'destacados-industrial']) }}" class="btn btn-primary s-text1 trans-0-4 w-auto mb-5">
               Ver más productos
             </a>
