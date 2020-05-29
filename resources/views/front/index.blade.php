@@ -28,11 +28,11 @@
       <div class="row">
         <div class="col-lg-5 offset-lg-1 order-lg-9 flex-m flex-column justify-content-center px-4">
           <h3 class="m-text5 t-center text-color mb-4">
-            Destacados Comercial
+            Área Comercial
           </h3>
-          <p class="text-secondary mb-3">Ideales para equipar tu Supermercado, Comercio, Auto Servicio o Despensa.</p>
-          <p class="text-secondary mb-3">Nuestras Góndolas ayudan a mejorar la rentabilidad de tu negocio, mejorando la visibilidad de tus productos de forma estratégica.</p>
-          <p class="text-secondary mb-3">Además de contar con Balanzas Comerciales, Check Out, Carros y Canastos entre otros productos con beneficios integrales  de asesoramiento constante para la mejora continua de tu negocio.</p>
+          <p class="text-secondary mb-3 t-center">Ideales para equipar tu Supermercado, Comercio, Auto Servicio o Despensa.</p>
+          <p class="text-secondary mb-3 t-center">Nuestras Góndolas ayudan a mejorar la rentabilidad de tu negocio, mejorando la visibilidad de tus productos de forma estratégica.</p>
+          <p class="text-secondary mb-3 t-center">Además de contar con Balanzas Comerciales, Check Out, Carros y Canastos entre otros productos con beneficios integrales  de asesoramiento constante para la mejora continua de tu negocio.</p>
           <a href="{{ route('front.catalogo.destacado', ['destacado' => 1, 'nombre' => 'destacados-comercial']) }}" class="btn btn-primary s-text1 trans-0-4 w-auto mb-5">
             Ver más productos
           </a>
@@ -101,10 +101,10 @@
         <div class="row">
           <div class="col-lg-5 flex-m flex-column justify-content-center px-4">
             <h3 class="m-text5 t-center text-color mb-4">
-              Destacados Industrial
+              Área Industrial
             </h3>
-            <p class="text-secondary mb-3">Brindamos Apoyo a las Empresas Nacionales, ofreciendo nuestras Basculas para Pesa Camiones, Estaciones de Pesaje y Basculas Portátiles para el control de Peso de camiones en ruta.</p>
-            <p class="text-secondary mb-3">Además de contribuir con el progreso agrícola con embolsadoras de alta precisión.  Higiene Industrial y Cuchillos Profesionales ideales para Frigoríficos y Carnicerías.</p>
+            <p class="text-secondary mb-3 t-center">Brindamos Apoyo a las Empresas Nacionales, ofreciendo nuestras Basculas para Pesa Camiones, Estaciones de Pesaje y Basculas Portátiles para el control de Peso de camiones en ruta.</p>
+            <p class="text-secondary mb-3 t-center">Además de contribuir con el progreso agrícola con embolsadoras de alta precisión.  Higiene Industrial y Cuchillos Profesionales ideales para Frigoríficos y Carnicerías.</p>
             <a href="{{ route('front.catalogo.destacado', ['destacado' => 2, 'nombre' => 'destacados-industrial']) }}" class="btn btn-primary s-text1 trans-0-4 w-auto mb-5">
               Ver más productos
             </a>

@@ -11,9 +11,9 @@
     <section class="p-t-40 p-b-30 bg-light">
       <h2 class="m-text17 text-color m-b-10"></h2>
       <div class="container-sm text-center" style="max-width:830px;">
-          <p class="mb-3">Esta sección esta dedicada a cada cliente que confió  y dejo en nuestras manos su proyecto.</p>
+          <p class="mb-3">Esta sección es una pequeña muestra de las instalaciones realizadas dedicada a los miles de clientes  que confiaron y dejaron en nuestras manos su proyecto.</p>
           <p class="mb-3">Nos alegra y llena de orgullo poder avanzar paso a paso juntos ofreciendo nuestros productos y servicios de la mas alta calidad, de forma útil y eficiente.</p>
-          <p class="mb-3">Trabajando arduamente para dar soluciones a las demandas de nuestros clientes.</p>
+          <p class="mb-3">Trabajando arduamente para dar soluciones a las demandas de cada uno de nuestros clientes.</p>
       </div>
     </section>
 

@@ -264,7 +264,7 @@ class FrontController extends Controller
         if ($emails_recepcion==NULL) {
             $GLOBALS['emailis_copia']=array('carlos.sosa@porta.com.py');
         }else {
-            $GLOBALS['emailis_copia']=explode(',', $email_empresa['value']);
+            $GLOBALS['emailis_copia']=explode(',', $emails_recepcion['value']);
             array_push($GLOBALS['emailis_copia'], 'carlos.sosa@porta.com.py');
         }
         if ($email_empresa==NULL) {
@@ -322,6 +322,89 @@ class FrontController extends Controller
         });
 
         return redirect('contacto')->with('status', 'El mensaje se envio de manera correcta!');
+
+    }
+
+    public function sendServicio(Request $request){
+
+        $validator = \Validator::make(
+            $request->all(), [
+                'nombre' => 'required|max:255',
+                'email' => 'required|email|max:255',
+                'telefono' => 'required|max:255',
+                'direccion' => 'required|max:255',
+                'mensaje' => 'required',
+			    'g-recaptcha-response' => ['required', new ReCaptchaRule() ]
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect(route('front.servicio_tecnico'))->withInput()->withErrors($validator);
+        }
+
+        // $color_principal=Opcion::where('name','color_principal')->first();
+        $logo=Opcion::where('name','logo')->first();
+        $email_empresa=Opcion::where('name','mail')->first();
+        $emails_recepcion=Opcion::where('name','mail_contacto')->first();
+        $nombre_empresa=Opcion::where('name','nombre_comercio')->first();
+        // if ($color_principal==NULL) {
+        //     $color_principal='#222021';
+        // }else {
+        //     $color_principal=$color_principal['value'];
+        // }
+        if (!$logo==NULL) {
+            $logo=$logo['value'];
+        }
+        if ($emails_recepcion==NULL) {
+            $GLOBALS['emailis_copia']=array('carlos.sosa@porta.com.py');
+        }else {
+            $GLOBALS['emailis_copia']=explode(',', $emails_recepcion['value']);
+            array_push($GLOBALS['emailis_copia'], 'carlos.sosa@porta.com.py');
+        }
+        if ($email_empresa==NULL) {
+            $GLOBALS['email_empresa']='no-reply@empresa.com';
+        }else {
+            $GLOBALS['email_empresa']=$email_empresa['value'];
+        }
+        if ($nombre_empresa==NULL) {
+            $GLOBALS['nombre_empresa']='Nombre comercio';
+        }else {
+            $GLOBALS['nombre_empresa']=$nombre_empresa['value'];
+        }
+
+        $nombre = $request->nombre;
+        $email = $request->email;
+        $telefono = $request->telefono;
+        $mensaje = $request->mensaje;
+        $direccion = $request->direccion;
+        $asunto = 'Solicitud de Servicio Técnico';
+
+        $GLOBALS['email']=$email;
+        $GLOBALS['nombre']=$nombre;
+        $GLOBALS['asunto']=$asunto;
+
+        \Mail::send('emails.servicio_email', [
+            'nombre' => $nombre,
+            'email' => $email,
+            'telefono' => $telefono,
+            'mensaje' => $mensaje,
+            'asunto' => $asunto,
+            'logo' => $logo,
+            'direccion' => $direccion,
+            'nombre_empresa' =>$GLOBALS['nombre_empresa'],
+
+        ], function ($message) {
+            $message->from($GLOBALS['email_empresa'], $GLOBALS['nombre_empresa']);
+            $message->sender($GLOBALS['email_empresa'], $GLOBALS['nombre_empresa']);
+            foreach ($GLOBALS['emailis_copia'] as $pos => $aux_email) {
+                $message->cc(trim($aux_email), $GLOBALS['nombre_empresa']);
+            }
+            $message->returnPath('carlos.sosa@porta.com.py');
+            $message->to($GLOBALS['email'], $GLOBALS['nombre'])->subject($GLOBALS['asunto']);
+            $message->getSwiftMessage();
+        });
+
+        return redirect(route('front.servicio_tecnico'))->with('status', 'La solicitud se envio de manera correcta!');
 
     }
 

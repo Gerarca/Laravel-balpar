@@ -23,6 +23,32 @@
             <h4 class="p-b-36">
               Servicio de Asistencia Técnica
             </h4>
+
+            <h5 class="m-text12">
+              Ponemos a su disposición:
+            </h5>
+            <span class="s-text8">
+              <ul class="disc-list">
+                <li>Camión Metrológico con un Peso total de 22 Toneladas.</li>
+                <li>Pesas patrones certificadas desde 1 gramo hasta 1000 Kg.</li>
+                <li>Stock permanente de recambios y componentes originales.</li>
+                <li>Mano de obra calificada con mas de 25 años de experiencia.</li>
+              </ul>
+            </span>
+            <br>
+            <h5 class="m-text12">
+                Realizamos los siguientes Servicios:
+            </h5>
+            <span class="s-text8">
+              <ul class="disc-list">
+                <li>Inspección, Informes y asesoramiento Técnico.</li>
+                <li>Mantenimiento preventivo y reparaciones.</li>
+                <li>Ajustes y verificación de Peso:</li>
+                <li>Excentricidad.</li>
+                <li>Exactitud y Sensibilidad.</li>
+                <li>Informes y Recomendaciones.</li>
+              </ul>
+            </span>
           </div>
           <div class="container tw-box w-100 m-b-40">
             <div class="row">
@@ -54,27 +80,29 @@
         </div>
 
         <div class="col-md-6 p-b-30 box-info">
-          <form class="leave-comment">
+          <form id="FormSolicitud" class="leave-comment" action="{{ route('front.servicio.send') }}" method="POST">
+            @csrf
             <h4 class="p-b-36">
               Solicitud de Servicio Técnico
             </h4>
             <div class="bo4 of-hidden size15 m-b-20">
-              <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="Nombre">
+              <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="nombre" value="{{ old('nombre') }}" required placeholder="Nombre">
             </div>
             <div class="bo4 of-hidden size15 m-b-20">
-              <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="Dirección">
-            </div>
-
-            <div class="bo4 of-hidden size15 m-b-20">
-              <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="phone-number" placeholder="Teléfono">
+              <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="direccion" value="{{ old('direccion') }}" required placeholder="Dirección">
             </div>
 
             <div class="bo4 of-hidden size15 m-b-20">
-              <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="email" placeholder="Email">
+              <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="telefono" value="{{ old('telefono') }}" required placeholder="Teléfono">
             </div>
 
-            <textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" name="message" placeholder="Mensaje"></textarea>
+            <div class="bo4 of-hidden size15 m-b-20">
+              <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="email" value="{{ old('email') }}" required placeholder="Email">
+            </div>
 
+            <textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" name="mensaje" required placeholder="Mensaje">{{ old('mensaje') }}</textarea>
+
+            <div class="g-recaptcha" data-sitekey="6LcjBfMUAAAAALX80qvyB0pUoE0LtECnyKbsUV9O"></div>
             <div class="w-size25">
               <button class="btn btn-primary flex-c-m size2">
                 Enviar Solicitud
@@ -86,7 +114,7 @@
     </div>
   </section>
 
-  <section class="py-5">
+  {{-- <section class="py-5">
     <div class="container">
       <h3 class="m-text5 t-center line-divider">
         <span>Preguntas Frecuentes</span>
@@ -118,9 +146,22 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> --}}
 
 @endsection
 
 @section('especifico')
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        $("#FormSolicitud").submit(function(){
+            Swal.fire({
+                onBeforeOpen: () => {
+                  Swal.showLoading()
+                },
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                text: 'Enviando solicitud, espere por favor',
+            })
+        });
+    </script>
 @endsection

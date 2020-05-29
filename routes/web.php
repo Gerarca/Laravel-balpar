@@ -32,13 +32,14 @@ Route::get('/catalogos', 'FrontController@catalogos')->name('front.catalogos');
 Route::post('/dejar_testimonio', 'FrontController@cargar_testimonio')->name('cargar.testimonio');
 Route::post('/buscar_catalogo', 'FrontController@buscar_catalogo')->name('front.buscar.catalogo');
 Route::post('/carrito', 'FrontController@carritoFinalizar')->name('front.carritoFinalizar');
-// Route::view('/email', 'emails.contacto_email');
+// Route::view('/email', 'emails.servicio_email');
 
 Route::post('/ajax/addProducto', 'Ajax\CarritoController@addProducto')->name('ajax.addProducto');
 Route::get('/ajax/getProductos', 'Ajax\CarritoController@getProductos')->name('ajax.getProductos');
 Route::post('/ajax/delProducto', 'Ajax\CarritoController@delProducto')->name('ajax.delProducto');
 
 Route::post('send_contacto', 'FrontController@sendContacto')->name('front.contacto.send');
+Route::post('send_servicio', 'FrontController@sendServicio')->name('front.servicio.send');
 Route::post('add_newsletter', 'FrontController@addNewsletter')->name('front.newsletter.add');
 Route::post('/ajax/getDescuento', 'Ajax\CarritoController@getDescuento')->name('ajax.getDescuento');
 
