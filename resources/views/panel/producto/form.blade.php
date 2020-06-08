@@ -190,6 +190,27 @@
                             </div>
                         </div>
 						<div class="form-group has-label">
+							<label for="medidas">
+								Medidas
+							</label>
+							<div class="form-group">
+								<div class="fileinput fileinput-new text-center" data-provides="fileinput">
+									<div class="fileinput-new thumbnail">
+										<img src="{{$producto->medidas ? url('storage/productos/'.$producto->medidas):url('assets_template/img/image_placeholder.jpg')}}" alt="{{ old('titulo', $producto->titulo) }}">
+									</div>
+									<div class="fileinput-preview fileinput-exists thumbnail"></div>
+									<div>
+										<span class="btn btn-rose btn-round btn-file">
+											<span class="fileinput-new">Seleccionar Imagen</span>
+											<span class="fileinput-exists">Cambiar</span>
+											<input type="file" name="medidas" id="medidas" accept="image/*"/>
+										</span>
+										<a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Quitar</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group has-label">
 							<label for="etiquetas">
 								Etiquetas
 							</label>

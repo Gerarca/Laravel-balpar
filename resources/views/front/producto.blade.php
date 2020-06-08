@@ -120,6 +120,15 @@
           </div>
           </div>
         </div>
+
+        <br>
+        @if($producto->medidas <> NULL)
+            <div class="p-b-20">
+                <h6 style="margin-bottom: 10px">Medidas</h6>
+                <img src="{{ url('storage/productos/'. $producto->medidas) }}" style="max-width: 100%; height: auto;">
+            </div>
+        @endif
+
       </div>
     </div>
   </div>

@@ -16,7 +16,7 @@ class InjectCategory
 
 	public function compose(View $view)
 	{
-		$categories = Categoria::orderBy('categoria')->get();
+		$categories = Categoria::orderBy('orden')->get();
 		$view->with('categories', $categories);
 	}
 }

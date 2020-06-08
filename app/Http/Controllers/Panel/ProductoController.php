@@ -63,7 +63,8 @@ class ProductoController extends Controller
             'imagen' => 'required|image',
             'imagen2' => 'image',
             'imagen3' => 'image',
-            'imagen4' => 'image'
+            'imagen4' => 'image',
+            'medidas' => 'image'
         ]);
 
         $request['visible'] = $request['visible'] ? '1' : '0';
@@ -114,12 +115,19 @@ class ProductoController extends Controller
             $imageName4 = '';
         }
 
+        if($request->hasFile('medidas')){
+            $medidasName = 'm-'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('medidas')->getClientOriginalExtension();
+            $request->file('medidas')->move(base_path() . '/public/storage/productos/', $medidasName);
+        } else {
+            $medidasName = '';
+        }
+
         $producto = Producto::create(
             $request->only(
                 'categoria_id', 'marca_id', 'uso_id', 'rubro_id', 'nombre', 'subtitulo',
                 'cod_articulo', 'descripcion', 'informacion', 'visible', 'destacado_comercial', 'destacado_industrial'
             ) + ['imagen' => $imageName] + ['imagen2' => $imageName2] + ['imagen3' => $imageName3]
-              + ['imagen4' => $imageName4] + ['stock' => 10]);
+              + ['imagen4' => $imageName4] + ['medidas' => $medidasName] + ['stock' => 10]);
 
         $producto->etiquetas()->attach(request('etiquetas'));
 
@@ -155,7 +163,8 @@ class ProductoController extends Controller
             'imagen' => 'image',
             'imagen2' => 'image',
             'imagen3' => 'image',
-            'imagen4' => 'image'
+            'imagen4' => 'image',
+            'medidas' => 'image'
         ]);
 
         $request['visible'] = $request['visible'] ? '1' : '0';
@@ -204,6 +213,12 @@ class ProductoController extends Controller
                 $constraint->aspectRatio();
             })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName4);
             $producto->fill(['imagen4' => $imageName4])->save();
+        }
+
+        if($request->hasFile('medidas')){
+            $medidasName = 'm-'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('medidas')->getClientOriginalExtension();
+            $request->file('medidas')->move(base_path() . '/public/storage/productos/', $medidasName);
+            $producto->fill(['medidas' => $medidasName])->save();
         }
 
         $producto->fill(
