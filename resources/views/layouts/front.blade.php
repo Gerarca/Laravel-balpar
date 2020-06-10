@@ -193,7 +193,9 @@
           <h4 class="s-text12 p-b-30">
             Instagram
           </h4>
-          <!-- LightWidget WIDGET --><script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script><iframe src="//lightwidget.com/widgets/6c1b742b1cc252a9b9af0411d70879cc.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
+          <!-- SnapWidget -->
+          <script src="https://snapwidget.com/js/snapwidget.js"></script>
+          <iframe src="https://snapwidget.com/embed/837290" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden;  width:100%; "></iframe>
         </div>
         <div class="col-md-4 py-2">
           <h4 class="s-text12 p-b-30">
