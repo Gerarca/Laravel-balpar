@@ -94,8 +94,8 @@ Route::group(['middleware' => 'role:usuario', 'middleware' => 'role:administrado
 	Route::resource('panel/categoria_catalogos', 'Panel\CategoriaCatalogoController', ['except' => ['show']]);
 	Route::resource('panel/catalogos', 'Panel\CatalogoController', ['except' => ['show']]);
 	Route::resource('panel/categoria_trabajos', 'Panel\CategoriaTrabajoController', ['except' => ['show']]);
-	Route::get('panel/data/nosotros', 'Panel\dataController@editNosotros')->name('nosotros.edit');
-	Route::put('panel/data/nosotros/update', 'Panel\dataController@updateNosotros')->name('nosotros.update');
+	Route::get('panel/data/nosotros', 'Panel\DataController@editNosotros')->name('nosotros.edit');
+	Route::put('panel/data/nosotros/update', 'Panel\DataController@updateNosotros')->name('nosotros.update');
 
 	Route::get('panel/producto/{cod_articulo}/cuotas', 'Panel\CuotasController@index')->name('panel.cuotas.index');
 	Route::post('panel/producto/{cod_articulo}/cuotas', 'Panel\CuotasController@store')->name('panel.cuotas.store');
