@@ -13,6 +13,14 @@
     <div class="container">
       <div class="about-text row">
 
+        @if($data->video)
+            <div class="row">
+                <div class="col-md-12">
+                    <iframe width="770" height="315" src="https://www.youtube.com/embed/{{ $data->video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        @endif
+
         <div class="col-md-12 p-b-30">
           <h3 class="m-text26 p-b-16">
             La Empresa

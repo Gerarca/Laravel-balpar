@@ -20,6 +20,7 @@ use App\Opcion;
 use App\Trabajo;
 use App\CategoriaCatalogo;
 use App\CategoriaTrabajo;
+use App\Data;
 use Str;
 
 class FrontController extends Controller
@@ -124,7 +125,8 @@ class FrontController extends Controller
 		return view('front.presupuesto', compact('carrito_detalles', 'envio'));
 	}
     public function nosotros(){
-		return view('front.nosotros');
+        $data = Data::where('key', 'nosotros')->get()->first()->value;
+		return view('front.nosotros', compact('data'));
 	}
     public function servicio_tecnico(){
 		return view('front.servicio_tecnico');

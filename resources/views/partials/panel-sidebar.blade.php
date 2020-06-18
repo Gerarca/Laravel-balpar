@@ -438,15 +438,15 @@
     </div>
   </li>
 
-  <li class="{{ (Request::is('panel/datos_dinamicos') || Request::is('panel/datos_dinamicos/*') || Request::is('panel/testimonios') || Request::is('panel/testimonios/*') )?'active':''}}">
-        <a data-toggle="collapse" href="#menu_extra" class="{{ (Request::is('panel/datos_dinamicos') || Request::is('panel/datos_dinamicos/*') || Request::is('panel/testimonios') || Request::is('panel/testimonios/*') )?'collapsed':''}}">
+  <li class="{{ (Request::is('panel/datos_dinamicos') || Request::is('panel/datos_dinamicos/*') || Request::is('panel/testimonios') || Request::is('panel/testimonios/*') || Request::is('panel/data/nosotros') || Request::is('panel/data/nosotros/update') )?'active':''}}">
+        <a data-toggle="collapse" href="#menu_extra" class="{{ (Request::is('panel/datos_dinamicos') || Request::is('panel/datos_dinamicos/*') || Request::is('panel/testimonios') || Request::is('panel/testimonios/*') || Request::is('panel/data/nosotros') || Request::is('panel/data/nosotros/update') )?'collapsed':''}}">
             <i class="fa fa-commenting-o"></i>
             <p>
                 Extra
                 <b class="caret"></b>
             </p>
         </a>
-        <div class="{{ (Request::is('panel/datos_dinamicos') || Request::is('panel/datos_dinamicos/*') || Request::is('panel/testimonios') || Request::is('panel/testimonios/*') )?'collapse show':'collapse'}} " id="menu_extra">
+        <div class="{{ (Request::is('panel/datos_dinamicos') || Request::is('panel/datos_dinamicos/*') || Request::is('panel/testimonios') || Request::is('panel/testimonios/*') || Request::is('panel/data/nosotros') || Request::is('panel/data/nosotros/update') )?'collapse show':'collapse'}} " id="menu_extra">
             <ul class="nav">
                 <li class="{{ (Request::is('panel/datos_dinamicos') || Request::is('panel/datos_dinamicos/*/edit'))?'active':''}} ">
                     <a href="{{ route('datos_dinamicos.index') }}">
@@ -458,6 +458,12 @@
                     <a href="{{ route('testimonios.index') }}">
                         <span class="sidebar-mini-icon">LT</span>
                         <span class="sidebar-normal"> Lista de Testimonios </span>
+                    </a>
+                </li>
+                <li class="{{ (Request::is('panel/data/nosotros') || Request::is('panel/data/nosotros/update'))?'active':''}} ">
+                    <a href="{{ route('nosotros.edit') }}">
+                        <span class="sidebar-mini-icon">VN</span>
+                        <span class="sidebar-normal"> Video en Nosotros </span>
                     </a>
                 </li>
             </ul>
