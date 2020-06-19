@@ -18,7 +18,7 @@ class DataController extends Controller
     public function updateNosotros(Request $request)
     {
         $request->validate([
-            'video' => 'nullable|alphaNum|between:11,11'
+            'video' => 'nullable|alpha_dash|between:11,11'
         ]);
 
         Data::where('key', 'nosotros')->update([
