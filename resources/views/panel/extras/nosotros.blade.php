@@ -23,14 +23,19 @@
     											<p>No posee ningun video aún, agrégalo con el formulario de abajo.</p>
     										</div>
     									@endif
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label for="video">ID del video</label>
                                             <input type="text" name="video" id="video" class="form-control" value="{{ old('video', $nosotros->video) }}">
+                                        </div> --}}
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">https://www.youtube.com/watch?v=</span>
+                                            </div>
+                                            <input type="text" name="video" value="{{ old('video', $nosotros->video) }}" class="form-control" pattern="[a-zA-Z0-9-_]{11}" placeholder="d0TZ6OUmlcw" title="Hasta 11 caracteres">
                                         </div>
                                     </div>
                                 </div>
                             </fieldset>
-                            <div class="category form-category">* Campos requeridos</div>
                         </div>
                         <div class="card-footer text-right">
 
