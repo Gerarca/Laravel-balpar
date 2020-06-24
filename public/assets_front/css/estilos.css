@@ -821,6 +821,26 @@ ul.theme_menu.submenu {
   column-gap: 0;
   column-width: auto;
   max-height: 50vh;
+  background: #fff;
+}
+li.has-submenu ul {
+  background-color: #fff;
+}
+.theme_menu.submenu ul {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: -webkit-transform .4s ease, opacity .4s ease, visibility .4s ease;
+  transition: transform .4s ease, opacity .4s ease, visibility .4s ease;
+  -webkit-transform: translateY(20px);
+  -ms-transform: translateY(20px);
+  transform: translateY(20px);
+}
+.theme_menu.submenu li:hover > ul {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  transform: translateY(0px);
 }
 @media (min-width:992px) {
   .main_menu>li>.sub_menu,.has-submenu > .submenu {

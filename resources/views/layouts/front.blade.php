@@ -21,7 +21,7 @@
   {{-- css --}}
   <link rel="stylesheet" type="text/css" href="{{url('assets_front/css/util.min.css')}}">
   <link rel="stylesheet" type="text/css" href="{{url('assets_front/css/main.min.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{url('assets_front/css/estilos.css?v=1.5')}}">
+  <link rel="stylesheet" type="text/css" href="{{url('assets_front/css/estilos.css?v=1.6')}}">
 
 </head>
 <body class="animsition">
