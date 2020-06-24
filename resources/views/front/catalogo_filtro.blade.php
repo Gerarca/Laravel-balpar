@@ -74,7 +74,7 @@
         <div class="col-md-12 col-lg-9 p-b-50">
           <button role="button" class="btn btn-outline-primary btn_filter d-lg-none">Categorías</button>
           <div class="row">
-            @foreach($productos as $producto)
+            @forelse($productos as $producto)
                 @if($producto->visible <> 0)
                     <div class="col-6 col-sm-6 col-md-4 col-lg-4 p-b-50">
                         <div class="block2">
@@ -89,7 +89,11 @@
                         </div>
                     </div>
                 @endif
-            @endforeach
+            @empty
+                <div class="col-md-12">
+                    <h3 class="text-center">Sin resultados</h3>
+                </div>
+            @endforelse
           </div>
         </div>
       </div>

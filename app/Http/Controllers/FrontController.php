@@ -77,7 +77,7 @@ class FrontController extends Controller
         $marcas = Marca::orderBy('nombre')->get();
         $etiquetas = Etiqueta::orderBy('nombre')->get();
         $asunto = ['asunto' => 'Búsqueda', 'titulo' => request('search_product')];
-        return view('front.catalogo_filtro', compact('productos', 'etiqueta', 'etiquetas', 'marcas', 'asunto'));
+        return view('front.catalogo_filtro', compact('productos', 'etiquetas', 'marcas', 'asunto'));
     }
     public function catalogo_destacado(Request $request){
 
