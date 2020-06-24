@@ -42,6 +42,29 @@
                                 <textarea class="form-control" id="descripcion" name="descripcion" rows="8" cols="80">{{ old('descripcion', $trabajo->descripcion) }}</textarea>
                             </div>
                             <div class="form-group has-label">
+                                <label for="tipo">
+                                    Tipo *
+                                </label>
+                                <select class="form-control" name="tipo" id="tipo">
+                                    <option {{ $trabajo->tipo == '1' ? 'selected' : '' }} value="1">Imagen</option>
+                                    <option {{ $trabajo->tipo == '2' ? 'selected' : '' }} value="2">Video</option>
+                                </select>
+                            </div>
+                            <div id="divVideo" class="form-group has-label" style="display: @if($trabajo->tipo == '2') block @else none @endif">
+                                <label class="col-md-3 control-label" for="video">Vídeo</label>
+                                @if($trabajo->video <> '')
+                                    <div class="col-md-6">
+                                        <iframe src="https://www.youtube.com/embed/{{ $trabajo->video }}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" width="100%" height="350px" frameborder="0"></iframe>
+                                    </div>
+                                @endif
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">https://www.youtube.com/watch?v=</span>
+                                    </div>
+                                    <input type="text" name="video" value="{{ old('video', $trabajo->video) }}" class="form-control" pattern="[a-zA-Z0-9-_]{11}" placeholder="d0TZ6OUmlcw" title="Hasta 11 caracteres">
+                                </div>
+                            </div>
+                            <div id="divImagen" class="form-group has-label" style="display: @if($trabajo->tipo <> '2') block @else none @endif">
                                 <label for="imagen">
                                     Imagen *
                                 </label>
@@ -55,7 +78,7 @@
                                             <span class="btn btn-rose btn-round btn-file">
                                                 <span class="fileinput-new">Seleccionar Imagen</span>
                                                 <span class="fileinput-exists">Cambiar</span>
-                                                <input type="file" name="imagen" id="imagen" {{ $trabajo->id ? '' : 'required="true"' }} accept="image/*"/>
+                                                <input type="file" name="imagen" id="imagen" accept="image/*"/>
                                             </span>
                                             <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Quitar</a>
                                         </div>
@@ -115,26 +138,37 @@ $(document).ready(function() {
 
 
     @if($errors->any())
-    @foreach ($errors->all() as $error)
-    $.notify({
-        // options
-        message: '{{$error}}'
-    },{
-        // settings
-        type: 'danger'
-    });
-    @endforeach
+        @foreach ($errors->all() as $error)
+            $.notify({
+                // options
+                message: '{{$error}}'
+            },{
+                // settings
+                type: 'danger'
+            });
+        @endforeach
     @endif
     @if(session()->has('mensaje'))
-    $.notify({
-        // options
-        message: '{{ session()->get('mensaje') }}'
-    },{
-        // settings
-        type: 'success'
+        $.notify({
+            // options
+            message: '{{ session()->get('mensaje') }}'
+        },{
+            // settings
+            type: 'success'
+        });
+    @endif
+
+    $('#tipo').change(function(){
+        var valor = $(this).val();
+        if(valor == 1){
+            $('#divVideo').hide();
+            $('#divImagen').show();
+        } else {
+            $('#divVideo').show();
+            $('#divImagen').hide();
+        }
     });
 
-    @endif
 });
 </script>
 

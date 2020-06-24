@@ -38,7 +38,13 @@
                         <tr>
                           <td class="text-center">{{ $loop->iteration }}</td>
                           <td>{{ $trabajo->categoria->categoria }}</td>
-                          <td class="text-center"><img src="{{ url('uploads/'.$trabajo->imagen) }}" alt="{{ $trabajo->nombre }}" width="100"></td>
+                          <td class="text-center">
+                              @if($trabajo->tipo == 1)
+                                  <img src="{{ url('uploads/'.$trabajo->imagen) }}" alt="{{ $trabajo->nombre }}" width="100">
+                              @else
+                                  <iframe src="https://www.youtube.com/embed/{{ $trabajo->video }}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" width="100%" height="100%" frameborder="0"></iframe>
+                              @endif
+                          </td>
                           <td>{{ $trabajo->nombre }}</td>
                           <td>{{ $trabajo->created_at }}</td>
                           <td class="text-right">
