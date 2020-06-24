@@ -132,12 +132,12 @@ class FrontController extends Controller
 		return view('front.servicio_tecnico');
 	}
     public function trabajos_realizados(){
-        $categorias_trabajos = CategoriaTrabajo::whereHas('trabajos')->orderBy('categoria')->get();
+        $categorias_trabajos = CategoriaTrabajo::whereHas('trabajos')->orderBy('orden')->get();
         $trabajos = Trabajo::orderBy('id', 'desc')->get();
 		return view('front.trabajos_realizados', ['categorias_trabajos' => $categorias_trabajos, 'trabajos' => $trabajos]);
 	}
     public function categoria_trabajos_realizados(Request $request){
-        $categorias_trabajos = CategoriaTrabajo::whereHas('trabajos')->orderBy('categoria')->get();
+        $categorias_trabajos = CategoriaTrabajo::whereHas('trabajos')->orderBy('orden')->get();
         $trabajos = Trabajo::where('categoria_id', $request->categoria_trabajo)->orderBy('id', 'desc')->get();
 		return view('front.trabajos_realizados', ['categorias_trabajos' => $categorias_trabajos, 'trabajos' => $trabajos]);
 	}

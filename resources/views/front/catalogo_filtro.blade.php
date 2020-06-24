@@ -1,7 +1,7 @@
 @extends('layouts.front')
 @section('title','Catálogo |')
 @section('content')
-  <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url({{ url('assets_front/images/nosotros.jpg') }});">
+  <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url({{ url('assets_front/images/balpar_bannner.jpeg') }});">
     <h2 class="l-text2 t-center">
       Catálogo
     </h2>
