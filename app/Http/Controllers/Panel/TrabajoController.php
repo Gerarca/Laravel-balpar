@@ -44,13 +44,25 @@ class TrabajoController extends Controller
             'categoria_id' => 'required',
             'nombre' => 'required|max:255',
             'descripcion' => 'required',
-            'imagen' => 'required|image'
+            'tipo' => 'required',
+            'imagen' => 'image',
+            'video' => 'max:11'
         ]);
 
-        $imageName = Str::slug($request->nombre) . '-' . time() . '.' . $request->file('imagen')->getClientOriginalExtension();
-        $request->file('imagen')->move(base_path() . '/public/uploads/', $imageName);
+        if($request->tipo == '1'){
+            $imageName = Str::slug($request->nombre) . '-' . time() . '.' . $request->file('imagen')->getClientOriginalExtension();
+            $request->file('imagen')->move(base_path() . '/public/uploads/', $imageName);
+        } else {
+            $imageName = NULL;
+        }
 
-        Trabajo::create($request->only('categoria_id', 'nombre', 'descripcion') + ['imagen' => $imageName]);
+        if($request->tipo == '2'){
+            $videoName = $request->video;
+        } else {
+            $videoName = NULL;
+        }
+
+        Trabajo::create($request->only('categoria_id', 'nombre', 'descripcion', 'tipo') + ['imagen' => $imageName] + ['video' => $videoName]);
 
         Session::flash('mensaje', 'El proyecto ' . $request->nombre . ' ha sido creado correctamente');
         return redirect(route('trabajos.index'));
@@ -93,12 +105,19 @@ class TrabajoController extends Controller
             'nombre' => 'required|max:255',
             'descripcion' => 'required'
         ]);
-        $trabajo->fill($request->only('categoria_id', 'nombre', 'descripcion'))->save();
+        $trabajo->fill($request->only('categoria_id', 'nombre', 'descripcion', 'tipo'))->save();
 
         if ($request->hasFile('imagen')) {
             $imageName = Str::slug($request->nombre) . '-' . time() . '.' . $request->file('imagen')->getClientOriginalExtension();
             $request->file('imagen')->move(base_path() . '/public/uploads/', $imageName);
             $trabajo->fill(['imagen' => $imageName])->save();
+        }
+
+        if($request->tipo == '2'){
+            $trabajo->fill(['video' => $request->video])->save();
+            $trabajo->fill(['imagen' => NULL])->save();
+        } else {
+            $trabajo->fill(['video' => NULL])->save();
         }
 
         Session::flash('mensaje', 'El proyecto ' . $trabajo->nombre . ' ha sido actualizado correctamente');

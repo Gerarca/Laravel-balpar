@@ -49,7 +49,13 @@
             <div class="col-12 col-sm-6 col-md-6 col-lg-4">
               <div class="block3">
                 <a class="block3-img">
-                  <img src="{{url('uploads/'. $trabajo->imagen)}}" class="img-fluid">
+                    @if($trabajo->tipo == 1)
+                        <img src="{{url('uploads/'. $trabajo->imagen)}}" class="img-fluid">
+                    @else
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" width="770" height="315" src="https://www.youtube.com/embed/{{ $trabajo->video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
+                        </div>
+                    @endif
                 </a>
                 <div class="block3-txt p-4 bg-white">
                   <h5 class="p-b-7">{{ $trabajo->nombre }}</h5>
