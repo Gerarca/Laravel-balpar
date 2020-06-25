@@ -155,6 +155,9 @@ a.header-cart-item-name {
 .sub_menu a, .sub_menu li{
   color: #333;
 }
+.sub_menu li {
+  background: #fff;
+}
 .search-product input{
   transition: all ease .5s;
 }

@@ -134,6 +134,9 @@ class FrontController extends Controller
     public function trabajos_realizados(){
         $categorias_trabajos = CategoriaTrabajo::whereHas('trabajos')->orderBy('orden')->get();
         $trabajos = Trabajo::orderBy('id', 'desc')->get();
+        $trabajos = $trabajos->sortBy(function($a){
+            return $a->categoria_id == 5 ? -1 : 1;
+        });
 		return view('front.trabajos_realizados', ['categorias_trabajos' => $categorias_trabajos, 'trabajos' => $trabajos]);
 	}
     public function categoria_trabajos_realizados(Request $request){
