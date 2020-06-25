@@ -64,18 +64,20 @@
                             <a href="{{route('front.catalogo.categoria', ['categoria' => $category->id, 'nombre' => Str::slug($category->categoria)])}}">{{ $category->categoria }}</a>
                             <ul class="theme_menu submenu">
                                 @foreach($category->rubros as $rubro_category)
-                                    <li>
-                                        <a href="{{ route('front.catalogo.rubro', ['rubro' => $rubro_category->id, 'nombre' => Str::slug($rubro_category->rubro)]) }}">
-                                            {{ $rubro_category->rubro }}
-                                        </a>
-                                    </li>
-                                    @if($loop->iteration == 10)
+                                    @if($rubro_category->productos->where('visible', 1)->isNotEmpty())
                                         <li>
-                                            <a href="{{route('front.catalogo.categoria', ['categoria' => $category->id, 'nombre' => Str::slug($category->categoria)])}}" class="font-weight-bold">
-                                                Ver todos
+                                            <a href="{{ route('front.catalogo.rubro', ['rubro' => $rubro_category->id, 'nombre' => Str::slug($rubro_category->rubro)]) }}">
+                                                {{ $rubro_category->rubro }}
                                             </a>
                                         </li>
-                                        @php break; @endphp
+                                        @if($loop->iteration == 10)
+                                            <li>
+                                                <a href="{{route('front.catalogo.categoria', ['categoria' => $category->id, 'nombre' => Str::slug($category->categoria)])}}" class="font-weight-bold">
+                                                    Ver todos
+                                                </a>
+                                            </li>
+                                            @php break; @endphp
+                                        @endif
                                     @endif
                                 @endforeach
                             </ul>
