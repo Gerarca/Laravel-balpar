@@ -4,6 +4,7 @@ namespace App\Http\ViewComposers;
 
 use App\Categoria;
 use Illuminate\View\View;
+use Illuminate\Database\Eloquent\Builder;
 
 class InjectCategory
 {
@@ -16,7 +17,9 @@ class InjectCategory
 
 	public function compose(View $view)
 	{
-		$categories = Categoria::whereHas('productos')->orderBy('orden')->get();
+		$categories = Categoria::whereHas('productos', function (Builder $query) {
+		    $query->where('visible', 1);
+		})->orderBy('orden')->get();
 		$view->with('categories', $categories);
 	}
 }

@@ -62,7 +62,9 @@
                     @foreach($categories as $category)
                         <li class="has-submenu">
                             <a href="{{route('front.catalogo.categoria', ['categoria' => $category->id, 'nombre' => Str::slug($category->categoria)])}}">{{ $category->categoria }}</a>
-                            <ul class="theme_menu submenu">
+                            @if($category->rubros->isNotEmpty())
+                                <ul class="theme_menu submenu">
+                            @endif
                                 @foreach($category->rubros as $rubro_category)
                                     @if($rubro_category->productos->where('visible', 1)->isNotEmpty())
                                         <li>
@@ -80,7 +82,9 @@
                                         @endif
                                     @endif
                                 @endforeach
-                            </ul>
+                            @if($category->rubros->isNotEmpty())
+                                </ul>
+                            @endif
                         </li>
                     @endforeach
                     <li><a href="{{ route('front.catalogo.todos') }}" class="font-weight-bold">Ver todos los productos</a> </li>
