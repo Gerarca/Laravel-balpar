@@ -23,6 +23,12 @@
   <link rel="stylesheet" type="text/css" href="{{url('assets_front/css/main.min.css')}}">
   <link rel="stylesheet" type="text/css" href="{{url('assets_front/css/estilos.css?v=1.7')}}">
 
+  <style media="screen">
+      .verTodos:hover > .listaOculta{
+        display: block;
+      }
+  </style>
+
 </head>
 <body class="animsition">
 
@@ -65,23 +71,31 @@
                             @if($category->rubros->isNotEmpty())
                                 <ul class="theme_menu submenu">
                             @endif
-                                @foreach($category->rubros as $rubro_category)
+                                @foreach($category->rubros->take(10) as $rubro_category)
                                     @if($rubro_category->productos->where('visible', 1)->isNotEmpty())
                                         <li>
                                             <a href="{{ route('front.catalogo.rubro', ['rubro' => $rubro_category->id, 'nombre' => Str::slug($rubro_category->rubro)]) }}">
                                                 {{ $rubro_category->rubro }}
                                             </a>
                                         </li>
-                                        @if($loop->iteration == 10)
-                                            <li>
-                                                <a href="{{route('front.catalogo.categoria', ['categoria' => $category->id, 'nombre' => Str::slug($category->categoria)])}}" class="font-weight-bold">
-                                                    Ver todos
-                                                </a>
-                                            </li>
-                                            @php break; @endphp
-                                        @endif
                                     @endif
                                 @endforeach
+                                @if($category->rubros->count() > 10)
+                                    <li class="has-submenu verTodos">
+                                        <a href="{{route('front.catalogo.categoria', ['categoria' => $category->id, 'nombre' => Str::slug($category->categoria)])}}" class="font-weight-bold">
+                                            Ver todos
+                                        </a>
+                                        <ul class="theme_menu submenu listaOculta">
+                                            @foreach(range(10, $category->rubros->count() - 1) as $position)
+                                                <li>
+                                                    <a href="{{ route('front.catalogo.rubro', ['rubro' => $category->rubros[$position]->id, 'nombre' => Str::slug($category->rubros[$position]->rubro)]) }}">
+                                                        {{ $category->rubros[$position]->rubro }}
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                @endif
                             @if($category->rubros->isNotEmpty())
                                 </ul>
                             @endif
