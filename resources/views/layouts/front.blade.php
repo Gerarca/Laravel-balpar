@@ -85,7 +85,7 @@
                                         <a href="{{route('front.catalogo.categoria', ['categoria' => $category->id, 'nombre' => Str::slug($category->categoria)])}}" class="font-weight-bold">
                                             Ver todos
                                         </a>
-                                        <ul class="theme_menu submenu listaOculta">
+                                        <ul class="theme_menu submenu listaOculta" style="top: auto; bottom: 0;">
                                             @foreach(range(10, $category->rubros->count() - 1) as $position)
                                                 <li>
                                                     <a href="{{ route('front.catalogo.rubro', ['rubro' => $category->rubros[$position]->id, 'nombre' => Str::slug($category->rubros[$position]->rubro)]) }}">
