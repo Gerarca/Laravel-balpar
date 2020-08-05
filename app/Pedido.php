@@ -76,13 +76,12 @@ class Pedido extends Model
                 $message->cc(trim($aux_email), $GLOBALS['nombre_empresa']);
             }
             $message->returnPath('carlos.sosa@porta.com.py');
-            $message->to($GLOBALS['email'], $GLOBALS['nombre'])->subject('Confirmación PEDIDO NRO. '.$this->attributes['id']);
+            $message->to($GLOBALS['email'], $GLOBALS['nombre'])->subject('Solicitud de PEDIDO NRO. '.$this->attributes['id']);
             $message->getSwiftMessage();
         });
 
-
-
     }
+
     public function updateEstado($estado)
     {
         $aux_sql = DB::table('pedido_detalle')->where('pedido_id', $this->attributes['id'])->update(['estado'=>$estado]);
