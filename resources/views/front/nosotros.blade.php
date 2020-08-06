@@ -26,7 +26,7 @@
             La Empresa
           </h3>
           <p>
-            A mediados de 1995 se inicia la actividad de BALPAR S.A., fruto del acercamiento tecnológico y comercial de los fundadores de la empresa con los fabricantes europeos de balanzas DINA.
+            A mediados de 1991 se inicia la actividad de BALPAR S.A., fruto del acercamiento tecnológico y comercial de los fundadores de la empresa con los fabricantes europeos de balanzas DINA.
           </p>
           <p>Durante diez años se impulsa, conjuntamente con el fabricante europeo DINA, la implantación de las más vanguardistas y avanzadas tecnologías de pesaje en el mercado paraguayo. Con mucho éxito se constituye Balpar S.A. en la precursora de la instalación de redes de equipos de pesaje inteligentes en dicho mercado.</p>
           <p>Desde un inicio, la empresa enfatiza la vocación de servicio y la inclinación prioritaria por la calidad, desechando aquellas soluciones o productos que solamente contemplen el menor precio pero descuidando la calidad.</p>

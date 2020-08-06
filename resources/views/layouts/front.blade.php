@@ -173,7 +173,7 @@
     <div class="container">
       <div class="row flex-w">
         <div class="col-md-4 py-2 flex-column">
-          <a href="{{route('front.index')}}"><img src="{{url('assets_front/images/logo.png')}}" style="height:30px;"></a>
+          <a href="{{route('front.index')}}"><img src="{{url('assets_front/images/logo.png')}}" class="white-img" style="height:30px;"></a>
           <ul>
             <li class="p-b-9 m-t-20">
               <a href="https://goo.gl/maps/UFVu7vSabQt3WCTW8" target="_blank" class="s-text7">
@@ -213,9 +213,7 @@
           <h4 class="s-text12 p-b-30">
             Instagram
           </h4>
-          <!-- SnapWidget -->
-          <script src="https://snapwidget.com/js/snapwidget.js"></script>
-          <iframe src="https://snapwidget.com/embed/837290" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden;  width:100%; "></iframe>
+          <div id="instafeed" class="instafeed-fluid"></div>
         </div>
         <div class="col-md-4 py-2">
           <h4 class="s-text12 p-b-30">
@@ -265,6 +263,7 @@
   <script src="{{url('assets_front/js/main.js')}}"></script>
   <script src="{{url('assets_front/js/owl.carousel.min.js')}}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="{{url('assets_front/js/jquery.instagramFeed.min.js')}}"></script>
 
   <script type="text/javascript">
 
@@ -427,6 +426,24 @@
         });
 
   </script>
+  <script>
+	(function($){
+		$(window).on('load', function(){
+			$.instagramFeed({
+				'username': 'balparpy',
+				'container': "#instafeed",
+				'display_profile': false,
+				'display_biography': false,
+				'display_gallery': true,
+				'callback': null,
+				'styling': true,
+				'items': 9,
+				'items_per_row': 3,
+				'margin': 0.7
+			});
+		});
+	})(jQuery);
+</script>
   @yield('especifico')
 </body>
 </html>

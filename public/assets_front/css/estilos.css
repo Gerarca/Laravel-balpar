@@ -599,7 +599,7 @@ footer {
   background: linear-gradient(140deg, rgba(11,37,73,1) 0%, rgba(20,72,141,1) 100%);
   /* background: #222; */
 }
-footer img{
+.white-img{
   filter: brightness(0)invert(1);
 }
 
