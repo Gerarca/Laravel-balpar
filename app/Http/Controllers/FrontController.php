@@ -209,7 +209,7 @@ class FrontController extends Controller
                 }
                 $pedido->finalizar();
                 Cookie::queue(Cookie::forget('productos'));
-                return redirect()->route('front.presupuesto')->with('status', 'Su pedido de presupuesto se ha realizado con éxito.');
+                return redirect()->route('front.presupuesto')->with('status', 'Su solicitud de presupuesto se ha realizado con éxito.');
 
             }
         }else {

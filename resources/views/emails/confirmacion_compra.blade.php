@@ -454,7 +454,7 @@ h6,
                                 </tr>
                               </tbody>
                             </table><!-- /.icon_holder:icon_primary -->
-                            <h1 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 32px;line-height: 40px;font-weight: bold;text-transform: uppercase;letter-spacing: 4px;color: #30393d;">Orden N&deg; PED-{{ $carrito->id }}</h1>
+                            <h1 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 32px;line-height: 40px;font-weight: bold;text-transform: uppercase;letter-spacing: 4px;color: #30393d;">Orden N&deg; COT-{{ $carrito->id }}</h1>
                             <p style="font-family: Helvetica, Arial, sans-serif;font-size: 16px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;"><em>{{ $carrito->mensaje }}</em></p>
                             <table class="hruler hruler_primary" width="80" border="0" align="center" cellpadding="0" cellspacing="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 62px;margin-left: auto;margin-right: auto;clear: both;">
                               <tbody>
@@ -469,7 +469,7 @@ h6,
                                 </tr>
                               </tbody>
                             </table><!-- /.hruler:hruler_primary -->
-                            <h3 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 22px;line-height: 30px;font-weight: normal;color: #30393d;">Hemos recibido tu pedido. Nos comunicaremos contigo en el transcurso de las horas para responder a tu solicitud de presupuesto. <br /> </h3>
+                            <h3 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 22px;line-height: 30px;font-weight: normal;color: #30393d;">Hemos recibido tu cotizacion. Nos comunicaremos contigo en el transcurso de las horas para responder a tu solicitud de presupuesto. <br /> </h3>
                           </td><!-- /.column_cell -->
                         </tr>
                       </tbody>
