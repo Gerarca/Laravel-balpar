@@ -64,7 +64,7 @@
                   </div>
                   <div class="">
                     <p class="info-text">Servicio técnico</p>
-                    <a href="mailto:sac@balpar.com.py">sac@balpar.com.py</a>
+                    <a href="mailto:sac@balpar.com.py">sat@balpar.com.py</a>
                   </div>
                 </p>
               </div>
