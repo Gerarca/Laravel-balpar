@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Rubro;
 use App\Categoria;
 use Session;
+use Str;
 
 class RubroController extends Controller
 {
@@ -44,7 +45,10 @@ class RubroController extends Controller
             'rubro' => 'required|max:255'
         ]);
 
-        $rubro = Rubro::create($request->only('categoria_id', 'rubro'));
+        $imagenName = Str::slug($request->rubro).'-'.time() . '.' .$request->file('meta_image')->getClientOriginalExtension();
+        $request->file('meta_image')->move(base_path() . '/public/uploads/', $imagenName);
+
+        $rubro = Rubro::create($request->only('categoria_id', 'rubro', 'meta_description') + ['meta_image' => $imagenName]);
 
         Session::flash('mensaje', 'El rubro '.$rubro->rubro.' ha sido creado correctamente');
         return redirect(route('rubros.index'));
@@ -87,7 +91,13 @@ class RubroController extends Controller
             'rubro' => 'required|max:255'
         ]);
 
-        $rubro->fill($request->only('categoria_id', 'rubro'))->save();
+        $rubro->fill($request->only('categoria_id', 'rubro', 'meta_description'))->save();
+
+        if($request->hasFile('meta_image')){
+            $imagenName = Str::slug($request->rubro).'-'.time() . '.' .$request->file('meta_image')->getClientOriginalExtension();
+            $request->file('meta_image')->move(base_path() . '/public/uploads/', $imagenName);
+            $rubro->fill(['meta_image' => $imagenName])->save();
+        }
 
         Session::flash('mensaje', 'El rubro '.$rubro->rubro.' ha sido actualizado correctamente');
         return redirect(route('rubros.edit', $rubro->id));

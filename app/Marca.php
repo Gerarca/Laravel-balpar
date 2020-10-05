@@ -8,7 +8,7 @@ class Marca extends Model
 {
     protected $table = 'marcas';
 
-    protected $fillable = ['imagen', 'nombre'];
+    protected $fillable = ['imagen', 'nombre', 'meta_description'];
 
     public function productos(){
         return $this->hasMany(Producto::class);

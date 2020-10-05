@@ -42,14 +42,27 @@ class FrontController extends Controller
         $productos = $categoria->productos;
         $marcas = Marca::orderBy('nombre')->get();
         $etiquetas = Etiqueta::orderBy('nombre')->get();
-		return view('front.catalogo', compact('categoria', 'productos', 'etiquetas', 'marcas'));
+        $metaTags = [
+            'titulo' => $categoria->categoria,
+            'descripcion' => $categoria->meta_description,
+            'imagen' => $categoria->meta_image,
+            'url' => route('front.catalogo.categoria', ['categoria' => $categoria->id, 'nombre' => Str::slug($categoria->categoria)])
+        ];
+		return view('front.catalogo', compact('categoria', 'productos', 'etiquetas', 'marcas', 'metaTags'));
 	}
     public function catalogo_marca(Marca $marca){
         $marcas = Marca::orderBy('nombre')->get();
         $productos = $marca->productos;
         $etiquetas = Etiqueta::orderBy('nombre')->get();
         $asunto = ['asunto' => 'Marca', 'titulo' => $marca->nombre];
-		return view('front.catalogo_filtro', compact('marcas', 'marca', 'productos', 'etiquetas', 'asunto'));
+        $asunto = ['asunto' => 'Marca', 'titulo' => $marca->nombre];
+        $metaTags = [
+            'titulo' => $marca->nombre,
+            'descripcion' => $marca->meta_description,
+            'imagen' => $marca->imagen,
+            'url' => route('front.catalogo.marca', ['marca' => $marca->id, 'nombre' => Str::slug($marca->nombre)])
+        ];
+        return view('front.catalogo_filtro', compact('marcas', 'marca', 'productos', 'etiquetas', 'asunto', 'metaTags'));
 	}
     public function catalogo_uso(Uso $uso){
         $categoria = $uso->categoria;
@@ -63,7 +76,13 @@ class FrontController extends Controller
         $productos = $rubro->productos;
         $marcas = Marca::orderBy('nombre')->get();
         $etiquetas = Etiqueta::orderBy('nombre')->get();
-		return view('front.catalogo', compact('categoria', 'rubro', 'productos', 'etiquetas', 'marcas'));
+        $metaTags = [
+            'titulo' => $rubro->rubro,
+            'descripcion' => $rubro->meta_description,
+            'imagen' => $rubro->meta_image,
+            'url' => route('front.catalogo.rubro', ['rubro' => $rubro->id, 'nombre' => Str::slug($rubro->rubro)])
+        ];
+		return view('front.catalogo', compact('categoria', 'rubro', 'productos', 'etiquetas', 'marcas', 'metaTags'));
 	}
     public function catalogo_etiqueta(Etiqueta $etiqueta){
         $productos = $etiqueta->productos;

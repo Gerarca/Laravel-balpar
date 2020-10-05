@@ -42,6 +42,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group has-label">
+                                <label for="meta_description">
+                                    Meta descripción
+                                </label>
+                                <textarea class="form-control" id="meta_description" name="meta_description" rows="8" cols="80">{{ old('meta_description', $marca->meta_description) }}</textarea>
+                            </div>
                             <div class="category form-category">* Campos requeridos</div>
                         </div>
                         <div class="card-footer text-right">

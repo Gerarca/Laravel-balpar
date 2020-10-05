@@ -1,5 +1,20 @@
 @extends('layouts.front')
-@section('title','Catálogo |')
+
+@isset($metaTags)
+
+    @section('title',$metaTags['titulo'] . ' |')
+    @section('og:description', $metaTags['descripcion'] )
+    @section('og:url', $metaTags['url']))
+    @section('og:type', 'product.item')
+    @if($metaTags['imagen'])
+        @section('og:image', asset('uploads/'.$metaTags['imagen']))
+        @section('og:image:type', mime_content_type(public_path('uploads/'.$metaTags['imagen'])))
+        @section('og:image:width', getimagesize(public_path('uploads/'.$metaTags['imagen']))[0])
+        @section('og:image:height', getimagesize(public_path('uploads/'.$metaTags['imagen']))[1])
+    @endif
+
+@endisset
+
 @section('content')
   <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url({{ url('assets_front/images/balpar_bannner.jpeg') }});">
     <h2 class="l-text2 t-center">

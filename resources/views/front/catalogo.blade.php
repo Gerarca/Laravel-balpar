@@ -1,5 +1,20 @@
 @extends('layouts.front')
-@section('title','Catálogo |')
+
+@isset($metaTags)
+
+    @section('title',$metaTags['titulo'] . ' |')
+    @section('og:description', $metaTags['descripcion'] )
+    @section('og:url', $metaTags['url']))
+    @section('og:type', 'product.item')
+    @if($metaTags['imagen'])
+        @section('og:image', asset('uploads/'.$metaTags['imagen']))
+        @section('og:image:type', mime_content_type(public_path('uploads/'.$metaTags['imagen'])))
+        @section('og:image:width', getimagesize(public_path('uploads/'.$metaTags['imagen']))[0])
+        @section('og:image:height', getimagesize(public_path('uploads/'.$metaTags['imagen']))[1])
+    @endif
+
+@endisset
+
 @section('content')
   <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url({{ url('assets_front/images/balpar_bannner.jpeg') }});">
     <h2 class="l-text2 t-center">
@@ -11,7 +26,10 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('front.index')}}">Inicio</a></li>
         <li class="breadcrumb-item" aria-current="page">Catálogo</li>
-        <li class="breadcrumb-item active" aria-current="page">{{ $categoria->categoria }}</li>
+        <li class="breadcrumb-item {{ isset($rubro) ? '' : 'active' }}" aria-current="page">{{ $categoria->categoria }}</li>
+        @isset($rubro)
+            <li class="breadcrumb-item active" aria-current="page">{{ $rubro->rubro }}</li>
+        @endisset
       </ol>
     </nav>
   </div>

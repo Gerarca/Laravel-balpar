@@ -4,8 +4,19 @@
   <title>@yield('title', '') Balpar S.A.</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="{{url('assets_front/images/favicon.png')}}"/>
+  <meta name="title" content="Balpar S.A">
   <meta name="description" content="Innovación para un país en expansión. Calidad en pesaje industrial y comercial, equipos para supermercados y cepillería industrial.">
+
+    <meta property="og:url" content="@yield('og:url', URL::current())"/>
+    <meta property="og:type" content="@yield('og:type', 'website')"/>
+    <meta property="og:title" content="@yield('title','') Balpar S.A"/>
+    <meta property="og:description" content="@yield('og:description', 'Innovación para un país en expansión. Calidad en pesaje industrial y comercial, equipos para supermercados y cepillería industrial.')"/>
+    <meta property="og:image" content="@yield('og:image', url('assets_front/images/favicon.png'))"/>
+    <meta property="og:image:type" content="@yield('og:image:type', 'image/png')" />
+    <meta property="og:image:width" content="@yield('og:image:width', 194)" />
+    <meta property="og:image:height" content="@yield('og:image:height', 194)" />
+
+  <link rel="icon" type="image/png" href="{{url('assets_front/images/favicon.png')}}"/>
 
   <script src="https://kit.fontawesome.com/0ae1380cc5.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="{{ mix('assets_front/css/combined.min.css') }}">

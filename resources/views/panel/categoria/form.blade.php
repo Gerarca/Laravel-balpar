@@ -20,6 +20,34 @@
                                 </label>
                                 <input class="form-control" id="categoria" name="categoria" type="text" required="true" value="{{ old('categoria', $categoria->categoria) }}" />
                             </div>
+                            <div class="form-group has-label">
+                                <label for="meta_image">
+                                    Meta imagen
+                                </label>
+                                <div class="form-group">
+
+                                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                        <div class="fileinput-new thumbnail">
+                                            <img src="{{ $categoria->meta_image ? url('uploads/'.$categoria->meta_image) : url('assets_template/img/image_placeholder.jpg') }}" alt="{{ $categoria->nombre?$categoria->nombre:old('nombre') }}">
+                                        </div>
+                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                        <div>
+                                            <span class="btn btn-rose btn-round btn-file">
+                                                <span class="fileinput-new">Seleccionar Imagen</span>
+                                                <span class="fileinput-exists">Cambiar</span>
+                                                <input type="file" name="meta_image" id="meta_image" {{ $categoria->id ? '' : 'required="true"' }} accept="image/*"/>
+                                            </span>
+                                            <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Quitar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group has-label">
+                                <label for="meta_description">
+                                    Meta descripción
+                                </label>
+                                <textarea class="form-control" id="meta_description" name="meta_description" rows="8" cols="80">{{ old('meta_description', $categoria->meta_description) }}</textarea>
+                            </div>
                             <div class="category form-category">* Campos requeridos</div>
                         </div>
                         <div class="card-footer text-right">

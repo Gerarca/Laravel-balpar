@@ -53,7 +53,7 @@ class MarcaController extends Controller
         $imagenName = Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen')->getClientOriginalExtension();
         $request->file('imagen')->move(base_path() . '/public/uploads/', $imagenName);
 
-        $marca = Marca::create($request->only('nombre') + ['imagen' => $imagenName]);
+        $marca = Marca::create($request->only('nombre', 'meta_description') + ['imagen' => $imagenName]);
 
         Session::flash('mensaje', 'La marca '.$marca->nombre.' ha sido creada correctamente');
         return redirect(route('marcas.index'));
@@ -95,7 +95,7 @@ class MarcaController extends Controller
             'imagen' => 'image'
         ]);
 
-        $marca->fill($request->only('nombre'))->save();
+        $marca->fill($request->only('nombre', 'meta_description'))->save();
 
         //Portada
         if($request->hasFile('imagen')){
