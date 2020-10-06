@@ -256,6 +256,12 @@
 								</div>
 							</div>
 						</div>
+						<div class="form-group has-label">
+							<label for="meta_keywords">
+								Palabras clave (Separados por coma. Ejemplo: pesaje industrial, pesaje comercial, insumos)
+							</label>
+							<input class="form-control" id="meta_keywords" name="meta_keywords" type="text" value="{{ old('meta_keywords', $producto->meta_keywords) }}" placeholder="pesaje industrial, pesaje comercial, insumos"/>
+						</div>
 						<div class="category form-category">* Campos requeridos</div>
 						<hr>
 					</div>

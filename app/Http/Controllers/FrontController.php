@@ -46,7 +46,8 @@ class FrontController extends Controller
             'titulo' => $categoria->categoria,
             'descripcion' => $categoria->meta_description,
             'imagen' => $categoria->meta_image,
-            'url' => route('front.catalogo.categoria', ['categoria' => $categoria->id, 'nombre' => Str::slug($categoria->categoria)])
+            'url' => route('front.catalogo.categoria', ['categoria' => $categoria->id, 'nombre' => Str::slug($categoria->categoria)]),
+            'keywords' => $categoria->meta_keywords
         ];
 		return view('front.catalogo', compact('categoria', 'productos', 'etiquetas', 'marcas', 'metaTags'));
 	}
@@ -60,7 +61,8 @@ class FrontController extends Controller
             'titulo' => $marca->nombre,
             'descripcion' => $marca->meta_description,
             'imagen' => $marca->imagen,
-            'url' => route('front.catalogo.marca', ['marca' => $marca->id, 'nombre' => Str::slug($marca->nombre)])
+            'url' => route('front.catalogo.marca', ['marca' => $marca->id, 'nombre' => Str::slug($marca->nombre)]),
+            'keywords' => $marca->meta_keywords
         ];
         return view('front.catalogo_filtro', compact('marcas', 'marca', 'productos', 'etiquetas', 'asunto', 'metaTags'));
 	}
@@ -80,7 +82,8 @@ class FrontController extends Controller
             'titulo' => $rubro->rubro,
             'descripcion' => $rubro->meta_description,
             'imagen' => $rubro->meta_image,
-            'url' => route('front.catalogo.rubro', ['rubro' => $rubro->id, 'nombre' => Str::slug($rubro->rubro)])
+            'url' => route('front.catalogo.rubro', ['rubro' => $rubro->id, 'nombre' => Str::slug($rubro->rubro)]),
+            'keywords' => $rubro->meta_keywords
         ];
 		return view('front.catalogo', compact('categoria', 'rubro', 'productos', 'etiquetas', 'marcas', 'metaTags'));
 	}

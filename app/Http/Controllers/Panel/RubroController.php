@@ -48,7 +48,7 @@ class RubroController extends Controller
         $imagenName = Str::slug($request->rubro).'-'.time() . '.' .$request->file('meta_image')->getClientOriginalExtension();
         $request->file('meta_image')->move(base_path() . '/public/uploads/', $imagenName);
 
-        $rubro = Rubro::create($request->only('categoria_id', 'rubro', 'meta_description') + ['meta_image' => $imagenName]);
+        $rubro = Rubro::create($request->only('categoria_id', 'rubro', 'meta_description', 'meta_keywords') + ['meta_image' => $imagenName]);
 
         Session::flash('mensaje', 'El rubro '.$rubro->rubro.' ha sido creado correctamente');
         return redirect(route('rubros.index'));
@@ -91,7 +91,7 @@ class RubroController extends Controller
             'rubro' => 'required|max:255'
         ]);
 
-        $rubro->fill($request->only('categoria_id', 'rubro', 'meta_description'))->save();
+        $rubro->fill($request->only('categoria_id', 'rubro', 'meta_description', 'meta_keywords'))->save();
 
         if($request->hasFile('meta_image')){
             $imagenName = Str::slug($request->rubro).'-'.time() . '.' .$request->file('meta_image')->getClientOriginalExtension();

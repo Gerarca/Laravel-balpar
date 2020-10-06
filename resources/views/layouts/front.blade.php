@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="title" content="Balpar S.A">
   <meta name="description" content="Innovación para un país en expansión. Calidad en pesaje industrial y comercial, equipos para supermercados y cepillería industrial.">
+  <meta name="keywords" content="@yield('keywords','')"/>
 
     <meta property="og:url" content="@yield('og:url', URL::current())"/>
     <meta property="og:type" content="@yield('og:type', 'website')"/>

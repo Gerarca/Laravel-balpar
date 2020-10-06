@@ -2,6 +2,8 @@
 
 @isset($metaTags)
 
+    @section('keywords',$metaTags['keywords'])
+    
     @section('title',$metaTags['titulo'] . ' |')
     @section('og:description', $metaTags['descripcion'] )
     @section('og:url', $metaTags['url'])

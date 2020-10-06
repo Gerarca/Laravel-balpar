@@ -1,5 +1,7 @@
 @extends('layouts.front')
 
+@section('keywords',$producto->meta_keywords)
+
 @section('title',$producto->nombre . ' |')
 @section('og:description', $producto->subtitulo )
 @section('og:url', route('front.producto', ['producto' => $producto->id, 'nombre' => Str::slug($producto->nombre)]) )
