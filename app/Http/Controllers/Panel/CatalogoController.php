@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Catalogo;
 use App\CategoriaCatalogo;
 use Session;
+use Image;
 use Str;
 
 class CatalogoController extends Controller
@@ -47,11 +48,16 @@ class CatalogoController extends Controller
             'archivo' => 'required'
         ]);
 
+        $destino = base_path() . '/public/uploads/';
         $imageName = Str::slug($request->nombre) . '-' . time() . '.' . $request->file('imagen')->getClientOriginalExtension();
         $request->file('imagen')->move(base_path() . '/public/uploads/', $imageName);
 
         $archivoName = Str::slug($request->nombre) . '-' . time() . '.' . $request->file('archivo')->getClientOriginalExtension();
         $request->file('archivo')->move(base_path() . '/public/uploads/', $archivoName);
+        Image::make($destino . $imageName)->resize(400, null, function ($constraint) {
+            $constraint->upsize();
+            $constraint->aspectRatio();
+        })->encode('jpg', 70)->save($destino . $imageName);
 
         Catalogo::create($request->only('categoria_catalogo_id', 'nombre') + ['imagen' => $imageName] + ['archivo' => $archivoName]);
 
@@ -99,9 +105,14 @@ class CatalogoController extends Controller
         $catalogo->fill($request->only('categoria_catalogo_id', 'nombre'))->save();
 
         if ($request->hasFile('imagen')) {
+            $destino = base_path() . '/public/uploads/';
             $imageName = Str::slug($request->nombre) . '-' . time() . '.' . $request->file('imagen')->getClientOriginalExtension();
             $request->file('imagen')->move(base_path() . '/public/uploads/', $imageName);
             $catalogo->fill(['imagen' => $imageName])->save();
+            Image::make($destino . $imageName)->resize(400, null, function ($constraint) {
+                $constraint->upsize();
+                $constraint->aspectRatio();
+            })->encode('jpg', 70)->save($destino . $imageName);
         }
 
         if ($request->hasFile('archivo')) {

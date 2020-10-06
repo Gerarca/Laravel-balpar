@@ -1,5 +1,22 @@
 @extends('layouts.front')
-@section('title','Catálogo |')
+
+@isset($metaTags)
+
+    @section('keywords',$metaTags['keywords'])
+
+    @section('title',$metaTags['titulo'] . ' |')
+    @section('og:description', $metaTags['descripcion'] )
+    @section('og:url', $metaTags['url'])
+    @section('og:type', 'product.item')
+    @if($metaTags['imagen'])
+        @section('og:image', asset('uploads/'.$metaTags['imagen']))
+        @section('og:image:type', mime_content_type(public_path('uploads/'.$metaTags['imagen'])))
+        @section('og:image:width', getimagesize(public_path('uploads/'.$metaTags['imagen']))[0])
+        @section('og:image:height', getimagesize(public_path('uploads/'.$metaTags['imagen']))[1])
+    @endif
+
+@endisset
+
 @section('content')
   <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url({{ url('assets_front/images/balpar_bannner.jpeg') }});">
     <h2 class="l-text2 t-center">
@@ -11,7 +28,10 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('front.index')}}">Inicio</a></li>
         <li class="breadcrumb-item" aria-current="page">Catálogo</li>
-        <li class="breadcrumb-item active" aria-current="page">{{ $categoria->categoria }}</li>
+        <li class="breadcrumb-item {{ isset($rubro) ? '' : 'active' }}" aria-current="page">{{ $categoria->categoria }}</li>
+        @isset($rubro)
+            <li class="breadcrumb-item active" aria-current="page">{{ $rubro->rubro }}</li>
+        @endisset
       </ol>
     </nav>
   </div>
@@ -109,7 +129,9 @@
                     <div class="col-6 col-sm-6 col-md-4 col-lg-4 p-b-50">
                         <div class="block2">
                             <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                <a href="{{route('front.producto', ['producto' => $producto->id, 'nombre' => Str::slug($producto->nombre)])}}"><img src="{{url('storage/productos/'. $producto->imagen)}}"></a>
+                                <a href="{{route('front.producto', ['producto' => $producto->id, 'nombre' => Str::slug($producto->nombre)])}}">
+                                    <img src="{{url('storage/productos/thumbs/'. $producto->imagen)}}" loading="lazy">
+                                </a>
                             </div>
                             <div class="block2-txt p-t-20">
                                 <a href="{{route('front.producto', ['producto' => $producto->id, 'nombre' => Str::slug($producto->nombre)])}}" class="block2-name dis-block product-name">

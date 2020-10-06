@@ -20,7 +20,8 @@
         "laravel/ui": "^2.0",
         "laraveles/spanish": "^1.4",
         "league/flysystem-sftp": "^1.0",
-        "maatwebsite/excel": "^3.1"
+        "maatwebsite/excel": "^3.1",
+        "spatie/array-to-xml": "^2.14"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

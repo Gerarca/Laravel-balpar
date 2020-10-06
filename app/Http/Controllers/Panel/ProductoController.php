@@ -125,7 +125,7 @@ class ProductoController extends Controller
         $producto = Producto::create(
             $request->only(
                 'categoria_id', 'marca_id', 'uso_id', 'rubro_id', 'nombre', 'subtitulo',
-                'cod_articulo', 'descripcion', 'informacion', 'visible', 'destacado_comercial', 'destacado_industrial'
+                'cod_articulo', 'descripcion', 'informacion', 'visible', 'destacado_comercial', 'destacado_industrial', 'meta_keywords'
             ) + ['imagen' => $imageName] + ['imagen2' => $imageName2] + ['imagen3' => $imageName3]
               + ['imagen4' => $imageName4] + ['medidas' => $medidasName] + ['stock' => 10]);
 
@@ -223,8 +223,8 @@ class ProductoController extends Controller
 
         $producto->fill(
             $request->only(
-                'categoria_id', 'marca_id', 'uso_id', 'rubro_id', 'nombre', 'subtitulo',
-                'cod_articulo', 'descripcion', 'informacion', 'visible', 'destacado_comercial', 'destacado_industrial'
+                'categoria_id', 'marca_id', 'uso_id', 'rubro_id', 'nombre', 'subtitulo', 'cod_articulo',
+                'descripcion', 'informacion', 'visible', 'destacado_comercial', 'destacado_industrial', 'meta_keywords'
             )
         )->save();
 

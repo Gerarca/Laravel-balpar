@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Trabajo;
 use App\CategoriaTrabajo;
 use Session;
+use Image;
 use Str;
 
 class TrabajoController extends Controller
@@ -50,8 +51,13 @@ class TrabajoController extends Controller
         ]);
 
         if($request->tipo == '1'){
+            $destino = base_path() . '/public/uploads/';
             $imageName = Str::slug($request->nombre) . '-' . time() . '.' . $request->file('imagen')->getClientOriginalExtension();
             $request->file('imagen')->move(base_path() . '/public/uploads/', $imageName);
+            Image::make($destino . $imageName)->resize(400, null, function ($constraint) {
+                $constraint->upsize();
+                $constraint->aspectRatio();
+            })->encode('jpg', 70)->save($destino . $imageName);
         } else {
             $imageName = NULL;
         }
@@ -108,9 +114,14 @@ class TrabajoController extends Controller
         $trabajo->fill($request->only('categoria_id', 'nombre', 'descripcion', 'tipo'))->save();
 
         if ($request->hasFile('imagen')) {
+            $destino = base_path() . '/public/uploads/';
             $imageName = Str::slug($request->nombre) . '-' . time() . '.' . $request->file('imagen')->getClientOriginalExtension();
             $request->file('imagen')->move(base_path() . '/public/uploads/', $imageName);
             $trabajo->fill(['imagen' => $imageName])->save();
+            Image::make($destino . $imageName)->resize(400, null, function ($constraint) {
+                $constraint->upsize();
+                $constraint->aspectRatio();
+            })->encode('jpg', 70)->save($destino . $imageName);
         }
 
         if($request->tipo == '2'){

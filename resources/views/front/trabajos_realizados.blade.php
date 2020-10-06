@@ -50,7 +50,7 @@
               <div class="block3">
                 <a class="block3-img">
                     @if($trabajo->tipo == 1)
-                        <img src="{{url('uploads/'. $trabajo->imagen)}}" class="img-fluid">
+                        <img src="{{url('uploads/'. $trabajo->imagen)}}" class="img-fluid" loading="lazy">
                     @else
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe class="embed-responsive-item" width="770" height="315" src="https://www.youtube.com/embed/{{ $trabajo->video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>

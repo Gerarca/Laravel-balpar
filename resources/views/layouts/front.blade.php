@@ -4,24 +4,23 @@
   <title>@yield('title', '') Balpar S.A.</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="{{url('assets_front/images/favicon.png')}}"/>
+  <meta name="title" content="Balpar S.A">
   <meta name="description" content="Innovación para un país en expansión. Calidad en pesaje industrial y comercial, equipos para supermercados y cepillería industrial.">
+  <meta name="keywords" content="@yield('keywords','')"/>
 
-  <link rel="stylesheet" type="text/css" href="{{url('assets_front/vendor/bootstrap/css/bootstrap.min.css')}}">
+    <meta property="og:url" content="@yield('og:url', URL::current())"/>
+    <meta property="og:type" content="@yield('og:type', 'website')"/>
+    <meta property="og:title" content="@yield('title','') Balpar S.A"/>
+    <meta property="og:description" content="@yield('og:description', 'Innovación para un país en expansión. Calidad en pesaje industrial y comercial, equipos para supermercados y cepillería industrial.')"/>
+    <meta property="og:image" content="@yield('og:image', url('assets_front/images/favicon.png'))"/>
+    <meta property="og:image:type" content="@yield('og:image:type', 'image/png')" />
+    <meta property="og:image:width" content="@yield('og:image:width', 194)" />
+    <meta property="og:image:height" content="@yield('og:image:height', 194)" />
+
+  <link rel="icon" type="image/png" href="{{url('assets_front/images/favicon.png')}}"/>
+
   <script src="https://kit.fontawesome.com/0ae1380cc5.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="{{url('assets_front/fonts/themify/themify-icons.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{url('assets_front/fonts/Linearicons-Free-v1.0.0/icon-font.min.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{url('assets_front/fonts/elegant-font/html-css/style.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{url('assets_front/vendor/animate/animate.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{url('assets_front/vendor/css-hamburgers/hamburgers.min.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{url('assets_front/vendor/animsition/css/animsition.min.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{url('assets_front/vendor/select2/select2.min.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{url('assets_front/vendor/slick/slick.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{url('assets_front/css/owl.carousel.min.css')}}">
-  {{-- css --}}
-  <link rel="stylesheet" type="text/css" href="{{url('assets_front/css/util.min.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{url('assets_front/css/main.min.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{url('assets_front/css/estilos.css?v=1.8')}}">
+  <link rel="stylesheet" href="{{ mix('assets_front/css/combined.min.css') }}">
 
   <style media="screen">
       .verTodos:hover > .listaOculta{
@@ -39,11 +38,11 @@
   t.src=v;s=b.getElementsByTagName(e)[0];
   s.parentNode.insertBefore(t,s)}(window,document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
-   fbq('init', '345741273251095'); 
+   fbq('init', '345741273251095');
   fbq('track', 'PageView');
   </script>
   <noscript>
-   <img height="1" width="1" 
+   <img height="1" width="1"
   src="https://www.facebook.com/tr?id=345741273251095&ev=PageView
   &noscript=1"/>
   </noscript>
@@ -270,19 +269,9 @@
   </a>
   <a role="button" href="https://api.whatsapp.com/send?phone=595991166277&text=Hola!%20Estoy%20escribiendo%20desde%20el%20sitio%20web%20de%20Balpar%20y%20tengo%20una%20consulta." target="_blank" class="btn-floating btn-wha btn-success" title="¡Escríbenos por Whatsapp!"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
 
-  <script src="{{url('assets_front/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
-  <script src="{{url('assets_front/vendor/animsition/js/animsition.min.js')}}"></script>
-  <script src="{{url('assets_front/vendor/bootstrap/js/popper.js')}}"></script>
-  <script src="{{url('assets_front/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
-  <script src="{{url('assets_front/vendor/select2/select2.min.js')}}"></script>
-
-  <script src="{{url('assets_front/vendor/slick/slick.min.js')}}"></script>
-  <script src="{{url('assets_front/js/slick-custom.js')}}"></script>
+  <script src="{{ mix('assets_front/js/combined.min.js') }}"></script>
   {{-- <script src="{{url('assets_front/vendor/sweetalert/sweetalert.min.js')}}"></script> --}}
-  <script src="{{url('assets_front/js/main.js')}}"></script>
-  <script src="{{url('assets_front/js/owl.carousel.min.js')}}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-  <script src="{{url('assets_front/js/jquery.instagramFeed.min.js')}}"></script>
 
   <script type="text/javascript">
 

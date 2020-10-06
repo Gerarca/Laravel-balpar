@@ -50,10 +50,15 @@ class MarcaController extends Controller
         ]);
 
         //Portada
+        $destino = base_path() . '/public/uploads/';
         $imagenName = Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen')->getClientOriginalExtension();
         $request->file('imagen')->move(base_path() . '/public/uploads/', $imagenName);
+        Image::make($destino . $imagenName)->resize(260, 150, function ($constraint) {
+            $constraint->upsize();
+            $constraint->aspectRatio();
+        })->encode('jpg', 70)->save($destino . $imagenName);
 
-        $marca = Marca::create($request->only('nombre') + ['imagen' => $imagenName]);
+        $marca = Marca::create($request->only('nombre', 'meta_description', 'meta_keywords') + ['imagen' => $imagenName]);
 
         Session::flash('mensaje', 'La marca '.$marca->nombre.' ha sido creada correctamente');
         return redirect(route('marcas.index'));
@@ -95,13 +100,18 @@ class MarcaController extends Controller
             'imagen' => 'image'
         ]);
 
-        $marca->fill($request->only('nombre'))->save();
+        $marca->fill($request->only('nombre', 'meta_description', 'meta_keywords'))->save();
 
         //Portada
         if($request->hasFile('imagen')){
+            $destino = base_path() . '/public/uploads/';
             $imagenName = Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen')->getClientOriginalExtension();
             $request->file('imagen')->move(base_path() . '/public/uploads/', $imagenName);
             $marca->fill(['imagen' => $imagenName])->save();
+            Image::make($destino . $imagenName)->resize(260, 150, function ($constraint) {
+                $constraint->upsize();
+                $constraint->aspectRatio();
+            })->encode('jpg', 70)->save($destino . $imagenName);
         }
 
         Session::flash('mensaje', 'La marca '.$marca->nombre.' ha sido actualizada correctamente');

@@ -1,5 +1,18 @@
 @extends('layouts.front')
-@section('title','Nombre Producto |')
+
+@section('keywords',$producto->meta_keywords)
+
+@section('title',$producto->nombre . ' |')
+@section('og:description', $producto->subtitulo )
+@section('og:url', route('front.producto', ['producto' => $producto->id, 'nombre' => Str::slug($producto->nombre)]) )
+@section('og:type', 'product.item')
+@if($producto->imagen)
+    @section('og:image', asset('storage/productos/'.$producto->imagen))
+    @section('og:image:type', mime_content_type(public_path('storage/productos/'.$producto->imagen)))
+    @section('og:image:width', getimagesize(public_path('storage/productos/'.$producto->imagen))[0])
+    @section('og:image:height', getimagesize(public_path('storage/productos/'.$producto->imagen))[1])
+@endif
+
 @section('content')
   <div class="container">
     <nav aria-label="breadcrumb">
