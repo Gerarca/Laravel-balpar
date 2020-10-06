@@ -595,7 +595,7 @@ h6,
 										 <tbody>
 											 <tr>
 												 <td class="column_cell font_default image_thumb" align="center" valign="top" style="padding: 8px 16px;font-family: Helvetica, Arial, sans-serif;font-size: 16px;text-align: center;vertical-align: top;color: {{ $color }};">
-													 <img src="{{ url('storage/productos/'.$detalle->producto->imagen) }}" width="168" height="168" alt="" style="line-height: 1;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;mso-line-height-rule: exactly;-webkit-border-radius: 4px;border-radius: 4px;">
+													 <img src="{!! asset('storage/productos/'. rawurlencode($detalle->producto->imagen)) !!}" width="168" height="168" alt="" style="line-height: 1;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;mso-line-height-rule: exactly;-webkit-border-radius: 4px;border-radius: 4px;">
 												 </td><!-- /.column_cell:image_thumb -->
 											 </tr>
 										 </tbody>

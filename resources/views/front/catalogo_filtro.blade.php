@@ -4,7 +4,7 @@
 
     @section('title',$metaTags['titulo'] . ' |')
     @section('og:description', $metaTags['descripcion'] )
-    @section('og:url', $metaTags['url']))
+    @section('og:url', $metaTags['url'])
     @section('og:type', 'product.item')
     @if($metaTags['imagen'])
         @section('og:image', asset('uploads/'.$metaTags['imagen']))
@@ -94,7 +94,9 @@
                     <div class="col-6 col-sm-6 col-md-4 col-lg-4 p-b-50">
                         <div class="block2">
                             <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                <a href="{{route('front.producto', ['producto' => $producto->id, 'nombre' => Str::slug($producto->nombre)])}}"><img src="{{url('storage/productos/'. $producto->imagen)}}"></a>
+                                <a href="{{route('front.producto', ['producto' => $producto->id, 'nombre' => Str::slug($producto->nombre)])}}">
+                                    <img src="{{url('storage/productos/thumbs/'. $producto->imagen)}}" loading="lazy">
+                                </a>
                             </div>
                             <div class="block2-txt p-t-20">
                                 <a href="{{route('front.producto', ['producto' => $producto->id, 'nombre' => Str::slug($producto->nombre)])}}" class="block2-name dis-block product-name">

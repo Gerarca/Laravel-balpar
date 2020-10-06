@@ -46,7 +46,7 @@
                         <div class="block2">
                             <div class="block2-img wrap-pic-w of-hidden pos-relative">
                                 <a href="{{route('front.producto', ['producto' => $producto_comercial->id, 'nombre' => Str::slug($producto_comercial->nombre)])}}">
-                                    <img src="{{url('storage/productos/'. $producto_comercial->imagen)}}">
+                                    <img src="{{url('storage/productos/thumbs/'. $producto_comercial->imagen)}}" loading="lazy">
                                 </a>
                             </div>
                             <div class="block2-txt p-t-20">
@@ -118,7 +118,7 @@
                           <div class="block2">
                               <div class="block2-img wrap-pic-w of-hidden pos-relative">
                                   <a href="{{route('front.producto', ['producto' => $producto_industrial->id, 'nombre' => Str::slug($producto_industrial->nombre)])}}">
-                                      <img src="{{url('storage/productos/'. $producto_industrial->imagen)}}">
+                                      <img src="{{url('storage/productos/thumbs/'. $producto_industrial->imagen)}}" loading="lazy">
                                   </a>
                               </div>
                               <div class="block2-txt p-t-20">
@@ -173,7 +173,7 @@
             @foreach($marcas as $marca)
                 <div class="item-marca">
                     <a href="{{ route('front.catalogo.marca', ['marca' => $marca->id, 'nombre' => Str::slug($marca->nombre)]) }}">
-                        <img src="{{url('uploads/'. $marca->imagen)}}" alt="{{ $marca->nombre }}" title="{{ $marca->nombre }}">
+                        <img src="{{url('uploads/'. $marca->imagen)}}" alt="{{ $marca->nombre }}" title="{{ $marca->nombre }}" loading="lazy">
                     </a>
                 </div>
             @endforeach
