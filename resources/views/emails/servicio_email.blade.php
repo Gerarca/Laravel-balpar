@@ -537,7 +537,8 @@ h6,
                               </tbody>
                             </table><!-- /.hruler:hruler_secondary -->
                             <p style="font-family: 'Helvetica Neue LT Std' !important;font-size: 16px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;">
-															{{ $nombre }}<br>
+                              {{ $nombre }}<br>
+                              {{ $ciudad }}<br>
 															{{ $direccion }}<br>
 															{{ $telefono }}<br>
 															{{ $email }}

@@ -9,17 +9,30 @@
   </section>
 
   <section class="p-t-40 p-b-30 bg-light">
-  <div class="container-sm text-center" style="max-width:830px;">
-    <p class="mb-3"><strong class="text-color">BALPAR S.A</strong>, empresa Paraguaya con más de 30 años de experiencia en el mercado, brindando asistencia integral especializada por profesionales altamente calificados, con la finalidad de realizar Mantenimiento Preventivo de Piezas, Calibración de Equipos de Pesaje; Balanzas, Básculas y la Reparación de Equipos dañados en todas las marcas que representamos, reafirmando así nuestro compromiso con cada cliente.</p>
-    <p class="text-color font-weight-bold mb-3">Nuestro objetivo principal es poder construir vínculos reales con nuestros clientes, logrando lazos con cada uno a lo largo del tiempo.</p>
-  </div>
-</section>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          @if (@$type)
+            @if(@$type[0] == 'image')
+              <img src="<?= url('uploads/'.@$recursos->image1 )?>" alt="" style="max-width: 100%">
+            @else
+              <iframe src="https://www.youtube.com/embed/<?=@$youtube_id[0]?>" width="100%" height="400" frameborder="0"></iframe>
+            @endif
+          @endif
+        </div>
+        <div class="col-lg-6">
+          <p class="mb-3"><strong class="text-color">BALPAR S.A</strong>, empresa Paraguaya con más de 30 años de experiencia en el mercado, brindando asistencia integral especializada por profesionales altamente calificados, con la finalidad de realizar Mantenimiento Preventivo de Piezas, Calibración de Equipos de Pesaje; Balanzas, Básculas y la Reparación de Equipos dañados en todas las marcas que representamos, reafirmando así nuestro compromiso con cada cliente.</p>
+          <p class="text-color font-weight-bold mb-3">Nuestro objetivo principal es poder construir vínculos reales con nuestros clientes, logrando lazos con cada uno a lo largo del tiempo.</p>
+        </div>
+      </div>    
+    </div>
+  </section>
 
   <section class="bgwhite p-t-50 p-b-50">
     <div class="container">
       <div class="row">
         <div class="col-md-6 p-b-30 box-info box-info1 justify-content-start">
-          <div class="container tw-box w-100 m-b-40">
+          <div class="container tw-box w-100 m-b-40 px-0">
             <h4 class="p-b-36">
               Servicio de Asistencia Técnica
             </h4>
@@ -50,6 +63,30 @@
               </ul>
             </span>
           </div>
+          
+
+        </div>
+
+        <div class="col-md-6 p-b-30 box-info">
+          @if (@$type)
+            @if(@$type[1] == 'image')
+              <img src="<?= url('uploads/'.@$recursos->image2 )?>" alt="" style="max-width: 100%">
+            @else
+              <iframe src="https://www.youtube.com/embed/<?=@$youtube_id[1]?>" width="100%" height="400" frameborder="0"></iframe>
+            @endif
+          @endif
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bgwhite ">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h4 class="p-b-36">
+            Contacto
+          </h4>
           <div class="container tw-box w-100 m-b-40">
             <div class="row">
               <div class="col-1 tw-box-icon">
@@ -76,10 +113,8 @@
               </div>
             </div>
           </div>
-
         </div>
-
-        <div class="col-md-6 p-b-30 box-info">
+        <div class="col-lg-6 pb-5 pt-0">
           <form id="FormSolicitud" class="leave-comment" action="{{ route('front.servicio.send') }}" method="POST">
             @csrf
             <h4 class="p-b-36">
@@ -87,6 +122,9 @@
             </h4>
             <div class="bo4 of-hidden size15 m-b-20">
               <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="nombre" value="{{ old('nombre') }}" required placeholder="Nombre">
+            </div>
+            <div class="bo4 of-hidden size15 m-b-20">
+              <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="ciudad" value="{{ old('ciudad') }}" required placeholder="Ciudad">
             </div>
             <div class="bo4 of-hidden size15 m-b-20">
               <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="direccion" value="{{ old('direccion') }}" required placeholder="Dirección">

@@ -70,6 +70,31 @@
       </ul>
     </div>
   </li>
+  <li class="{{ (Request::is('panel/serviciovideos/*') || Request::is('panel/serviciovideos'))?'active':''}}">
+    <a data-toggle="collapse" href="#menu_serviciovideos" class="{{ (Request::is('panel/serviciovideos/*') || Request::is('panel/serviciovideos'))?'collapsed':''}}">
+      <i class="nc-icon nc-album-2"></i>
+      <p>
+        ST Recursos
+        <b class="caret"></b>
+      </p>
+    </a>
+    <div class="{{ (Request::is('panel/serviciovideos/*') || Request::is('panel/serviciovideos'))?'collapse show':'collapse'}} " id="menu_serviciovideos">
+      <ul class="nav">
+        <li class="{{ (Request::is('panel/serviciovideos') || Request::is('panel/serviciovideos/*/edit'))?'active':''}} ">
+          <a href="{{ route('serviciovideos.index') }}">
+            <span class="sidebar-mini-icon">LB</span>
+            <span class="sidebar-normal"> Lista de ST Recursos </span>
+          </a>
+        </li>
+        <li class="{{ (Request::is('panel/serviciovideos/create'))?'active':''}} ">
+          <a href="{{ route('serviciovideos.create') }}">
+            <span class="sidebar-mini-icon">AB</span>
+            <span class="sidebar-normal"> Añadir ST Recurso </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </li>
   <li class="{{ (Request::is('panel/producto/*') || Request::is('panel/producto'))?'active':''}}">
     <a data-toggle="collapse" href="#menu_producto" class="{{ (Request::is('panel/producto/*') || Request::is('panel/producto'))?'collapsed':''}}">
       <i class="nc-icon nc-bag-16"></i>

@@ -151,7 +151,11 @@ class FrontController extends Controller
 		return view('front.nosotros', compact('data'));
 	}
     public function servicio_tecnico(){
-		return view('front.servicio_tecnico');
+        $recursos = \App\ServicioTecnicoInfo::orderBy('created_at')->get()->first();
+        $type = json_decode(@$recursos->type);
+        $youtube_id = json_decode(@$recursos->youtube_id);
+        
+		return view('front.servicio_tecnico', compact("recursos","type","youtube_id"));
 	}
     public function trabajos_realizados(){
         $categorias_trabajos = CategoriaTrabajo::whereHas('trabajos')->orderBy('orden')->get();
@@ -357,6 +361,7 @@ class FrontController extends Controller
         $validator = \Validator::make(
             $request->all(), [
                 'nombre' => 'required|max:255',
+                'ciudad' => 'required|ciudad|max:255',
                 'email' => 'required|email|max:255',
                 'telefono' => 'required|max:255',
                 'direccion' => 'required|max:255',
@@ -400,6 +405,7 @@ class FrontController extends Controller
         }
 
         $nombre = $request->nombre;
+        $ciudad = $request->ciudad;
         $email = $request->email;
         $telefono = $request->telefono;
         $mensaje = $request->mensaje;
@@ -412,6 +418,7 @@ class FrontController extends Controller
 
         \Mail::send('emails.servicio_email', [
             'nombre' => $nombre,
+            'ciudad' => $ciudad,
             'email' => $email,
             'telefono' => $telefono,
             'mensaje' => $mensaje,
