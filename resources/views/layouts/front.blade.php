@@ -20,7 +20,7 @@
   <link rel="icon" type="image/png" href="{{url('assets_front/images/favicon.png')}}"/>
 
   <script src="https://kit.fontawesome.com/0ae1380cc5.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="{{ mix('assets_front/css/combined.min.css') }}">
+  <link rel="stylesheet" href="{{ url('assets_front/css/combined.min.css') }}">
 
   <style media="screen">
       .verTodos:hover > .listaOculta{
@@ -269,7 +269,7 @@
   </a>
   <a role="button" href="https://api.whatsapp.com/send?phone=595991166277&text=Hola!%20Estoy%20escribiendo%20desde%20el%20sitio%20web%20de%20Balpar%20y%20tengo%20una%20consulta." target="_blank" class="btn-floating btn-wha btn-success" title="¡Escríbenos por Whatsapp!"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
 
-  <script src="{{ mix('assets_front/js/combined.min.js') }}"></script>
+  <script src="{{ url('assets_front/js/combined.min.js') }}"></script>
   {{-- <script src="{{url('assets_front/vendor/sweetalert/sweetalert.min.js')}}"></script> --}}
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
