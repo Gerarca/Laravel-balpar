@@ -49,6 +49,7 @@ class ServicioTecnicoInfoController extends Controller
             }
         }
 
+        $image1 = null;
         if($request->hasFile("image1")){            
             $imageName = 'servicio-tecnico-'. time() . '.' .$request->file("image1")->getClientOriginalExtension();
             $request->file("image1")->move(base_path() . '/public/uploads/', $imageName);
@@ -59,7 +60,7 @@ class ServicioTecnicoInfoController extends Controller
             $image1 = $imageName;
         }
 
-
+        $image2 = null;
         if($request->hasFile("image2")){            
             $imageName = 'servicio-tecnico-'. time() . '.' .$request->file("image2")->getClientOriginalExtension();
             $request->file("image2")->move(base_path() . '/public/uploads/', $imageName);
