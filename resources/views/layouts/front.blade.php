@@ -21,7 +21,7 @@
 
   <script src="https://kit.fontawesome.com/0ae1380cc5.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="{{ url('assets_front/css/combined.min.css') }}">
-
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
   <style media="screen">
       .verTodos:hover > .listaOculta{
         display: block;
@@ -130,6 +130,9 @@
               </li>
               <li>
                 <a href="{{route('front.trabajos_realizados')}}">Trabajos Realizados</a>
+              </li>
+              <li>
+                <a href="{{route('front.blog')}}">Blog</a>
               </li>
               <li>
                 <a href="{{route('front.contacto')}}">Contacto</a>

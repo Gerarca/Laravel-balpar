@@ -125,7 +125,23 @@ class FrontController extends Controller
 	}
     public function producto(Producto $producto){
 		return view('front.producto', compact('producto'));
-	}
+    }
+    public function blog(){
+		return view('front.blog');
+    }
+    public function blog_pnoticia(){
+		return view('front.blog_pnoticia');
+    }
+    public function blog_snoticia(){
+		return view('front.blog_snoticia');
+    }
+    public function blog_tnoticia(){
+		return view('front.blog_tnoticia');
+    }
+    public function blog_todas(){
+		return view('front.blog_todas');
+    }
+
     public function presupuesto(){
         $actual_cookie = Cookie::get('productos') ?? serialize([]);
         $carrito_detalles = unserialize($actual_cookie);

@@ -1,5 +1,6 @@
 
-<div class="product">
+   
+<div class="product" >
   <figure class="product-image-container">
     <a href="{{ route('front.productos.ver',[$producto->cod_articulo,str_slug($producto->titulo)])}}" class="product-image">
       <img src="{{ url('storage/productos/'.$producto->imagen) }}" alt="{{$producto->titulo}}">
