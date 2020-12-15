@@ -24,4 +24,8 @@ class Categoria extends Model
         return $this->hasMany(Rubro::class);
     }
 
+    public function blogs(){
+        return $this->hasMany(Blog::class);
+    }
+
 }

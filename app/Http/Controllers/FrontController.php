@@ -21,6 +21,7 @@ use App\Trabajo;
 use App\CategoriaCatalogo;
 use App\CategoriaTrabajo;
 use App\Data;
+use App\Blog;
 use Str;
 
 class FrontController extends Controller
@@ -126,20 +127,24 @@ class FrontController extends Controller
     public function producto(Producto $producto){
 		return view('front.producto', compact('producto'));
     }
-    public function blog(){
-		return view('front.blog');
+    public function blog(Request $request){
+      $categoria_id = $request->has('c') && $request->get('c') != null ? $request->get('c') : null;
+      $search = $request->has('search') && $request->get('search') != null ? $request->get('search') : null;
+      $blogs = Blog::where('visible',1)
+                  ->when(isset($categoria_id), function ($query) use($categoria_id) {
+                      return $query->where("categoria_id",$categoria_id);
+                  })
+                  ->when(isset($search), function ($query) use($search) {
+                      return $query->where("titulo","like","%".$search."%");
+                  })
+                  ->orderBy('created_at','desc')->paginate(8);
+      $categorias = Categoria::orderBy('categoria','asc')->get();
+		  return view('front.blog',compact('blogs','categorias','categoria_id','search'));
     }
-    public function blog_pnoticia(){
-		return view('front.blog_pnoticia');
-    }
-    public function blog_snoticia(){
-		return view('front.blog_snoticia');
-    }
-    public function blog_tnoticia(){
-		return view('front.blog_tnoticia');
-    }
-    public function blog_todas(){
-		return view('front.blog_todas');
+    public function singleBlog($id){
+      $blog = Blog::find($id);
+      $tepuede_interesar = Blog::where("categoria_id",$blog->categoria_id)->where("id","!=",$blog->id)->take(2)->inRandomOrder()->get();
+		  return view('front.blog-single',compact('blog','tepuede_interesar'));
     }
 
     public function presupuesto(){
@@ -170,7 +175,7 @@ class FrontController extends Controller
         $recursos = \App\ServicioTecnicoInfo::orderBy('created_at')->get()->first();
         $type = json_decode(@$recursos->type);
         $youtube_id = json_decode(@$recursos->youtube_id);
-        
+
 		return view('front.servicio_tecnico', compact("recursos","type","youtube_id"));
 	}
     public function trabajos_realizados(){

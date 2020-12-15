@@ -61,7 +61,7 @@ class BlogController extends Controller
 
         $imageName = 'blog_'.$blog->id.time().'.'.$request->file('imagen')->getClientOriginalExtension();
         $request->file('imagen')->move(base_path() . '/public/uploads/', $imageName);
-        Image::make(base_path() . '/public/uploads/' . $imageName)->fit(1920, 700, function ($constraint) {
+        Image::make(base_path() . '/public/uploads/' . $imageName)->fit(870, 455, function ($constraint) {
             $constraint->upsize();
             $constraint->aspectRatio();
         })->encode('jpg', 60)->save();
@@ -115,10 +115,10 @@ class BlogController extends Controller
         if($request->hasFile('imagen')) {
             $imageName = 'blog_'.$blog->id. time() . '.' .$request->file('imagen')->getClientOriginalExtension();
             $request->file('imagen')->move(base_path() . '/public/uploads/', $imageName);
-            Image::make(base_path() . '/public/uploads/' . $imageName)->fit(1920, 700, function ($constraint) {
+            Image::make(base_path() . '/public/uploads/' . $imageName)->fit(870, 455, function ($constraint) {
                 $constraint->upsize();
                 $constraint->aspectRatio();
-            })->encode('jpg', 70)->save();
+            })->encode('jpg', 60)->save();
             $blog->fill(['imagen' => $imageName])->save();
         }
 

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Str;
 
 class Blog extends Model
 {
@@ -12,7 +13,7 @@ class Blog extends Model
   protected $fillable = [
       'fecha', 'titulo', 'imagen', 'contenido', 'visible', 'categoria_id', 'user_id'
   ];
-  
+
   public function categoria(){
     return $this->belongsTo(Categoria::class);
   }
@@ -32,5 +33,17 @@ class Blog extends Model
   public function getVisibleFormatAttribute()
   {
      return $this->attributes['visible'] == true ? 'Sí' : 'No';
+  }
+  public function getResumenContenidoAttribute(){
+    return str_limit($this->attributes['contenido'], 180);
+  }
+  public function fullURL(){
+    return route('front.blog.single', $this->routeParams());
+  }
+  public function routeParams(){
+      return [
+          $this->id,
+          Str::slug($this->titulo),
+      ];
   }
 }

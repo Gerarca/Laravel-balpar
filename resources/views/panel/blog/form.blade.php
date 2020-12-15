@@ -39,7 +39,7 @@
                 						</div>
                             <div class="form-group has-label">
                                 <label for="imagen">
-                                    Imagen * <small>(Recomendamos 1920px X 580px)</small>
+                                    Imagen * <small>(Recomendamos 870px X 455px)</small>
                                 </label>
                                 <div class="form-group">
                                     <div class="fileinput fileinput-new text-center" data-provides="fileinput">
