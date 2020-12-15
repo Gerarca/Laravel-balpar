@@ -70,6 +70,31 @@
       </ul>
     </div>
   </li>
+  <li class="{{ (Request::is('panel/blog/*') || Request::is('panel/blog'))?'active':''}}">
+    <a data-toggle="collapse" href="#menu_blog" class="{{ (Request::is('panel/blog/*') || Request::is('panel/blog'))?'collapsed':''}}">
+      <i class="nc-icon nc-image"></i>
+      <p>
+        Blogs
+        <b class="caret"></b>
+      </p>
+    </a>
+    <div class="{{ (Request::is('panel/blog/*') || Request::is('panel/blog'))?'collapse show':'collapse'}} " id="menu_blog">
+      <ul class="nav">
+        <li class="{{ (Request::is('panel/blog') || Request::is('panel/blog/*/edit'))?'active':''}} ">
+          <a href="{{ route('blog.index') }}">
+            <span class="sidebar-mini-icon">LB</span>
+            <span class="sidebar-normal"> Lista de Blogs </span>
+          </a>
+        </li>
+        <li class="{{ (Request::is('panel/blog/create'))?'active':''}} ">
+          <a href="{{ route('blog.create') }}">
+            <span class="sidebar-mini-icon">AB</span>
+            <span class="sidebar-normal"> Añadir Blog </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </li>
   <li class="{{ (Request::is('panel/serviciovideos/*') || Request::is('panel/serviciovideos'))?'active':''}}">
     <a data-toggle="collapse" href="#menu_serviciovideos" class="{{ (Request::is('panel/serviciovideos/*') || Request::is('panel/serviciovideos'))?'collapsed':''}}">
       <i class="nc-icon nc-album-2"></i>
