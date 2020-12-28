@@ -90,7 +90,7 @@
             </div>
             <div class="aside-info">
               <p class="title-aside" >Solicitar Asesoramiento</p>
-              <p class="text-aside">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil tenetur dolor, libero temporibus doloribus quo perspiciatis itaque quaerat repellat sit minus atque consequuntur, nemo omnis modi, sint nesciunt vero iste?</p>
+              <p class="text-aside">Somos empresa Paraguaya con más de 30 años de experiencia en el mercado, brindando asistencia integral especializada por profesionales altamente calificados, con la finalidad de realizar Mantenimiento Preventivo de Piezas, Calibración de Equipos de Pesaje; Balanzas, Básculas y la Reparación de Equipos dañados en todas las marcas que representamos, reafirmando así nuestro compromiso con cada cliente.</p>
             </div>
             <div class="btn-asesoria">
               <a href="{{route('front.contacto')}}">Solicitar Asesoria</a>
