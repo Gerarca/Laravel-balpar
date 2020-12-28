@@ -65,7 +65,7 @@
           @endif
 
         </div>
-        <div class="col-md-12 col-lg-3">
+        <div class="col-md-12 col-lg-3 mt-5">
           <aside class="aside">
             <div class="aside-img">
               <img src="{{url('assets_front/images/asesoramiento-1.jpg')}}" alt="">
