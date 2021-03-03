@@ -125,14 +125,23 @@
         @endforeach
       @endif
       @if(session()->has('mensaje'))
-      $.notify({
-        // options
-        message: '{{ session()->get('mensaje') }}'
-      },{
-        // settings
-        type: 'success'
-      });
+          $.notify({
+            // options
+            message: '{{ session()->get('mensaje') }}'
+          },{
+            // settings
+            type: 'success'
+          });
+      @endif
 
+      @if(session()->has('alerta'))
+          $.notify({
+            // options
+            message: '{{ session()->get('alerta') }}'
+          },{
+            // settings
+            type: 'warning'
+          });
       @endif
 
 

@@ -61,7 +61,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">https://www.youtube.com/watch?v=</span>
                                     </div>
-                                    <input type="text" name="video" value="{{ old('video', $trabajo->video) }}" class="form-control" pattern="[a-zA-Z0-9-_]{11}" placeholder="d0TZ6OUmlcw" title="Hasta 11 caracteres">
+                                    <input type="text" name="video" id="video" value="{{ old('video', $trabajo->video) }}" {{ $trabajo->tipo == '2' ? 'required' : '' }} class="form-control" pattern="[a-zA-Z0-9-_]{11}" placeholder="d0TZ6OUmlcw" title="Hasta 11 caracteres">
                                 </div>
                             </div>
                             <div id="divImagen" class="form-group has-label" style="display: @if($trabajo->tipo <> '2') block @else none @endif">
@@ -157,14 +157,25 @@ $(document).ready(function() {
             type: 'success'
         });
     @endif
+    @if(session()->has('alerta'))
+        $.notify({
+          // options
+          message: '{{ session()->get('alerta') }}'
+        },{
+          // settings
+          type: 'warning'
+        });
+    @endif
 
     $('#tipo').change(function(){
         var valor = $(this).val();
         if(valor == 1){
             $('#divVideo').hide();
+            $('#video').removeAttr('required');
             $('#divImagen').show();
         } else {
             $('#divVideo').show();
+            $('#video').attr('required', true);
             $('#divImagen').hide();
         }
     });

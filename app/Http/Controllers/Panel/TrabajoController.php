@@ -54,10 +54,16 @@ class TrabajoController extends Controller
             $destino = base_path() . '/public/uploads/';
             $imageName = Str::slug($request->nombre) . '-' . time() . '.' . $request->file('imagen')->getClientOriginalExtension();
             $request->file('imagen')->move(base_path() . '/public/uploads/', $imageName);
-            Image::make($destino . $imageName)->resize(400, null, function ($constraint) {
-                $constraint->upsize();
-                $constraint->aspectRatio();
-            })->encode('jpg', 70)->save($destino . $imageName);
+            try {
+                Image::make($destino . $imageName)->resize(400, null, function ($constraint) {
+                    $constraint->upsize();
+                    $constraint->aspectRatio();
+                })->encode('jpg', 70)->save($destino . $imageName);
+            } catch (\Intervention\Image\Exception\NotSupportedException $e) {
+                report($e);
+                Session::flash('alerta', 'La imagen no se pudo redimensionar porque es un formato no soportado');
+            }
+
         } else {
             $imageName = NULL;
         }
@@ -109,6 +115,7 @@ class TrabajoController extends Controller
         request()->validate([
             'categoria_id' => 'required',
             'nombre' => 'required|max:255',
+            'imagen' => 'image|nullable',
             'descripcion' => 'required'
         ]);
         $trabajo->fill($request->only('categoria_id', 'nombre', 'descripcion', 'tipo'))->save();
@@ -118,10 +125,16 @@ class TrabajoController extends Controller
             $imageName = Str::slug($request->nombre) . '-' . time() . '.' . $request->file('imagen')->getClientOriginalExtension();
             $request->file('imagen')->move(base_path() . '/public/uploads/', $imageName);
             $trabajo->fill(['imagen' => $imageName])->save();
-            Image::make($destino . $imageName)->resize(400, null, function ($constraint) {
-                $constraint->upsize();
-                $constraint->aspectRatio();
-            })->encode('jpg', 70)->save($destino . $imageName);
+            try {
+                Image::make($destino . $imageName)->resize(400, null, function ($constraint) {
+                    $constraint->upsize();
+                    $constraint->aspectRatio();
+                })->encode('jpg', 70)->save($destino . $imageName);
+            } catch (\Intervention\Image\Exception\NotSupportedException $e) {
+                report($e);
+                Session::flash('alerta', 'La imagen no se pudo redimensionar porque es un formato no soportado');
+            }
+
         }
 
         if($request->tipo == '2'){
