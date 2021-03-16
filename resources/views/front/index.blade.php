@@ -63,7 +63,7 @@
         </div>
       </div>
     </section>
-{{-- 
+
     <section class="parallax0 parallax100" id="contador-section" style="background-image: url({{url('assets_front/images/banner2.jpg')}});">
       <div class="overlay0 p-t-80 p-b-45 d-flex justify-content-center" style="background: linear-gradient(140deg, rgba(10, 35, 70, 0.8) 0%, rgba(30, 113, 223, 0.8) 100%);min-height:400px;">
         <div class="flex-col-c-m flex-row row p-l-15 p-r-15 w-100">
@@ -93,7 +93,7 @@
           </div>
         </div>
       </div>
-    </section> --}}
+    </section>
 
     {{-- Destacados Industrial --}}
     <section class="newproduct p-b-80 p-t-80 bg-light">
