@@ -45,25 +45,25 @@
               </div>
           </div>
 
-        @foreach($trabajos as $trabajo)
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-              <div class="block3">
-                <a class="block3-img">
-                    @if($trabajo->tipo == 1)
-                        <img src="{{url('uploads/'. $trabajo->imagen)}}" class="img-fluid" loading="lazy">
-                    @else
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" width="770" height="315" src="https://www.youtube.com/embed/{{ $trabajo->video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
-                        </div>
-                    @endif
-                </a>
-                <div class="block3-txt p-4 bg-white">
-                  <h5 class="p-b-7">{{ $trabajo->nombre }}</h5>
-                  <small class="text-muted">{{ $trabajo->descripcion }}</small>
+          @foreach($trabajos as $trabajo)
+              <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 mb-4">
+                <div class="block3 h-100 d-flex flex-column">
+                  <a class="block3-img">
+                      @if($trabajo->tipo == 1)
+                          <img src="{{url('uploads/'. $trabajo->imagen)}}" class="img-fluid w-100" loading="lazy">
+                      @else
+                          <div class="embed-responsive embed-responsive-16by9">
+                              <iframe class="embed-responsive-item" width="770" height="315" src="https://www.youtube.com/embed/{{ $trabajo->video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
+                          </div>
+                      @endif
+                  </a>
+                  <div class="block3-txt p-4 bg-white h-100">
+                    <h5 class="p-b-7">{{ $trabajo->nombre }}</h5>
+                    <small class="text-muted">{{ $trabajo->descripcion }}</small>
+                  </div>
                 </div>
               </div>
-            </div>
-        @endforeach
+          @endforeach
       </div>
     </div>
   </section>
