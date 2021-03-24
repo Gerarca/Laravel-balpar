@@ -344,6 +344,15 @@
 	        		type: 'success'
 	      		});
 	      	@endif
+			@if(session()->has('alerta'))
+		        $.notify({
+		          // options
+		          message: '{{ session()->get('alerta') }}'
+		        },{
+		          // settings
+		          type: 'warning'
+		        });
+		    @endif
 	    });
   	</script>
 

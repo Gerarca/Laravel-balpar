@@ -74,19 +74,30 @@ class ProductoController extends Controller
         $imageName = 'i-'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen')->getClientOriginalExtension();
         $destino = base_path() . '/public/storage/productos/';
         $request->file('imagen')->move($destino, $imageName);
-        Image::make($destino . $imageName)->resize(220, 326, function ($constraint) {
-            $constraint->upsize();
-            $constraint->aspectRatio();
-        })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName);
+
+        try {
+            Image::make($destino . $imageName)->resize(220, 326, function ($constraint) {
+                $constraint->upsize();
+                $constraint->aspectRatio();
+            })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName);
+        } catch (\Intervention\Image\Exception\NotSupportedException $e) {
+            report($e);
+            Session::flash('alerta', 'La imagen principal no se pudo redimensionar porque es un formato no soportado');
+        }
 
         if($request->hasFile('imagen2')){
             $imageName2 = 'i2'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen2')->getClientOriginalExtension();
             $destino = base_path() . '/public/storage/productos/';
             $request->file('imagen2')->move($destino, $imageName2);
-            Image::make($destino . $imageName2)->resize(220, 326, function ($constraint) {
-                $constraint->upsize();
-                $constraint->aspectRatio();
-            })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName2);
+            try{
+                Image::make($destino . $imageName2)->resize(220, 326, function ($constraint) {
+                    $constraint->upsize();
+                    $constraint->aspectRatio();
+                })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName2);
+            } catch (\Intervention\Image\Exception\NotSupportedException $e) {
+                report($e);
+                Session::flash('alerta', 'La imagen 2 no se pudo redimensionar porque es un formato no soportado');
+            }
         } else {
             $imageName2 = '';
         }
@@ -95,10 +106,15 @@ class ProductoController extends Controller
             $imageName3 = 'i3'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen3')->getClientOriginalExtension();
             $destino = base_path() . '/public/storage/productos/';
             $request->file('imagen3')->move($destino, $imageName3);
-            Image::make($destino . $imageName3)->resize(220, 326, function ($constraint) {
-                $constraint->upsize();
-                $constraint->aspectRatio();
-            })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName3);
+            try{
+                Image::make($destino . $imageName3)->resize(220, 326, function ($constraint) {
+                    $constraint->upsize();
+                    $constraint->aspectRatio();
+                })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName3);
+            } catch (\Intervention\Image\Exception\NotSupportedException $e) {
+                report($e);
+                Session::flash('alerta', 'La imagen 3 no se pudo redimensionar porque es un formato no soportado');
+            }
         } else {
             $imageName3 = '';
         }
@@ -107,10 +123,15 @@ class ProductoController extends Controller
             $imageName4 = 'i4'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen4')->getClientOriginalExtension();
             $destino = base_path() . '/public/storage/productos/';
             $request->file('imagen4')->move($destino, $imageName4);
-            Image::make($destino . $imageName4)->resize(220, 326, function ($constraint) {
-                $constraint->upsize();
-                $constraint->aspectRatio();
-            })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName4);
+            try{
+                Image::make($destino . $imageName4)->resize(220, 326, function ($constraint) {
+                    $constraint->upsize();
+                    $constraint->aspectRatio();
+                })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName4);
+            } catch (\Intervention\Image\Exception\NotSupportedException $e) {
+                report($e);
+                Session::flash('alerta', 'La imagen 4 no se pudo redimensionar porque es un formato no soportado');
+            }
         } else {
             $imageName4 = '';
         }
@@ -175,10 +196,16 @@ class ProductoController extends Controller
             $imageName = 'i'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen')->getClientOriginalExtension();
             $destino = base_path() . '/public/storage/productos/';
             $request->file('imagen')->move($destino, $imageName);
-            Image::make($destino . $imageName)->resize(220, 326, function ($constraint) {
-                $constraint->upsize();
-                $constraint->aspectRatio();
-            })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName);
+
+            try{
+                Image::make($destino . $imageName)->resize(220, 326, function ($constraint) {
+                    $constraint->upsize();
+                    $constraint->aspectRatio();
+                })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName);
+            } catch (\Intervention\Image\Exception\NotSupportedException $e) {
+                report($e);
+                Session::flash('alerta', 'La imagen principal no se pudo redimensionar porque es un formato no soportado');
+            }
             $producto->fill(['imagen' => $imageName])->save();
         }
 
@@ -186,10 +213,15 @@ class ProductoController extends Controller
             $imageName2 = 'i2'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen2')->getClientOriginalExtension();
             $destino = base_path() . '/public/storage/productos/';
             $request->file('imagen2')->move($destino, $imageName2);
-            Image::make($destino . $imageName2)->resize(220, 326, function ($constraint) {
-                $constraint->upsize();
-                $constraint->aspectRatio();
-            })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName2);
+            try{
+                Image::make($destino . $imageName2)->resize(220, 326, function ($constraint) {
+                    $constraint->upsize();
+                    $constraint->aspectRatio();
+                })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName2);
+            } catch (\Intervention\Image\Exception\NotSupportedException $e) {
+                report($e);
+                Session::flash('alerta', 'La imagen 2 no se pudo redimensionar porque es un formato no soportado');
+            }
             $producto->fill(['imagen2' => $imageName2])->save();
         }
 
@@ -197,10 +229,15 @@ class ProductoController extends Controller
             $imageName3 = 'i3'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen3')->getClientOriginalExtension();
             $destino = base_path() . '/public/storage/productos/';
             $request->file('imagen3')->move($destino, $imageName3);
-            Image::make($destino . $imageName3)->resize(220, 326, function ($constraint) {
-                $constraint->upsize();
-                $constraint->aspectRatio();
-            })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName3);
+            try{
+                Image::make($destino . $imageName3)->resize(220, 326, function ($constraint) {
+                    $constraint->upsize();
+                    $constraint->aspectRatio();
+                })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName3);
+            } catch (\Intervention\Image\Exception\NotSupportedException $e) {
+                report($e);
+                Session::flash('alerta', 'La imagen 3 no se pudo redimensionar porque es un formato no soportado');
+            }
             $producto->fill(['imagen3' => $imageName3])->save();
         }
 
@@ -208,10 +245,15 @@ class ProductoController extends Controller
             $imageName4 = 'i4'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen4')->getClientOriginalExtension();
             $destino = base_path() . '/public/storage/productos/';
             $request->file('imagen4')->move($destino, $imageName4);
-            Image::make($destino . $imageName4)->resize(220, 326, function ($constraint) {
-                $constraint->upsize();
-                $constraint->aspectRatio();
-            })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName4);
+            try{
+                Image::make($destino . $imageName4)->resize(220, 326, function ($constraint) {
+                    $constraint->upsize();
+                    $constraint->aspectRatio();
+                })->encode('jpg', 70)->save($destino . 'thumbs/' . $imageName4);
+            } catch (\Intervention\Image\Exception\NotSupportedException $e) {
+                report($e);
+                Session::flash('alerta', 'La imagen 4 no se pudo redimensionar porque es un formato no soportado');
+            }
             $producto->fill(['imagen4' => $imageName4])->save();
         }
 
