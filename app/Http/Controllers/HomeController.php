@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+	    return redirect()->route('panel.index');
         return view('home');
     }
 }
