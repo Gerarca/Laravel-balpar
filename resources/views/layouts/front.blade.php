@@ -235,7 +235,7 @@
             Instagram
           </h4>
           <script src="https://apps.elfsight.com/p/platform.js" defer></script>
-          <div class="elfsight-app-1a58f5d6-d58d-48bf-94ee-cb57e9749453"></div>
+          <div class="elfsight-app-350497ba-60ed-4856-a173-1e6d9a195696"></div>
         </div>
         <div class="col-md-4 py-2">
           <h4 class="s-text12 p-b-30">
