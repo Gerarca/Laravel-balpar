@@ -469,7 +469,7 @@ h6,
                                 </tr>
                               </tbody>
                             </table><!-- /.hruler:hruler_primary -->
-                            <h3 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 22px;line-height: 30px;font-weight: normal;color: #30393d;">Hemos recibido tu cotizacion. Nos comunicaremos contigo en el transcurso de las horas para responder a tu solicitud de presupuesto. <br /> </h3>
+                            <h3 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;margin-top: 16px;margin-bottom: 8px;padding: 0;font-size: 22px;line-height: 30px;font-weight: normal;color: #30393d;">Hemos recibido su pedido de cotizacion. Nos comunicaremos contigo en el transcurso de las horas para responder a tu solicitud de presupuesto. <br /> </h3>
                           </td><!-- /.column_cell -->
                         </tr>
                       </tbody>
