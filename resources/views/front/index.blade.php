@@ -182,6 +182,21 @@
       </div>
     </section>
 
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index: 99999">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <img class="img-modal" src="{{ url('assets_front/images/pop.png')}}" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+
   @endsection
   @section('especifico')
     <script type="text/javascript">
@@ -244,4 +259,11 @@
     <script type="text/javascript">
     $('.counter').countTo();
     </script>
+    <script>
+      $(document).ready(function() {
+        setTimeout(() => {
+          $('#myModal').modal('show')
+        },3000);
+      })
+  </script>
   @endsection
