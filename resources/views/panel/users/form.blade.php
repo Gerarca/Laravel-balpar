@@ -40,7 +40,7 @@
 
                   <div class="col-md-3 col-sm-4">
                     <label for="avatar">
-                      Avatar *
+                      Avatar (JPG y PNG) *
                     </label>
                     <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                       <div class="fileinput-new thumbnail img-circle">
