@@ -3,7 +3,7 @@
 @isset($metaTags)
 
     @section('keywords',$metaTags['keywords'])
-    
+
     @section('title',$metaTags['titulo'] . ' |')
     @section('og:description', $metaTags['descripcion'] )
     @section('og:url', $metaTags['url'])
@@ -89,7 +89,7 @@
         </div>
 
         <div class="col-md-12 col-lg-9 p-b-50">
-          <button role="button" class="btn btn-outline-primary btn_filter d-lg-none">Categorías</button>
+          <button role="button" class="btn btn-outline-primary btn_filter mb-4 d-lg-none">Categorías</button>
           <div class="row">
             @forelse($productos as $producto)
                 @if($producto->visible <> 0)

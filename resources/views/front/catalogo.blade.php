@@ -122,7 +122,7 @@
         </div>
 
         <div class="col-md-12 col-lg-9 p-b-50">
-          <button role="button" class="btn btn-outline-primary btn_filter d-lg-none">Categorías</button>
+          <button role="button" class="btn btn-outline-primary btn_filter mb-4 d-lg-none">Categorías</button>
           <div class="row">
             @foreach($productos as $producto)
                 @if($producto->visible <> 0)
