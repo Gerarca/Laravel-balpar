@@ -382,4 +382,9 @@ class ProductoController extends Controller
 		$imagenes_secundarias = ImagenProducto::where('cod_articulo', $request->codigo_articulo)->orderBy('orden', 'asc')->get();
 		return view('panel.producto.partial-fotos-secundarias', ['imagenes_secundarias' => $imagenes_secundarias]);
 	}
+    public function eliminarImagen(Request $request)
+    {
+        $producto = Producto::whereId($request->producto_id)->update([$request->imagen => null]);
+        return $producto;
+    }
 }

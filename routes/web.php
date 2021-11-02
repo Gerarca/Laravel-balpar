@@ -116,4 +116,5 @@ Route::group(['middleware' => 'role:usuario', 'middleware' => 'role:administrado
 	// Route::get('panel/producto/galeria', 'Panel\ProductoController@galeriaFotos')->name('producto.obtener.galeria');
 	// Route::post('panel/producto/eliminar_galeria', 'Panel\ProductoController@eliminarImagen')->name('producto.eliminar.galeria');
 	// Route::post('panel/producto/editar_orden', 'Panel\ProductoController@actualizarOrden')->name('producto.editar.galeria');
+    Route::post('panel/producto/eliminar-imagen', 'Panel\ProductoController@eliminarImagen')->name('panel.producto.eliminarImagen');
 });

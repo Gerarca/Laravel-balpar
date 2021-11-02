@@ -132,7 +132,7 @@
                                 <div class="form-group">
                                     <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                         <div class="fileinput-new thumbnail">
-                                            <img src="{{$producto->imagen2 ? url('storage/productos/'.$producto->imagen2):url('assets_template/img/image_placeholder.jpg')}}" alt="{{$producto->titulo?$producto->titulo:old('titulo')}}">
+                                            <img src="{{$producto->imagen2 ? url('storage/productos/'.$producto->imagen2):url('assets_template/img/image_placeholder.jpg')}}" id="imagen2" alt="{{$producto->titulo?$producto->titulo:old('titulo')}}">
                                         </div>
                                         <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                         <div>
@@ -143,6 +143,13 @@
                                             </span>
                                             <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Quitar</a>
                                         </div>
+										@if($producto->imagen2)
+											<div>
+												<span class="btn btn-round btn-danger eliminarImagen" data-imagen="2">
+													<span class="fileinput-new">Eliminar</span>
+												</span>
+											</div>
+										@endif
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +160,7 @@
                                 <div class="form-group">
                                     <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                         <div class="fileinput-new thumbnail">
-                                            <img src="{{$producto->imagen3 ? url('storage/productos/'.$producto->imagen3):url('assets_template/img/image_placeholder.jpg')}}" alt="{{$producto->titulo?$producto->titulo:old('titulo')}}">
+                                            <img src="{{$producto->imagen3 ? url('storage/productos/'.$producto->imagen3):url('assets_template/img/image_placeholder.jpg')}}" id="imagen3" alt="{{$producto->titulo?$producto->titulo:old('titulo')}}">
                                         </div>
                                         <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                         <div>
@@ -164,6 +171,13 @@
                                             </span>
                                             <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Quitar</a>
                                         </div>
+										@if($producto->imagen3)
+											<div>
+												<span class="btn btn-round btn-danger eliminarImagen" data-imagen="3">
+													<span class="fileinput-new">Eliminar</span>
+												</span>
+											</div>
+										@endif
                                     </div>
                                 </div>
                             </div>
@@ -174,7 +188,7 @@
                                 <div class="form-group">
                                     <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                         <div class="fileinput-new thumbnail">
-                                            <img src="{{$producto->imagen4 ? url('storage/productos/'.$producto->imagen4):url('assets_template/img/image_placeholder.jpg')}}" alt="{{$producto->titulo?$producto->titulo:old('titulo')}}">
+                                            <img src="{{$producto->imagen4 ? url('storage/productos/'.$producto->imagen4):url('assets_template/img/image_placeholder.jpg')}}" id="imagen4" alt="{{$producto->titulo?$producto->titulo:old('titulo')}}">
                                         </div>
                                         <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                         <div>
@@ -185,6 +199,13 @@
                                             </span>
                                             <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Quitar</a>
                                         </div>
+										@if($producto->imagen4)
+											<div>
+												<span class="btn btn-round btn-danger eliminarImagen" data-imagen="4">
+													<span class="fileinput-new">Eliminar</span>
+												</span>
+											</div>
+										@endif
                                     </div>
                                 </div>
                             </div>
@@ -470,6 +491,36 @@
 	            });
 
 	        });
+
+			@if($producto->id)
+				$('.eliminarImagen').click(function(){
+					let imagen = $(this).data('imagen');
+					$.ajax({
+						url: '{{ route('panel.producto.eliminarImagen') }}',
+						method: 'POST',
+						headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+						data: {
+							producto_id: {{ $producto->id }},
+							imagen: 'imagen'+ imagen
+						},
+						success: function (r) {
+							$('#imagen'+ imagen).attr('src', '{{ url('assets_template/img/image_placeholder.jpg') }}');
+							$.notify({
+								message: `La imagen ${imagen} ha sido eliminada`
+							},{
+								type: 'success'
+							});
+						},
+						error: function(error){
+							$.notify({
+								message: `Hubo un error al eliminar la imagen ${imagen}`
+							},{
+								type: 'danger'
+							});
+						}
+					});
+				});
+			@endif
 
     	});
   	</script>
