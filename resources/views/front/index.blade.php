@@ -184,7 +184,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index: 99999">
+{{-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index: 99999">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-body">
@@ -195,7 +195,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
   @endsection
   @section('especifico')
@@ -259,11 +259,11 @@
     <script type="text/javascript">
     $('.counter').countTo();
     </script>
-    <script>
+    {{-- <script>
       $(document).ready(function() {
         setTimeout(() => {
           $('#myModal').modal('show')
         },3000);
       })
-  </script>
+    </script> --}}
   @endsection
