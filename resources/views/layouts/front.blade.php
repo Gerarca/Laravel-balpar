@@ -19,11 +19,9 @@
 
   <link rel="icon" type="image/png" href="{{url('assets_front/images/favicon.png')}}"/>
 
-  <script src="https://kit.fontawesome.com/0ae1380cc5.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="{{ url('assets_front/css/combined.min.css') }}">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   <style media="screen">
       .verTodos:hover > .listaOculta{
@@ -71,123 +69,117 @@
         </div>
       </div>
       <div class="wrap_header container-fluid px-0">
-        <a href="{{route('front.index')}}" class="logo">
-          <img src="{{url('assets_front/images/logo.png')}}" alt="Logo" style="max-height: 25px;">
-        </a>
-        <div class="wrap_menu wrap-side-menu">
-          <nav class="menu">
-            <ul class="main_menu">
-              <li>
-                <a href="{{route('front.index')}}">Inicio</a>
-              </li>
-              <li>
-                <a href="{{route('front.nosotros')}}">Nosotros</a>
-              </li>
-              <li class="has-menu">
-                <a href="javascript:void(0)">Productos</a>
-                <ul class="sub_menu py-0">
-                    @foreach($categories as $category)
-                        <li class="has-submenu">
-                            <a href="{{route('front.catalogo.categoria', ['categoria' => $category->id, 'nombre' => Str::slug($category->categoria)])}}">{{ $category->categoria }}</a>
-                            @if($category->rubros->isNotEmpty())
-                                <ul class="theme_menu submenu">
-                            @endif
-                                @foreach($category->rubros->take(10) as $rubro_category)
-                                    @if($rubro_category->productos->where('visible', 1)->isNotEmpty())
-                                        <li>
-                                            <a href="{{ route('front.catalogo.rubro', ['rubro' => $rubro_category->id, 'nombre' => Str::slug($rubro_category->rubro)]) }}">
-                                                {{ $rubro_category->rubro }}
-                                            </a>
-                                        </li>
-                                    @endif
-                                @endforeach
-                                @if($category->rubros->count() > 10)
-                                    <li class="has-submenu verTodos">
-                                        <a href="{{route('front.catalogo.categoria', ['categoria' => $category->id, 'nombre' => Str::slug($category->categoria)])}}" class="font-weight-bold">
-                                            Ver todos
-                                        </a>
-                                        <ul class="theme_menu submenu listaOculta" style="top: auto; bottom: 0;">
-                                            @foreach(range(10, $category->rubros->count() - 1) as $position)
-                                                <li>
-                                                    <a href="{{ route('front.catalogo.rubro', ['rubro' => $category->rubros[$position]->id, 'nombre' => Str::slug($category->rubros[$position]->rubro)]) }}">
-                                                        {{ $category->rubros[$position]->rubro }}
-                                                    </a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                @endif
-                            @if($category->rubros->isNotEmpty())
-                                </ul>
-                            @endif
-                        </li>
-                    @endforeach
-                    <li><a href="{{ route('front.catalogo.todos') }}" class="font-weight-bold">Ver todos los productos</a> </li>
+        <div class="justify-content-between row mx-0 align-items-center h-100 w-100">
+          {{-- Header Icons --}}
+          <div class="col-md-4 col-2 header-icons justify-content-center">
+            {{-- Header search --}}
+            <div class="header-wrapicon header-wrapicon1">
+              <i class="fas fa-search header-icon1 js-show-header-dropdown"></i>
+              <div class="header-cart header-dropdown search-dropdown">
+                <div class="search-product pos-relative bo4 of-hidden">
+                    <form action="{{ route('front.buscar.catalogo') }}" method="post">
+                        @csrf
+                        <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search_product" placeholder="Buscar">
+                        <button type="submit" class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4 btn-search-toggle">
+                            <i class="fs-12 fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <a href="{{route('front.index')}}" class="col-8 col-md-4 col-auto logo d-flex">
+            <img src="{{url('assets_front/images/logo.png')}}" alt="Logo" class="mx-auto" style="max-height: 25px;">
+          </a>
+
+          {{-- Header Icons --}}
+          <div class="col-md-4 col-2 header-icons justify-content-center">
+
+            {{-- Header cart --}}
+            <div class="header-wrapicon header-wrapicon2">
+              <i class="fas fa-receipt header-icon1 js-show-header-dropdown"></i>
+              <div class="header-cart header-dropdown">
+                <ul class="header-cart-wrapitem cart-products-container">
+
                 </ul>
+                <div class="header-cart-buttons">
+                  <div class="w-100 pt-3">
+                    <a href="{{route('front.presupuesto')}}" class="btn btn-primary flex-c-m size1 s-text1 trans-0-4">
+                      Solicitar Presupuesto
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="main_menu navbar-nav mx-auto">
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorías</a>
+              <ul class="dropdown-menu">
+                @foreach($categories as $category)
+                  <li class="dropdown-item dropdown"><a href="{{route('front.catalogo.categoria', ['categoria' => $category->id, 'nombre' => Str::slug($category->categoria)])}}" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $category->categoria }}</a>
+                    @if($category->rubros->isNotEmpty())
+                      <ul class="dropdown-menu">
+                        @foreach($category->rubros->take(8) as $rubro_category)
+                          @if($rubro_category->productos->where('visible', 1)->isNotEmpty())
+                            <li class="dropdown-item"><a href="{{ route('front.catalogo.rubro', ['rubro' => $rubro_category->id, 'nombre' => Str::slug($rubro_category->rubro)]) }}">{{ $rubro_category->rubro }}</a></li>
+                          @endif
+                        @endforeach
+                        @if($category->rubros->count() > 8)
+                          <li class="dropdown-item dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ver todos</a>
+                            <ul class="dropdown-menu">
+                              @foreach(range(8, $category->rubros->count() - 1) as $position)
+                                <li class="dropdown-item"><a href="{{ route('front.catalogo.rubro', ['rubro' => $category->rubros[$position]->id, 'nombre' => Str::slug($category->rubros[$position]->rubro)]) }}">{{ $category->rubros[$position]->rubro }}</a></li>
+                              @endforeach
+                            </ul>
+                          </li>
+                        @endif
+                      </ul>
+                    @endif
+                  </li>
+
+                @endforeach
+                <li><a href="{{ route('front.catalogo.todos') }}" class="dropdown-item font-weight-bold">Ver todos los productos</a> </li>
+              </ul>
+            </li>
+
+              <li class="nav-item ">
+                <a href="{{route('front.nosotros')}}" class="nav-link">Nosotros</a>
               </li>
-              <li class="has-menu">
-                <a href="javascript:void(0)">Servicios</a>
+              <li class="nav-item dropdown">
+                <a href="javascript:void(0)" class="nav-link">Servicios</a>
                 <ul class="sub_menu">
                   <li><a href="{{route('front.servicio_tecnico')}}">Servicio Técnico</a></li>
                 </ul>
               </li>
-              <li>
-                <a href="{{route('front.trabajos_realizados')}}">Trabajos Realizados</a>
+              <li class="nav-item ">
+                <a href="{{route('front.trabajos_realizados')}}" class="nav-link">Trabajos Realizados</a>
               </li>
-              <li>
-                <a href="{{route('front.blog')}}">Blog</a>
+              <li class="nav-item ">
+                <a href="{{route('front.blog')}}" class="nav-link">Blog</a>
               </li>
-              <li>
-                <a href="{{route('front.contacto')}}">Contacto</a>
+              <li class="nav-item ">
+                <a href="{{route('front.contacto')}}" class="nav-link">Contacto</a>
               </li>
               <li class="d-lg-none">
-                <a href="{{url('assets_front/public/ejemplo.pdf')}}" download><i class="fas fa-file-download"></i> Descargar Catálogo</a>
+                <a href="{{url('assets_front/public/ejemplo.pdf')}}" class="nav-link" download><i class="fas fa-file-download"></i> Descargar Catálogo</a>
               </li>
             </ul>
-          </nav>
-        </div>
-        {{-- Header Icons --}}
-        <div class="header-icons">
-          {{-- Header search --}}
-          <div class="header-wrapicon header-wrapicon1">
-            <i class="fas fa-search header-icon1 js-show-header-dropdown"></i>
-            <div class="header-cart header-dropdown search-dropdown">
-              <div class="search-product pos-relative bo4 of-hidden">
-                  <form action="{{ route('front.buscar.catalogo') }}" method="post">
-                      @csrf
-                      <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search_product" placeholder="Buscar">
-                      <button type="submit" class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4 btn-search-toggle">
-                          <i class="fs-12 fa fa-search" aria-hidden="true"></i>
-                      </button>
-                  </form>
-              </div>
-            </div>
-          </div>
-          <span class="linedivide1"></span>
-          {{-- Header cart --}}
-          <div class="header-wrapicon header-wrapicon2">
-            <i class="fas fa-receipt header-icon1 js-show-header-dropdown"></i>
-            <div class="header-cart header-dropdown">
-              <ul class="header-cart-wrapitem cart-products-container">
 
-              </ul>
-              <div class="header-cart-buttons">
-                <div class="w-100 pt-3">
-                  <a href="{{route('front.presupuesto')}}" class="btn btn-primary flex-c-m size1 s-text1 trans-0-4">
-                    Solicitar Presupuesto
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          {{-- btn menu mobile --}}
-          <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-            <span class="hamburger-box">
-              <span class="hamburger-inner"></span>
-            </span>
-          </div>
         </div>
-      </div>
+      </nav>
     </div>
   </header>
 
@@ -277,22 +269,27 @@
   <a role="button" href="https://api.whatsapp.com/send?phone=595991166277&text=Hola!%20Estoy%20escribiendo%20desde%20el%20sitio%20web%20de%20Balpar%20y%20tengo%20una%20consulta." target="_blank" class="btn-floating btn-wha btn-success" title="¡Escríbenos por Whatsapp!"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
 
   <script src="{{ url('assets_front/js/combined.min.js') }}"></script>
-  {{-- <script src="{{url('assets_front/vendor/sweetalert/sweetalert.min.js')}}"></script> --}}
+    <script src="{{ url('assets_front/js/bootstrap-navbar-dropdowns.min.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
   <script type="text/javascript">
-
-      $(".has-menu").click(function(){
-        $(this).find(".sub_menu").toggleClass("show");
-        $(this).toggleClass("open");
-      });
-      // $(".has-submenu").click(function(){
-      //   $(this).find(".theme_menu").toggleClass("show");
-      //   $(this).toggleClass("open");
-      // });
+  if ($(window).width() < 991) {
+    $('.navbar').navbarDropdown({
+      // bs3 | bs4 | bs5
+      theme: 'bs4',
+      // click | mouseover
+      trigger: 'click',
+      // override the default selector of the dropdown
+      dropdownSelector: null
+    });
+  }
+  else {
+     $('.navbar').navbarDropdown({
+       theme: 'bs4',
+       trigger: 'mouseover',
+       dropdownSelector: null
+     });
+  }
 
         $(document).ready(function(){
 
