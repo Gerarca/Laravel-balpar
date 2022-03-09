@@ -23,7 +23,7 @@
       Catálogo
     </h2>
   </section>
-  <div class="container">
+  <div class="container-fluid">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('front.index')}}">Inicio</a></li>
@@ -36,13 +36,13 @@
     </nav>
   </div>
 
-  <section class="bgwhite p-t-50 p-b-50">
-    <div class="container">
+  <section class="bgwhite p-b-50">
+    <div class="container-fluid">
       <div class="row">
 
         <div class="sidebar col-sm-6 col-md-4 col-lg-3 p-b-50">
           <div class="leftbar p-r-20 p-r-0-sm">
-            <button type="button" class="btn_close_filter text-right w-100 d-lg-none"><i class="fa fa-times" aria-hidden="true"></i></button>
+            <button type="button" class="btn_close_filter text-right w-100"><i class="fa fa-times" aria-hidden="true"></i></button>
             <div class="search-product pos-relative bo4 of-hidden mb-4">
                 <form action="{{ route('front.buscar.catalogo') }}" method="post">
                     @csrf
@@ -121,12 +121,21 @@
           </div>
         </div>
 
-        <div class="col-md-12 col-lg-9 p-b-50">
-          <button role="button" class="btn btn-outline-primary btn_filter mb-4 d-lg-none">Categorías</button>
+        <div class="col-md-12 col-lg-12 p-b-50">
+          <div class="row" style="row-gap: 12px;">
+            @isset($rubro)
+              <div class="col-12 col-md-4 d-flex justify-content-center  order-md-last">
+                <h3>{{ $rubro->rubro }}</h3>
+              </div>
+            @endisset
+            <div class="col-12 col-md-4">
+              <button role="button" class="btn btn-outline-primary btn_filter mb-4"><i class="fa-th-large fas mr-2"></i>Categorías</button>
+            </div>
+          </div>
           <div class="row">
             @foreach($productos as $producto)
                 @if($producto->visible <> 0)
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-4 p-b-50">
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-b-50">
                         <div class="block2">
                             <div class="block2-img wrap-pic-w of-hidden pos-relative">
                                 <a href="{{route('front.producto', ['producto' => $producto->id, 'nombre' => Str::slug($producto->nombre)])}}">
