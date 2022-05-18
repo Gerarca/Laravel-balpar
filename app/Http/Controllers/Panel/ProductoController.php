@@ -73,7 +73,7 @@ class ProductoController extends Controller
         $imageName = 'i-'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen')->getClientOriginalExtension();
         $destino = base_path() . '/public/storage/productos/';
         $request->file('imagen')->move($destino, $imageName);
-/*
+
         try {
             Image::make($destino . $imageName)->resize(220, 326, function ($constraint) {
                 $constraint->upsize();
@@ -83,7 +83,7 @@ class ProductoController extends Controller
             report($e);
             Session::flash('alerta', 'La imagen principal no se pudo redimensionar porque es un formato no soportado');
         }
-*/
+
         if ($request->hasFile('imagen2')) {
             $imageName2 = 'i2'. Str::slug($request->nombre).'-'.time() . '.' .$request->file('imagen2')->getClientOriginalExtension();
             $destino = base_path() . '/public/storage/productos/';
